@@ -43,7 +43,7 @@ public:
 	void render(const Transform4x4f& parentTrans) override;
 	virtual void setThemeName(std::string name);
 
-	virtual std::vector<std::string> getEntriesLetters() = 0;
+	virtual std::vector<std::wstring> getEntriesLetters() = 0;
 
 protected:
 	FolderData* mRoot;

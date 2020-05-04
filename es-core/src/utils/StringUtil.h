@@ -33,6 +33,9 @@ namespace Utils
 
 		std::string join(const std::vector<std::string>& items, std::string separator);
 
+		std::wstring UTF8_to_wchar(const char * in);
+		std::string wchar_to_UTF8(const wchar_t * in);
+
 #if defined(_WIN32)
 		const std::string convertFromWideString(const std::wstring wstring);
 		const std::wstring convertToWideString(const std::string string);

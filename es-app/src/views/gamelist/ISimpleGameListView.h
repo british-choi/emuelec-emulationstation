@@ -30,7 +30,7 @@ public:
 	virtual bool input(InputConfig* config, Input input) override;
 	virtual void launch(FileData* game) = 0;
 	
-	virtual std::vector<std::string> getEntriesLetters() override;
+	virtual std::vector<std::wstring> getEntriesLetters() override;
 
 protected:
 	FileData* getRandomGame();

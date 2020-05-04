@@ -20,6 +20,7 @@
 #include "ThreadedHasher.h"
 #include "guis/GuiMenu.h"
 #include "ApiSystem.h"
+#include "utils/StringUtil.h"
 
 std::vector<std::string> GuiGamelistOptions::gridSizes {
 	"automatic",
@@ -103,18 +104,18 @@ GuiGamelistOptions::GuiGamelistOptions(Window* window, SystemData* system, bool 
 		// jump to letter
 		row.elements.clear();
 
-		std::vector<std::string> letters = getGamelist()->getEntriesLetters();
+		std::vector<std::wstring> letters = getGamelist()->getEntriesLetters();
 		if (!letters.empty())
 		{
 			mJumpToLetterList = std::make_shared<LetterList>(mWindow, _("JUMP TO..."), false); // batocera
 
-			char curChar = (char)toupper(getGamelist()->getCursor()->getName()[0]);
+			wchar_t curChar = (wchar_t)toupper(Utils::String::UTF8_to_wchar(getGamelist()->getCursor()->getName().c_str())[0]);
 
-			if (std::find(letters.begin(), letters.end(), std::string(1, curChar)) == letters.end())
+			if (std::find(letters.begin(), letters.end(), std::wstring(1, curChar)) == letters.end())
 				curChar = letters.at(0)[0];
 
 			for (auto letter : letters)
-				mJumpToLetterList->add(letter, letter[0], letter[0] == curChar);
+				mJumpToLetterList->add(Utils::String::wchar_to_UTF8(letter.c_str()), letter[0], letter[0] == curChar);
 
 			row.addElement(std::make_shared<TextComponent>(mWindow, _("JUMP TO..."), theme->Text.font, theme->Text.color), true); // batocera
 			row.addElement(mJumpToLetterList, false);
@@ -467,7 +468,7 @@ void GuiGamelistOptions::openMetaDataEd()
 
 void GuiGamelistOptions::jumpToLetter()
 {
-	char letter = mJumpToLetterList->getSelected();
+	wchar_t letter = mJumpToLetterList->getSelected();
 	IGameListView* gamelist = getGamelist();
 
 	if (mListSort->getSelected() != 0)
@@ -498,11 +499,11 @@ void GuiGamelistOptions::jumpToLetter()
 		if(files.at(mid)->getName().empty())
 			continue;
 
-		char checkLetter = (char)toupper(files.at(mid)->getName()[0]);
+		wchar_t checkLetter = (wchar_t)toupper(Utils::String::UTF8_to_wchar(files.at(mid)->getName().c_str())[0]);
 
 		if(checkLetter < letter)
 			min = mid + 1;
-		else if(checkLetter > letter || (mid > 0 && (letter == toupper(files.at(mid - 1)->getName()[0]))))
+		else if(checkLetter > letter || (mid > 0 && (letter == (wchar_t)toupper(Utils::String::UTF8_to_wchar(files.at(mid-1)->getName().c_str())[0]))))
 			max = mid - 1;
 		else
 			break; //exact match found

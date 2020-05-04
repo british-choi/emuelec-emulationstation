@@ -10,6 +10,7 @@
 #include "guis/GuiMsgBox.h"
 #include "Window.h"
 #include "LocaleES.h"
+#include "utils/StringUtil.h"
 #include <set>
 
 ISimpleGameListView::ISimpleGameListView(Window* window, FolderData* root) : IGameListView(window, root),
@@ -235,15 +236,15 @@ FileData* ISimpleGameListView::getRandomGame()
 	return nullptr;
 }
 
-std::vector<std::string> ISimpleGameListView::getEntriesLetters()
+std::vector<std::wstring> ISimpleGameListView::getEntriesLetters()
 {	
-	std::set<std::string> setOfLetters;
+	std::set<std::wstring> setOfLetters;
 
 	for (auto file : getFileDataEntries()) 
 		if (file->getType() == GAME)
-			setOfLetters.insert(std::string(1, toupper(file->getName()[0])));
+			setOfLetters.insert(std::wstring(1, toupper(Utils::String::UTF8_to_wchar(file->getName().c_str())[0])));
 
-	std::vector<std::string> letters;
+	std::vector<std::wstring> letters;
 
 	for (const auto letter : setOfLetters)
 		letters.push_back(letter);

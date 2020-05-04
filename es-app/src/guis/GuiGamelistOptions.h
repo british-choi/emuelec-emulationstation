@@ -40,7 +40,7 @@ private:
 
 	MenuComponent mMenu;
 
-	typedef OptionListComponent<char> LetterList;
+	typedef OptionListComponent<wchar_t> LetterList;
 	std::shared_ptr<LetterList> mJumpToLetterList;
 
 	typedef OptionListComponent<unsigned int> SortList;
