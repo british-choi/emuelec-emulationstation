@@ -163,7 +163,7 @@ void loadGamelistFile (const std::string xmlpath, SystemData* system, std::unord
 			LOG(LogError) << "Error finding/creating FileData for \"" << path << "\", skipping.";
 			continue;
 		}
-		else if (!file->isArcadeAsset())
+		else if (type == FOLDER || !file->isArcadeAsset())
 		{
 			std::string defaultName = file->getMetadata(MetaDataId::Name);
 			file->setMetadata(MetaDataList::createFromXML(type == FOLDER ? FOLDER_METADATA : GAME_METADATA, fileNode, system));
