@@ -284,10 +284,9 @@ std::vector<std::string> getFallbackFontPaths()
 
 	// batocera
 	const char* paths[] = {
+		":/DroidSansFallback.ttf",
 		":/DroidSansFallbackFull.ttf",// japanese, chinese, present on Debian
-		":/fontawesome_webfont.ttf",
 		":/fontawesome-webfont.ttf",
-		":/NanumMyeongjo.ttf", // korean font
 	};
 
 	std::vector<std::string> fontPaths;
