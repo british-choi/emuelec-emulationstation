@@ -30,16 +30,16 @@ namespace Utils
 
 		std::vector<std::string> split  (const std::string& s, char seperator);
 		std::vector<std::string> splitAny(const std::string& s, const std::string& seperator);
+		std::vector<std::string> extractStrings(const std::string& _string, const std::string& startDelimiter, const std::string& endDelimiter);
 
 		std::string join(const std::vector<std::string>& items, std::string separator);
-
-		std::wstring UTF8_to_wchar(const char * in);
-		std::string wchar_to_UTF8(const wchar_t * in);
 
 #if defined(_WIN32)
 		const std::string convertFromWideString(const std::wstring wstring);
 		const std::wstring convertToWideString(const std::string string);
 #endif
+		std::wstring UTF8_to_wchar(const char * in);
+		std::string wchar_to_UTF8(const wchar_t * in);
 	} // String::
 
 } // Utils::

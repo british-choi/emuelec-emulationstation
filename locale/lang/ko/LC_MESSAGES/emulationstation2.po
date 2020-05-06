@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:24+0200\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,16 +50,16 @@ msgid "CANCEL"
 msgstr "취소"
 
 msgid "FORGET A BLUETOOTH CONTROLLER"
-msgstr "블루투스 컨트롤러 제거"
+msgstr "블루투스 컨트롤러 삭제"
 
 msgid "REMOVE ALL"
-msgstr "전체 제거"
+msgstr "전부 제거"
 
 msgid "BACK"
 msgstr "뒤로"
 
 msgid "NO BLUETOOTH DEVICES FOUND"
-msgstr "발견된 블루투스 장치가 없음"
+msgstr "발견된 블루투스 장치 없음"
 
 msgid "PLEASE WAIT"
 msgstr "잠시만 기다려주세요"
@@ -86,7 +86,7 @@ msgid "LAUNCH"
 msgstr "실행"
 
 msgid "UNAVAILABLE CORE"
-msgstr "실팽불가 코어"
+msgstr "사용불가 코어"
 
 msgid "AVAILABLE GAMES"
 msgstr "실행가능 게임"
@@ -111,6 +111,18 @@ msgstr "다음으로 게임 정렬"
 
 msgid "OTHER FILTERS"
 msgstr "다른 필터"
+
+msgid "COLLECTION"
+msgstr "컬렉션"
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr "다이나믹 컬렉션 필터 편집"
+
+msgid "DELETE COLLECTION"
+msgstr "컬렉션 삭제"
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr "새 다이나믹 컬렉션 만들기"
 
 msgid "GAMELIST VIEW STYLE"
 msgstr "게임리스트 정렬방법"
@@ -143,7 +155,7 @@ msgid "ADVANCED GAME OPTIONS"
 msgstr "고급 게임 옵션"
 
 msgid "EDIT FOLDER METADATA"
-msgstr "폴더 정보 편집"
+msgstr "폴더 메타데이터 편집"
 
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "게임 정보 편집"
@@ -157,6 +169,12 @@ msgstr "로딩..."
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr "게임 아트워크 수집 중에는 이 기능은 비활성화됩니다"
 
+msgid "New Collection Name"
+msgstr "새 컬렉션 이름"
+
+msgid "ARE YOU SURE ?"
+msgstr "확실합니까?"
+
 msgid "FILTER GAMELIST BY"
 msgstr "로 게임리스트를 필터링합니다"
 
@@ -165,6 +183,12 @@ msgstr "모든 필터 리셋"
 
 msgid "FIND GAMES"
 msgstr "게임 찾기"
+
+msgid "Unknown"
+msgstr "알수없음"
+
+msgid "SYSTEMS"
+msgstr "시스템"
 
 msgid "MANUAL INPUT"
 msgstr "수동 입력"
@@ -269,10 +293,10 @@ msgid "TITLE SCREENSHOT"
 msgstr "타이틀 스크린샷"
 
 msgid "MIX V1"
-msgstr "병합 V1"
+msgstr "혼합 V1"
 
 msgid "MIX V2"
-msgstr "병합 V2"
+msgstr "혼합 V2"
 
 msgid "BOX 2D"
 msgstr "박스 2D"
@@ -287,7 +311,7 @@ msgid "NONE"
 msgstr "없음 "
 
 msgid "LOGO SOURCE"
-msgstr "로고 소스"
+msgstr "로고 출처"
 
 msgid "WHEEL"
 msgstr "휠"
@@ -314,7 +338,7 @@ msgid "SCRAPE NOW"
 msgstr "게임 아트워크 수집 시작"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
-msgstr "입력을 구성 하겠습니까?"
+msgstr "입력 구성을 정말로 원합니까?"
 
 msgid "SCREENSAVER SETTINGS"
 msgstr "화면보호기 설정"
@@ -337,8 +361,11 @@ msgstr "정보"
 msgid "VERSION"
 msgstr "버전"
 
-msgid "DISK USAGE"
-msgstr "디스크 사용량"
+msgid "USER DISK USAGE"
+msgstr "사용자 디스크 사용량"
+
+msgid "SYSTEM DISK USAGE"
+msgstr "시스템 디스크 사용량"
 
 msgid "DEVELOPER"
 msgstr "개발자"
@@ -382,8 +409,14 @@ msgstr "오직 게임리스트만 분석"
 msgid "SEARCH FOR LOCAL ART"
 msgstr "로컬 아트 서치"
 
+msgid "RESET FILE EXTENSIONS"
+msgstr "파일 확장자 리셋"
+
+msgid "REDETECT GAMES LANG/REGION"
+msgstr "게임 언어/지역 재감지"
+
 msgid "COMPLETE QUIT MENU"
-msgstr "완전 종료 메뉴"
+msgstr "완전한 종료 메뉴"
 
 msgid "USE RETROARCH RGUI MENU"
 msgstr "레트로아크 RGUI 메뉴 사용"
@@ -404,7 +437,7 @@ msgid "FILE GENERATION FAILED"
 msgstr "파일 생성 실패"
 
 msgid "FORMAT A DISK"
-msgstr "디스크 포맷"
+msgstr "디스크를 포맷합니다"
 
 msgid "DOWNLOADS"
 msgstr "다운로드"
@@ -422,7 +455,7 @@ msgid "CHECK FOR UPDATES"
 msgstr "업데이트 확인"
 
 msgid "UPDATE TYPE"
-msgstr "업데이트 형식"
+msgstr "업데이트 타입"
 
 msgid "APPLY UPDATE"
 msgstr "업데이트 적용"
@@ -491,7 +524,7 @@ msgid "BACKUP USER DATA"
 msgstr "사용자 데이터 백업"
 
 msgid "INSTALL BATOCERA ON A NEW DISK"
-msgstr "새로운 디스크에 바투세라 설치"
+msgstr "새로운 디스크에 바토세라 설치"
 
 msgid "ADVANCED"
 msgstr "고급"
@@ -702,7 +735,7 @@ msgid "DEFAULT VALUE"
 msgstr "기본 값"
 
 msgid "GAMELIST OPTIONS"
-msgstr "게임 목록 옵션"
+msgstr "게임리스트 옵션"
 
 msgid "SHOW FAVORITES ON TOP"
 msgstr "최상단에 즐겨찾기 보여주기"
@@ -720,7 +753,13 @@ msgid "never"
 msgstr "전혀"
 
 msgid "having multiple games"
-msgstr "멀티 게임을 즐깁니다"
+msgstr "다수의 게임이 있을 경우"
+
+msgid "SHOW '..' PARENT FOLDER"
+msgstr "'..' 상위 폴더 보여주기"
+
+msgid "FILE EXTENSIONS"
+msgstr "파일 확장자"
 
 msgid "TOOLS"
 msgstr "도구"
@@ -792,7 +831,7 @@ msgid "ON SCREEN KEYBOARD"
 msgstr "화상 키보드"
 
 msgid "HIDE WHEN RUNNING A GAME"
-msgstr "게임이 실행시 숨김"
+msgstr "게임이 실행 중인 때에는 숨김"
 
 msgid "SHOW FILENAMES IN LISTS"
 msgstr "리스트에서 파일명 보여주기"
@@ -927,25 +966,32 @@ msgid "INTERNAL RESOLUTION"
 msgstr "내부 해상도"
 
 msgid "FORMAT DEVICE"
-msgstr "장치 포맷"
+msgstr "장치를 포맷합니다"
 
 msgid "DEVICE TO FORMAT"
-msgstr "장치를 포맷함"
+msgstr "포맷하려는 장치"
 
 msgid "FILE SYSTEM"
 msgstr "파일 시스템"
 
 msgid "FORMAT NOW"
-msgstr "지금 포맷"
+msgstr "지금 포맷합니다"
 
 msgid "SELECTED OPTIONS ARE INVALID"
-msgstr "유효하지 않은 옵션이 선택됨"
+msgstr "선택한 옵션들은 유요하지 않습니다"
 
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
-msgstr "이 드라이브를 포맷합니까?"
+msgstr "이 드라이브를 포맷하는 것을 정말로 원합니까?"
+
+msgid "COLLECTIONS TO DISPLAY"
+msgstr "디스플레이용 컬렉션"
+
 
 msgid "GROUPED SYSTEMS"
 msgstr "그룹화된 시스템"
+
+msgid "CREATE CUSTOM COLLECTION"
+msgstr "사용자 컬렉션 만들기"
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
 msgstr "테마에서 새 커스텀 컬렉션 만들기"
@@ -953,11 +999,11 @@ msgstr "테마에서 새 커스텀 컬렉션 만들기"
 msgid "SELECT THEME FOLDER"
 msgstr "테마 폴더 선택"
 
-msgid "CREATE NEW CUSTOM COLLECTION"
-msgstr "새 커스텀 컬렉션 만들기"
+msgid "CREATE NEW EDITABLE COLLECTION"
+msgstr "새 편집가능 컬렉션 만들기"
 
-msgid "New Collection Name"
-msgstr "새 컬렉션 이름"
+msgid "OPTIONS"
+msgstr "옵션"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr "테마가 없는 커스텀 컬렉션을 그룹"
@@ -977,20 +1023,23 @@ msgstr "아케이드 시스템"
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr "자동 게임 컬렉션"
 
+msgid "EDITABLE COLLECTIONS"
+msgstr "편집가능한 컬렉션"
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr "다이나믹 컬렉션"
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr "커스텀 게임 컬렉션"
 
 msgid "INSTALL BATOCERA"
-msgstr "바투세라 설치"
+msgstr "바토세라 설치"
 
 msgid "TARGET DEVICE"
 msgstr "설치 장비"
 
 msgid "TARGET ARCHITECTURE"
 msgstr "설치 아카텍처"
-
-msgid "ARE YOU SURE ?"
-msgstr "확실합니까?"
 
 msgid "INSTALL"
 msgstr "설치"
@@ -999,7 +1048,7 @@ msgid "NETWORK REQUIRED"
 msgstr "네트워크 요구됨"
 
 msgid "INVALID PARAMETERS"
-msgstr "잘못된 매개 변수"
+msgstr "잘못된 매개변수들"
 
 msgid "SCRAPING IN PROGRESS"
 msgstr "게임 아트워크 수집 진행 중"
@@ -1056,7 +1105,7 @@ msgstr "베젤이 있는 시스템을 선택하면 (재)설치될 것입니다."
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
-msgstr "다운로드 대기에 '%개'가 추가됨"
+msgstr "다운로드 큐에 '%s' 개가 추가됨"
 
 msgid "UNINSTALL THE BEZEL PROJECT"
 msgstr "베젤 프로젝트 제거"
@@ -1068,7 +1117,7 @@ msgid "BEZELS DELETED SUCCESSFULLY"
 msgstr "베젤이 성공적으로 삭제됨"
 
 msgid "SWAP IMAGE AFTER (SECS)"
-msgstr "(몇초 후) 후 이미지 필터 교체"
+msgstr "(몇 초) 후 이미지 필터 교체"
 
 msgid "SHOW GAME INFO"
 msgstr "게임 정보 보여주기"
@@ -1109,6 +1158,9 @@ msgstr "화면보호기에 게임 정보 보여주기"
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr "화면보호기에 비디오 늘이기"
 
+msgid "MUTE VIDEO AUDIO"
+msgstr "비디오 오디오 음소거"
+
 msgid "SCRAPE THESE GAMES"
 msgstr "이 게임들의 아트워크를 수집"
 
@@ -1123,9 +1175,6 @@ msgstr "필터"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "이 시스템들을 수집"
-
-msgid "SYSTEMS"
-msgstr "시스템"
 
 msgid "USER DECIDES ON CONFLICTS"
 msgstr "직접 선택"
@@ -1236,10 +1285,10 @@ msgid "enter path to marquee"
 msgstr "마키 경로 입력"
 
 msgid "Thumbnail"
-msgstr "축소판 그림"
+msgstr "썸네일"
 
 msgid "enter path to thumbnail"
-msgstr "축소판 그림 경로 입력"
+msgstr "썸네일 경로 입력"
 
 msgid "Rating"
 msgstr "평점"
@@ -1314,13 +1363,13 @@ msgid "enter last played date"
 msgstr "마지막 플레이한 날짜 입력"
 
 msgid "Crc32"
-msgstr "CRC32"
+msgstr "Crc32"
 
 msgid "Crc32 checksum"
 msgstr "CRC32 체크섬"
 
 msgid "Md5"
-msgstr "MD5"
+msgstr "Md5"
 
 msgid "Md5 checksum"
 msgstr "MD5 체크섬"
@@ -1330,6 +1379,12 @@ msgstr "게임 시간"
 
 msgid "how long the game has been played in total (seconds)"
 msgstr "전체 게임 즐긴 시간"
+
+msgid "Languages"
+msgstr "언어"
+
+msgid "Region"
+msgstr "지역"
 
 msgid "favorite"
 msgstr "즐겨찾기"
@@ -1358,14 +1413,19 @@ msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "KODI 미디어 센터를 실행하시겠습니까?"
 
 #, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] "%I 컬렉션"
+
+#, c-format
 msgid "%i ITEM"
 msgid_plural "%i ITEMS"
-msgstr[0] ""
+msgstr[0] "%i 아이템"
 
 #, c-format
 msgid "%i GAME"
 msgid_plural "%i GAMES"
-msgstr[0] ""
+msgstr[0] "%i 게임"
 
 msgid "KODI"
 msgstr "KODI"
@@ -1383,28 +1443,25 @@ msgid "Full"
 msgstr "전체"
 
 msgid "Kiosk"
-msgstr "매장용"
+msgstr "키오스크"
 
 msgid "Kid"
 msgstr "어린이용"
 
-msgid "Released"
-msgstr "발매일"
-
-msgid "Times played"
-msgstr "플레이 횟수"
-
 msgid "No Entries Found"
 msgstr "항목을 찾지 못했습니다"
-
-msgid "OPTIONS"
-msgstr "옵션"
 
 msgid "Favorites"
 msgstr "즐겨 찾기"
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr "넷플레이 호스트로 게임을 실행합니까?"
+
+msgid "Released"
+msgstr "발매일"
+
+msgid "Times played"
+msgstr "플레이 횟수"
 
 msgid "Preloading UI"
 msgstr "UI 로딩중"
@@ -1502,14 +1559,23 @@ msgstr "유통사 / 개발사"
 msgid "RATING"
 msgstr "평점"
 
+msgid "REGION"
+msgstr "지역"
+
 msgid "KIDGAME"
 msgstr "어린이게임"
+
+msgid "ALREADY PLAYED"
+msgstr "이미 플레이하였음"
 
 msgid "HASHING GAMES"
 msgstr "해싱 게임"
 
+msgid "Collections"
+msgstr "컬렉션"
+
 msgid "Extracting"
-msgstr "추출중"
+msgstr "추출 중"
 
 msgid "NO GAMES FOUND - SKIP"
 msgstr "발견된 게임 없음 - 건너뛰기"
@@ -1542,13 +1608,16 @@ msgid "BLUETOOTH SCANNING IS ALREADY RUNNING."
 msgstr "블루투스 검색이 이미 실행중입니다."
 
 msgid "FORMATING DEVICE"
-msgstr "장치를 포맷중"
+msgstr "장치 포맷 중"
 
 msgid "Formating"
-msgstr "포맷중"
+msgstr "포맷 중"
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
+msgstr "동작을 완료하려면 시스템을 재시작하십시요."
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
-msgstr "드라이브 포맷이 이미 진행중입니다."
+msgstr "드라이브 포맷이 이미 진행 중입니다."
 
 msgid "UPDATE AVAILABLE"
 msgstr "업데이트 가능함"
@@ -1604,17 +1673,9 @@ msgid "Various"
 msgstr "다수"
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] "이 컬렉션에는 %2$s을(를) 포함한 %1$i 게임이 포함되어 있습니다."
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
-msgstr[0] ""
-"이 컬렉션에는 다른 타이틀 중 % 2 $ s을 (를) 포함한 % 1 $ i 게임이 포함되어 있"
-"습니다."
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
+msgstr[0] "이 컬렉션은  %s 포함하여, %i 게임이 들어 있습니다."
 
 msgid "UP"
 msgstr "위"
@@ -1726,14 +1787,43 @@ msgstr "발견된 게임 패드 없음"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "장치를 구성하려면 게임 패드의 A 버튼을 누르고 있으세요."
 
-msgid "Unknown"
-msgstr "알수없음"
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d 시간"
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d 분"
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d 초"
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d 일 전"
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d 시간 전"
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d 분 전"
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d 초 전"
 
 msgid "MOVE CURSOR"
 msgstr "커서 이동"
-
-msgid "STOP EDITING"
-msgstr "편집 중단"
 
 msgid "EDIT"
 msgstr "편집"
@@ -1769,6 +1859,67 @@ msgstr "위/아래"
 
 msgid "DANGER ZONE!"
 msgstr "위험 구역!"
+
+#~ msgid "STOP EDITING"
+#~ msgstr "편집 중단"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "디스크 사용량"
+
+#~ msgid "CREATE NEW CUSTOM COLLECTION"
+#~ msgstr "새 커스텀 컬렉션 만들기"
+
+#~ msgid "This collection contains %1$i game, including %2$s."
+#~ msgid_plural "This collection contains %1$i games, including %2$s."
+#~ msgstr[0] "이 컬렉션에는 %2$s을(를) 포함한 %1$i 게임이 포함되어 있습니다."
+
+#~ msgid ""
+#~ "This collection contains %1$i game, including %2$s among other titles."
+#~ msgid_plural ""
+#~ "This collection contains %1$i games, including %2$s among other titles."
+#~ msgstr[0] ""
+#~ "이 컬렉션에는 다른 타이틀 중 % 2 $ s을 (를) 포함한 % 1 $ i 게임이 포함되"
+#~ "어 있습니다."
+
+#~ msgid "%i GAME AVAILABLE"
+#~ msgid_plural "%i GAMES AVAILABLE"
+#~ msgstr[0] "%i 개의 게임 사용 가능"
+
+#~ msgid "GRID SIZE"
+#~ msgstr "그리드 사이즈"
+
+#~ msgid "AUTO UPDATES"
+#~ msgstr "자동 업데이트"
+
+#~ msgid "FORGET BLUETOOTH CONTROLLERS"
+#~ msgstr "블루투스 컨트롤러 삭제"
+
+#~ msgid "DEFAULT"
+#~ msgstr "기본"
+
+#~ msgid "VALIDATION"
+#~ msgstr "검증"
+
+#~ msgid "YES, I'M SURE"
+#~ msgstr "예, 확실합니다."
+
+#~ msgid "SELECT SYSTEMS TO DISPLAY"
+#~ msgstr "시스템 진열 선택"
+
+#~ msgid "APPLY"
+#~ msgstr "지원"
+
+#~ msgid "REVERT"
+#~ msgstr "복귀"
+
+#~ msgid "VALIDATE"
+#~ msgstr "승인"
+
+#~ msgid "Path to video"
+#~ msgstr "비디오 경로"
+
+#~ msgid "Path to marquee"
+#~ msgstr "마키 경로"
 
 msgid "You are about to set EmuELEC resolution to"
 msgstr "EmuELEC 해상도를 다음으로 설정합니다"

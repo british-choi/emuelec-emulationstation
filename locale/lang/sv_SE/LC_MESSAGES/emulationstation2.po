@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:21+0200\n"
 "PO-Revision-Date: 2020-03-01 23:31+0100\n"
 "Last-Translator: Mikael Bergström <krank23@gmail.com>\n"
 "Language-Team: \n"
@@ -115,6 +115,18 @@ msgstr "SORTERA SPEL EFTER"
 msgid "OTHER FILTERS"
 msgstr "ANDRA FILTER"
 
+msgid "COLLECTION"
+msgstr ""
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr ""
+
+msgid "DELETE COLLECTION"
+msgstr ""
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr ""
+
 msgid "GAMELIST VIEW STYLE"
 msgstr "VY FÖR SPELLISTAN"
 
@@ -160,6 +172,12 @@ msgstr "Laddar..."
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr "DENNA FUNKTION ÄR DEAKTIVERAD MEDAN SKRAPNING PÅGÅR"
 
+msgid "New Collection Name"
+msgstr "Namn på ny Samling"
+
+msgid "ARE YOU SURE ?"
+msgstr ""
+
 msgid "FILTER GAMELIST BY"
 msgstr "FILTRERA SPELLISTA PÅ"
 
@@ -168,6 +186,12 @@ msgstr "ÅTERSTÄLL ALLA FILTER"
 
 msgid "FIND GAMES"
 msgstr "HITTA SPEL"
+
+msgid "Unknown"
+msgstr "Okänt"
+
+msgid "SYSTEMS"
+msgstr "SYSTEM"
 
 msgid "MANUAL INPUT"
 msgstr "MANUELL INPUT"
@@ -340,8 +364,11 @@ msgstr "INFORMATION"
 msgid "VERSION"
 msgstr "VERSION"
 
-msgid "DISK USAGE"
-msgstr "DISKANVÄNDNING"
+msgid "USER DISK USAGE"
+msgstr ""
+
+msgid "SYSTEM DISK USAGE"
+msgstr ""
 
 msgid "DEVELOPER"
 msgstr "UTVECKLARE"
@@ -384,6 +411,12 @@ msgstr "TOLKA ENBART SPELLISTOR"
 
 msgid "SEARCH FOR LOCAL ART"
 msgstr "SÖK EFTER LOKAL KONST"
+
+msgid "RESET FILE EXTENSIONS"
+msgstr ""
+
+msgid "REDETECT GAMES LANG/REGION"
+msgstr ""
 
 msgid "COMPLETE QUIT MENU"
 msgstr ""
@@ -727,6 +760,12 @@ msgstr "aldrig"
 msgid "having multiple games"
 msgstr "innehåller flera system"
 
+msgid "SHOW '..' PARENT FOLDER"
+msgstr ""
+
+msgid "FILE EXTENSIONS"
+msgstr ""
+
 msgid "TOOLS"
 msgstr "VERKTYG"
 
@@ -950,8 +989,14 @@ msgstr ""
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
 msgstr ""
 
+msgid "COLLECTIONS TO DISPLAY"
+msgstr ""
+
 msgid "GROUPED SYSTEMS"
 msgstr "GRUPPERADE SYSTEM"
+
+msgid "CREATE CUSTOM COLLECTION"
+msgstr ""
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
 msgstr "SKAPA NY SAMLING FRÅN TEMA"
@@ -959,11 +1004,11 @@ msgstr "SKAPA NY SAMLING FRÅN TEMA"
 msgid "SELECT THEME FOLDER"
 msgstr "VÄLJ TEMA-MAPP"
 
-msgid "CREATE NEW CUSTOM COLLECTION"
-msgstr "SKAPA NY SAMLING"
+msgid "CREATE NEW EDITABLE COLLECTION"
+msgstr ""
 
-msgid "New Collection Name"
-msgstr "Namn på ny Samling"
+msgid "OPTIONS"
+msgstr "INSTÄLLNINGAR"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr "GRUPPERA ICKE-TEMATISKA SAMLINGAR"
@@ -983,6 +1028,12 @@ msgstr "ARKADSPEL"
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr "AUTOMATISKA SPELSAMLINGAR"
 
+msgid "EDITABLE COLLECTIONS"
+msgstr ""
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr ""
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr "EGNA SPELSAMLINGAR"
 
@@ -994,9 +1045,6 @@ msgstr "MÅLENHET"
 
 msgid "TARGET ARCHITECTURE"
 msgstr "MÅLARKITEKTUR"
-
-msgid "ARE YOU SURE ?"
-msgstr ""
 
 msgid "INSTALL"
 msgstr "INSTALLERA"
@@ -1117,6 +1165,9 @@ msgstr "VISA SPELINFO PÅ SKÄRMSLÄCKARE"
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr "STRÄCK UT VIDEO FÖR SKÄRMSLÄCKAREN"
 
+msgid "MUTE VIDEO AUDIO"
+msgstr ""
+
 msgid "SCRAPE THESE GAMES"
 msgstr "SKRAPA DESSA SPEL"
 
@@ -1131,9 +1182,6 @@ msgstr "FILTER"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "SKRAPA DESSA SYSTEM"
-
-msgid "SYSTEMS"
-msgstr "SYSTEM"
 
 msgid "USER DECIDES ON CONFLICTS"
 msgstr "ANVÄNDAREN BESTÄMMER VID KONFLIKT"
@@ -1339,6 +1387,12 @@ msgstr "Speltid"
 msgid "how long the game has been played in total (seconds)"
 msgstr "hur lång tid spelet har spelats totalt (sekunder)"
 
+msgid "Languages"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
 msgid "favorite"
 msgstr ""
 
@@ -1364,6 +1418,12 @@ msgstr ""
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "VILL DU STARTA KODI MEDIA CENTER?"
+
+#, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%i ITEM"
@@ -1398,23 +1458,20 @@ msgstr "Kiosk"
 msgid "Kid"
 msgstr "Barn"
 
-msgid "Released"
-msgstr "Publicerat"
-
-msgid "Times played"
-msgstr "Spelat antal gånger"
-
 msgid "No Entries Found"
 msgstr "Hittade ingenting"
-
-msgid "OPTIONS"
-msgstr "INSTÄLLNINGAR"
 
 msgid "Favorites"
 msgstr "Favoriter"
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr "STARTA SPELET SOM NETPLAY-HOST?"
+
+msgid "Released"
+msgstr "Publicerat"
+
+msgid "Times played"
+msgstr "Spelat antal gånger"
 
 msgid "Preloading UI"
 msgstr "Förhandsladdar UI"
@@ -1512,11 +1569,20 @@ msgstr "UTGIVARE / UTVECKLARE"
 msgid "RATING"
 msgstr "BETYG"
 
+msgid "REGION"
+msgstr ""
+
 msgid "KIDGAME"
 msgstr "BARNSPEL"
 
+msgid "ALREADY PLAYED"
+msgstr ""
+
 msgid "HASHING GAMES"
 msgstr "HASHAR SPEL"
+
+msgid "Collections"
+msgstr ""
 
 msgid "Extracting"
 msgstr ""
@@ -1555,6 +1621,9 @@ msgid "FORMATING DEVICE"
 msgstr ""
 
 msgid "Formating"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
 msgstr ""
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
@@ -1614,17 +1683,10 @@ msgid "Various"
 msgstr "Diverse"
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] "Den här samlingen innehåller %1$i spel, inklusive %2$s."
-msgstr[1] "Den här samlingen innehåller %1$i spel, inklusive %2$s."
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
-msgstr[0] "Den här samlingen innehåller %1$i spel, bland annat %2$s."
-msgstr[1] "Den här samlingen innehåller %1$i spel, bland annat %2$s."
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "UP"
 msgstr "UPP"
@@ -1726,14 +1788,50 @@ msgstr "INGA SPELKONTROLLER HITTADE"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "HÅLL NERE A-KNAPPEN PÅ DIN ENHET FÖR ATT KONFIGURERA DEN."
 
-msgid "Unknown"
-msgstr "Okänt"
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "MOVE CURSOR"
 msgstr "FLYTTA PEKARE"
-
-msgid "STOP EDITING"
-msgstr "SLUTA REDIGERA"
 
 msgid "EDIT"
 msgstr "REDIGERA"
@@ -1767,6 +1865,27 @@ msgstr "ARBETAR..."
 
 msgid "up/down"
 msgstr "upp/ner"
+
+#~ msgid "STOP EDITING"
+#~ msgstr "SLUTA REDIGERA"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "DISKANVÄNDNING"
+
+#~ msgid "CREATE NEW CUSTOM COLLECTION"
+#~ msgstr "SKAPA NY SAMLING"
+
+#~ msgid "This collection contains %1$i game, including %2$s."
+#~ msgid_plural "This collection contains %1$i games, including %2$s."
+#~ msgstr[0] "Den här samlingen innehåller %1$i spel, inklusive %2$s."
+#~ msgstr[1] "Den här samlingen innehåller %1$i spel, inklusive %2$s."
+
+#~ msgid ""
+#~ "This collection contains %1$i game, including %2$s among other titles."
+#~ msgid_plural ""
+#~ "This collection contains %1$i games, including %2$s among other titles."
+#~ msgstr[0] "Den här samlingen innehåller %1$i spel, bland annat %2$s."
+#~ msgstr[1] "Den här samlingen innehåller %1$i spel, bland annat %2$s."
 
 #~ msgid "%i GAME AVAILABLE"
 #~ msgid_plural "%i GAMES AVAILABLE"

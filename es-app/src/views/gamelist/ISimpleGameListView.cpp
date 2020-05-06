@@ -14,7 +14,7 @@
 #include <set>
 
 ISimpleGameListView::ISimpleGameListView(Window* window, FolderData* root) : IGameListView(window, root),
-	mHeaderText(window), mHeaderImage(window), mBackground(window)
+	mHeaderText(window), mHeaderImage(window), mBackground(window), mFolderPath(window)
 {
 	mHeaderText.setText("Logo Text");
 	mHeaderText.setSize(mSize.x(), 0);
@@ -30,8 +30,13 @@ ISimpleGameListView::ISimpleGameListView(Window* window, FolderData* root) : IGa
 	mBackground.setResize(mSize.x(), mSize.y());
 	mBackground.setDefaultZIndex(0);
 
+	mFolderPath.setHorizontalAlignment(ALIGN_CENTER);
+	mFolderPath.setDefaultZIndex(55);
+	mFolderPath.setVisible(false);
+
 	addChild(&mHeaderText);
 	addChild(&mBackground);
+	addChild(&mFolderPath);
 }
 
 void ISimpleGameListView::onThemeChanged(const std::shared_ptr<ThemeData>& theme)
@@ -40,6 +45,7 @@ void ISimpleGameListView::onThemeChanged(const std::shared_ptr<ThemeData>& theme
 	mBackground.applyTheme(theme, getName(), "background", ALL);
 	mHeaderImage.applyTheme(theme, getName(), "logo", ALL);
 	mHeaderText.applyTheme(theme, getName(), "logoText", ALL);
+	mFolderPath.applyTheme(theme, getName(), "folderpath", ALL);
 
 	// Remove old theme extras
 	for (auto extra : mThemeExtras)
@@ -52,15 +58,15 @@ void ISimpleGameListView::onThemeChanged(const std::shared_ptr<ThemeData>& theme
 	// Add new theme extras
 	mThemeExtras = ThemeData::makeExtras(theme, getName(), mWindow);
 	for (auto extra : mThemeExtras)
-	{
 		addChild(extra);
-	}
 
 	if(mHeaderImage.hasImage())
 	{
 		removeChild(&mHeaderText);
 		addChild(&mHeaderImage);
-	}else{
+	}
+	else
+	{
 		addChild(&mHeaderText);
 		removeChild(&mHeaderImage);
 	}
@@ -71,7 +77,8 @@ void ISimpleGameListView::onFileChanged(FileData* /*file*/, FileChangeType /*cha
 	// we could be tricky here to be efficient;
 	// but this shouldn't happen very often so we'll just always repopulate
 	FileData* cursor = getCursor();
-	if (!cursor->isPlaceHolder()) {
+	if (!cursor->isPlaceHolder()) 
+	{
 		populateList(cursor->getParent()->getChildrenListToDisplay());
 		setCursor(cursor);
 	}
@@ -80,6 +87,31 @@ void ISimpleGameListView::onFileChanged(FileData* /*file*/, FileChangeType /*cha
 		populateList(mRoot->getChildrenListToDisplay());
 		setCursor(cursor);
 	}
+}
+
+void ISimpleGameListView::moveToFolder(FolderData* folder)
+{
+	if (folder == nullptr || folder->getChildren().size() == 0)
+		return;
+	
+	mCursorStack.push(folder);
+	populateList(folder->getChildrenListToDisplay());
+	
+	FileData* cursor = getCursor();
+	if (cursor != nullptr)
+		setCursor(cursor);	
+}
+
+FolderData*		ISimpleGameListView::getCurrentFolder()
+{
+	if (mCursorStack.size())
+	{
+		auto top = mCursorStack.top();
+		if (top->getType() == FOLDER)
+			return (FolderData*)top;
+	}
+
+	return nullptr;
 }
 
 bool ISimpleGameListView::input(InputConfig* config, Input input)
@@ -118,15 +150,11 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 					Sound::getFromTheme(getTheme(), getName(), "launch")->play();
 					launch(cursor);
 				}
-				else {
+				else 
+				{
 					// it's a folder
-					if (folder != nullptr && folder->getChildren().size() > 0)
-					{
-						mCursorStack.push(cursor);
-						populateList(folder->getChildrenListToDisplay());
-						FileData* cursor = getCursor();
-						setCursor(cursor);
-					}
+					if (folder != nullptr)
+						moveToFolder(folder);
 				}
 			}
 			return true;
@@ -253,9 +281,30 @@ std::vector<std::wstring> ISimpleGameListView::getEntriesLetters()
 	return letters;
 }
 
+void ISimpleGameListView::updateFolderPath()
+{
+	if (mCursorStack.size())
+	{
+		auto top = mCursorStack.top();
+		mFolderPath.setText(top->getBreadCrumbPath());
+	}
+	else 
+		mFolderPath.setText("");
+}
 
+void ISimpleGameListView::repopulate()
+{
+	FolderData* folder = mRoot;
 
+	if (mCursorStack.size())
+	{
+		auto top = mCursorStack.top();
+		if (top->getType() == FOLDER)
+			folder = (FolderData*)top;
+	}
 
+	populateList(folder->getChildrenListToDisplay());
+}
 
 
 

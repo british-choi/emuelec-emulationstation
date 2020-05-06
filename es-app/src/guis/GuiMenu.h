@@ -67,8 +67,7 @@ private:
 #ifdef _ENABLEEMUELEC
 	void openEmuELECSettings(); /* < emuelec */
 #endif
-	// batocera
-	void openKodiLauncher_batocera();
+	// batocera	
 	void openSystemSettings_batocera();
 	void openGamesSettings_batocera();
 	void openControllersSettings_batocera();		
@@ -81,6 +80,8 @@ private:
 	void openRetroachievementsSettings();
 	void openMissingBiosSettings();
 	void openFormatDriveSettings();
+
+	static void reloadAllGames(Window* window, bool deleteCurrentGui = false);
 
 	// windows
 	void openEmulatorSettings();

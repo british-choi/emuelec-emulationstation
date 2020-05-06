@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,6 +115,18 @@ msgstr "ORDENAR JOGOS POR"
 msgid "OTHER FILTERS"
 msgstr "OUTROS FILTROS"
 
+msgid "COLLECTION"
+msgstr ""
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr ""
+
+msgid "DELETE COLLECTION"
+msgstr ""
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr ""
+
 msgid "GAMELIST VIEW STYLE"
 msgstr "MODO DE VISUALIZAÇÃO DA LISTA DE JOGOS"
 
@@ -160,6 +172,12 @@ msgstr "Carregando..."
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr "ESTÁ FUNÇÃO É DESATIVADA ENQUANTO O SCRAPER ESTÁ EXECUTANDO"
 
+msgid "New Collection Name"
+msgstr "Novo Nome da Coleção"
+
+msgid "ARE YOU SURE ?"
+msgstr "VOCÊ TEM CERTEZA?"
+
 msgid "FILTER GAMELIST BY"
 msgstr "FILTRAR LISTA DE JOGOS POR"
 
@@ -168,6 +186,12 @@ msgstr "REINICIAR TODOS OS FILTROS"
 
 msgid "FIND GAMES"
 msgstr "PROCURAR JOGOS"
+
+msgid "Unknown"
+msgstr "Desconhecido"
+
+msgid "SYSTEMS"
+msgstr "SISTEMAS"
 
 msgid "MANUAL INPUT"
 msgstr "ENTRADA MANUAL"
@@ -340,8 +364,11 @@ msgstr "INFORMAÇÃO"
 msgid "VERSION"
 msgstr "VERSÃO"
 
-msgid "DISK USAGE"
-msgstr "ESPAÇO DISPONÍVEL"
+msgid "USER DISK USAGE"
+msgstr ""
+
+msgid "SYSTEM DISK USAGE"
+msgstr ""
 
 msgid "DEVELOPER"
 msgstr "DESENVOLVEDOR"
@@ -384,6 +411,12 @@ msgstr "ANALISAR APENAS A GAMESLISTS"
 
 msgid "SEARCH FOR LOCAL ART"
 msgstr "PESQUISA DE ARTE LOCAL"
+
+msgid "RESET FILE EXTENSIONS"
+msgstr ""
+
+msgid "REDETECT GAMES LANG/REGION"
+msgstr ""
 
 msgid "COMPLETE QUIT MENU"
 msgstr "MENU DE SAÍDA COMPLETO"
@@ -725,6 +758,12 @@ msgstr "nunca"
 msgid "having multiple games"
 msgstr "tendo vários jogos"
 
+msgid "SHOW '..' PARENT FOLDER"
+msgstr ""
+
+msgid "FILE EXTENSIONS"
+msgstr ""
+
 msgid "TOOLS"
 msgstr "FERRAMENTAS"
 
@@ -949,8 +988,14 @@ msgstr ""
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
 msgstr ""
 
+msgid "COLLECTIONS TO DISPLAY"
+msgstr ""
+
 msgid "GROUPED SYSTEMS"
 msgstr "SISTEMAS EM GRUPO"
+
+msgid "CREATE CUSTOM COLLECTION"
+msgstr ""
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
 msgstr "CRIAR NOVA COLEÇÃO PERSONALIZADA DO TEMA"
@@ -958,11 +1003,11 @@ msgstr "CRIAR NOVA COLEÇÃO PERSONALIZADA DO TEMA"
 msgid "SELECT THEME FOLDER"
 msgstr "SELECIONAR PASTA TEMA"
 
-msgid "CREATE NEW CUSTOM COLLECTION"
-msgstr "CRIAR NOVA COLEÇÃO PERSONALIZADA"
+msgid "CREATE NEW EDITABLE COLLECTION"
+msgstr ""
 
-msgid "New Collection Name"
-msgstr "Novo Nome da Coleção"
+msgid "OPTIONS"
+msgstr "OPÇÕES"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr "GRUPO COLEÇÕES CUSTOMIZADO"
@@ -982,6 +1027,12 @@ msgstr "SISTEMAS ARCADE"
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr "COLEÇÕES AUTOMÁTICAS"
 
+msgid "EDITABLE COLLECTIONS"
+msgstr ""
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr ""
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr "COLEÇÕES DE JOGO PERSONALIZADOS"
 
@@ -993,9 +1044,6 @@ msgstr "DISPOSITIVO ALVO"
 
 msgid "TARGET ARCHITECTURE"
 msgstr "ARQUITETURA ALVO"
-
-msgid "ARE YOU SURE ?"
-msgstr "VOCÊ TEM CERTEZA?"
 
 msgid "INSTALL"
 msgstr "INSTALAR"
@@ -1117,6 +1165,9 @@ msgstr "MOSTRAR INFORMAÇÃO DO JOGO EM PROTEÇÃO DE TELA"
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr "ESTICAR VÍDEO NA PROTEÇÃO DE TELA"
 
+msgid "MUTE VIDEO AUDIO"
+msgstr ""
+
 msgid "SCRAPE THESE GAMES"
 msgstr "SCRAPE DESSES JOGOS"
 
@@ -1131,9 +1182,6 @@ msgstr "FILTRO"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "SCRAPE DESSES SISTEMAS"
-
-msgid "SYSTEMS"
-msgstr "SISTEMAS"
 
 msgid "USER DECIDES ON CONFLICTS"
 msgstr "USUÁRIO DECIDE CONFLITOS"
@@ -1342,6 +1390,12 @@ msgstr "Tempo de jogo"
 msgid "how long the game has been played in total (seconds)"
 msgstr "tempo total de jogo (segundos)"
 
+msgid "Languages"
+msgstr ""
+
+msgid "Region"
+msgstr "Região"
+
 msgid "favorite"
 msgstr "favorito"
 
@@ -1366,6 +1420,12 @@ msgstr "ERRO: TODOS OS SISTEMAS ESTÃO OCULTOS, REINICIANDO TODOS ELES AGORA"
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "DESEJA INICIAR O KODI MEDIA CENTER?"
+
+#, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%i ITEM"
@@ -1400,23 +1460,20 @@ msgstr "Quiosque"
 msgid "Kid"
 msgstr "Infantil"
 
-msgid "Released"
-msgstr "Liberado"
-
-msgid "Times played"
-msgstr "Vezes jogados"
-
 msgid "No Entries Found"
 msgstr "Nenhuma Entrada Encontrada"
-
-msgid "OPTIONS"
-msgstr "OPÇÕES"
 
 msgid "Favorites"
 msgstr "Favoritos"
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr "INICIAR O JOGO COMO HOST DO JOGO EM REDE"
+
+msgid "Released"
+msgstr "Liberado"
+
+msgid "Times played"
+msgstr "Vezes jogados"
 
 msgid "Preloading UI"
 msgstr "Pré-carregamento da interface"
@@ -1514,11 +1571,20 @@ msgstr "PUBLICADO / DESENVOLVEDOR"
 msgid "RATING"
 msgstr "Classificação"
 
+msgid "REGION"
+msgstr ""
+
 msgid "KIDGAME"
 msgstr "JOGOS INFANTIL"
 
+msgid "ALREADY PLAYED"
+msgstr ""
+
 msgid "HASHING GAMES"
 msgstr "HASHING DOS JOGOS"
+
+msgid "Collections"
+msgstr ""
 
 msgid "Extracting"
 msgstr ""
@@ -1557,6 +1623,9 @@ msgid "FORMATING DEVICE"
 msgstr ""
 
 msgid "Formating"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
 msgstr ""
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
@@ -1616,19 +1685,10 @@ msgid "Various"
 msgstr "Várias"
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] "Esta coleção contém %1$i jogo, incluindo %2$s entre outros títulos."
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
+msgstr[0] ""
 msgstr[1] ""
-"Esta coleção contém %1$i jogos, incluindo %2$s entre outros títulos."
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
-msgstr[0] "Esta coleção contém %1$i jogo, incluindo %2$s entre outros títulos."
-msgstr[1] ""
-"Esta coleção contém %1$i jogos, incluindo %2$s entre outros títulos."
 
 msgid "UP"
 msgstr "CIMA"
@@ -1729,14 +1789,50 @@ msgstr "NENHUM CONTROLE DETECTADO"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "SEGURE UM BOTÃO NO CONTROLE PARA INICIAR A CONFIGURAÇÃO"
 
-msgid "Unknown"
-msgstr "Desconhecido"
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "MOVE CURSOR"
 msgstr "MOVER CURSOR"
-
-msgid "STOP EDITING"
-msgstr "PARAR EDIÇÃO"
 
 msgid "EDIT"
 msgstr "EDITAR"
@@ -1770,6 +1866,31 @@ msgstr "EM PROGRESSO..."
 
 msgid "up/down"
 msgstr "cima/baixo"
+
+#~ msgid "STOP EDITING"
+#~ msgstr "PARAR EDIÇÃO"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "ESPAÇO DISPONÍVEL"
+
+#~ msgid "CREATE NEW CUSTOM COLLECTION"
+#~ msgstr "CRIAR NOVA COLEÇÃO PERSONALIZADA"
+
+#~ msgid "This collection contains %1$i game, including %2$s."
+#~ msgid_plural "This collection contains %1$i games, including %2$s."
+#~ msgstr[0] ""
+#~ "Esta coleção contém %1$i jogo, incluindo %2$s entre outros títulos."
+#~ msgstr[1] ""
+#~ "Esta coleção contém %1$i jogos, incluindo %2$s entre outros títulos."
+
+#~ msgid ""
+#~ "This collection contains %1$i game, including %2$s among other titles."
+#~ msgid_plural ""
+#~ "This collection contains %1$i games, including %2$s among other titles."
+#~ msgstr[0] ""
+#~ "Esta coleção contém %1$i jogo, incluindo %2$s entre outros títulos."
+#~ msgstr[1] ""
+#~ "Esta coleção contém %1$i jogos, incluindo %2$s entre outros títulos."
 
 #~ msgid "GRID SIZE"
 #~ msgstr "TAMANHO DA GRADE"
@@ -1979,9 +2100,6 @@ msgstr "cima/baixo"
 
 #~ msgid "enter ratio"
 #~ msgstr "digite a taxa"
-
-#~ msgid "Region"
-#~ msgstr "Região"
 
 #~ msgid "enter region"
 #~ msgstr "digite a região"

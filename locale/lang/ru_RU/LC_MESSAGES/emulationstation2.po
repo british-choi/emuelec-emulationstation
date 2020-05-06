@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: batocera-emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ckau\n"
 "Language-Team: Russian <https://4pda.ru/forum/index.php?showtopic=802556>\n"
@@ -20,7 +20,7 @@ msgid "UPDATE IS READY"
 msgstr "ОБНОВЛЕНИЕ ГОТОВО"
 
 msgid "REBOOT SYSTEM TO APPLY"
-msgstr "ПЕРЕЗАГРУЗКА СИСТЕМЫ ДЛЯ ПРИМЕНЕНИЯ"
+msgstr "ПЕРЕЗАГРУЗИТЕ СИСТЕМУ ДЛЯ ПРИМЕНЕНИЯ"
 
 msgid "AN ERROR OCCURED"
 msgstr "ПРОИЗОШЛА ОШИБКА"
@@ -113,7 +113,19 @@ msgid "SORT GAMES BY"
 msgstr "СОРТИРОВКА ПО"
 
 msgid "OTHER FILTERS"
-msgstr "ОСТАЛЬНЫЕ ФИЛЬТРЫ"
+msgstr "ДРУГИЕ ФИЛЬТРЫ"
+
+msgid "COLLECTION"
+msgstr "КОЛЛЕКЦИЯ"
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr "ИЗМЕНИТЬ ФИЛЬТРЫ ДИНАМ. КОЛЛЕКЦИИ"
+
+msgid "DELETE COLLECTION"
+msgstr "УДАЛИТЬ КОЛЛЕКЦИЮ"
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr "СОЗДАТЬ ДИНАМИЧЕСКУЮ КОЛЛЕКЦИЮ"
 
 msgid "GAMELIST VIEW STYLE"
 msgstr "ВИД СПИСКА ИГР"
@@ -125,13 +137,13 @@ msgid "VIEW OPTIONS"
 msgstr "НАСТРОЙКИ"
 
 msgid "VIEW CUSTOMISATION"
-msgstr "ПОКАЗАТЬ НАСТРОЙКИ"
+msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ"
 
 msgid "COLLECTION MANAGEMENT"
-msgstr "УПРАВЛЕНИЕ КОЛЛЕКЦИЯМИ"
+msgstr "УПРАВЛЕНИЕ КОЛЛЕКЦИЕЙ"
 
 msgid "ADD/REMOVE GAMES TO THIS GAME COLLECTION"
-msgstr "ДОБАВИТЬ/УДАЛИТЬ ИГРЫ К КОЛЛЕКЦИИ"
+msgstr "ДОБАВИТЬ/УДАЛИТЬ ИГРЫ В КОЛЛЕКЦИИ"
 
 msgid "FINISH EDITING COLLECTION"
 msgstr "ЗАВЕРШИТЬ РЕДАКТИРОВАНИЕ КОЛЛЕКЦИИ"
@@ -158,7 +170,13 @@ msgid "Loading..."
 msgstr "Загрузка..."
 
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
-msgstr "ВО ВРЕМЯ ЗАГРУЗКИ ЭТА ФУНКЦИЯ ОТСКЛЮЧЕНА"
+msgstr "ВО ВРЕМЯ ЗАГРУЗКИ ЭТА ФУНКЦИЯ ОТКЛЮЧЕНА"
+
+msgid "New Collection Name"
+msgstr "Название новой коллекции"
+
+msgid "ARE YOU SURE ?"
+msgstr "ВЫ УВЕРЕНЫ?"
 
 msgid "FILTER GAMELIST BY"
 msgstr "ФИЛЬТР СПИСКА ИГР ПО"
@@ -168,6 +186,12 @@ msgstr "СБРОСИТЬ ВСЕ ФИЛЬТРЫ"
 
 msgid "FIND GAMES"
 msgstr "НАЙТИ ИГРЫ"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "SYSTEMS"
+msgstr "СИСТЕМЫ"
 
 msgid "MANUAL INPUT"
 msgstr "РУЧНОЙ ВВОД"
@@ -340,8 +364,11 @@ msgstr "ИНФОРМАЦИЯ"
 msgid "VERSION"
 msgstr "ВЕРСИЯ"
 
-msgid "DISK USAGE"
-msgstr "ИСПОЛЬЗОВАНИЕ ДИСКА"
+msgid "USER DISK USAGE"
+msgstr ""
+
+msgid "SYSTEM DISK USAGE"
+msgstr ""
 
 msgid "DEVELOPER"
 msgstr "РАЗРАБОТЧИК"
@@ -385,6 +412,12 @@ msgstr "АНАЛИЗИРОВАТЬ ТОЛЬКО СПИСОК ИГР"
 msgid "SEARCH FOR LOCAL ART"
 msgstr "ПОИСК ЛОКАЛЬНЫХ ИЗОБРАЖЕНИЙ"
 
+msgid "RESET FILE EXTENSIONS"
+msgstr "СБРОСИТЬ РАСШИРЕНИЕ ФАЙЛА"
+
+msgid "REDETECT GAMES LANG/REGION"
+msgstr "ПЕРЕОПРЕДЕЛИТЬ ЯЗЫК/РЕГИОН ИГР"
+
 msgid "COMPLETE QUIT MENU"
 msgstr "ПОЛНОЕ МЕНЮ ВЫХОДА"
 
@@ -416,7 +449,7 @@ msgid "THEMES"
 msgstr "ТЕМЫ"
 
 msgid "THE BEZEL PROJECT"
-msgstr "НАБОР РАМКОК (ОВЕРЛЕЕВ)"
+msgstr "НАБОР РАМОК (ОВЕРЛЕЕВ)"
 
 msgid "SOFTWARE UPDATES"
 msgstr "ПРОГРАММНОЕ ОБНОВЛЕНИЕ"
@@ -726,6 +759,12 @@ msgstr "никогда"
 msgid "having multiple games"
 msgstr "несколько игр"
 
+msgid "SHOW '..' PARENT FOLDER"
+msgstr "ПОКАЗАТЬ '..' РОДИТЕЛЬСКОЙ ПАПКИ"
+
+msgid "FILE EXTENSIONS"
+msgstr "РАСШИРЕНИЕ ФАЙЛА"
+
 msgid "TOOLS"
 msgstr "ИНСТРУМЕНТЫ"
 
@@ -949,8 +988,14 @@ msgstr "ВЫБРАННЫЕ НАСТРОЙКИ НЕДЕЙСТВИТЕЛЬНЫ"
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
 msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ОТФОРМАТИРОВАТЬ УСТРОЙСТВО?"
 
+msgid "COLLECTIONS TO DISPLAY"
+msgstr "ОТОБРАЖАТЬ КОЛЛЕКЦИИ"
+
 msgid "GROUPED SYSTEMS"
 msgstr "СГРУППИРОВАННЫЕ СИСТЕМЫ"
+
+msgid "CREATE CUSTOM COLLECTION"
+msgstr "СОЗДАТЬ СВОЮ КОЛЛЕКЦИЮ"
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
 msgstr "СОЗДАТЬ ТЕМАТИЧЕСКУЮ КОЛЛЕКЦИЮ"
@@ -958,11 +1003,11 @@ msgstr "СОЗДАТЬ ТЕМАТИЧЕСКУЮ КОЛЛЕКЦИЮ"
 msgid "SELECT THEME FOLDER"
 msgstr "ВЫБЕРИТЕ ПАПКУ ТЕМЫ"
 
-msgid "CREATE NEW CUSTOM COLLECTION"
-msgstr "СОЗДАТЬ НОВУЮ КОЛЛЕКЦИЮ"
+msgid "CREATE NEW EDITABLE COLLECTION"
+msgstr "СОЗДАТЬ НОВУЮ ИЗМЕНЯЕМУЮ КОЛЛЕКЦИЮ"
 
-msgid "New Collection Name"
-msgstr "Название новой коллекции"
+msgid "OPTIONS"
+msgstr "ПАРАМЕТРЫ"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr "СГРУППИРОВАТЬ СВОИ КОЛЛЕКЦИИ"
@@ -982,6 +1027,12 @@ msgstr "АРКАДНЫЕ СИСТЕМЫ"
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr "АВТО-КОЛЛЕКЦИИ ИГР"
 
+msgid "EDITABLE COLLECTIONS"
+msgstr "ИЗМЕНЯЕМЫЕ КОЛЛЕКЦИИ"
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr "ДИНАМИЧЕСКИИ КОЛЛЕКЦИИ"
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr "КОЛЛЕКЦИИ ИГР"
 
@@ -993,9 +1044,6 @@ msgstr "ЦЕЛЕВОЕ УСТРОЙСТВО"
 
 msgid "TARGET ARCHITECTURE"
 msgstr "ЦЕЛЕВАЯ АРХИТЕКТУРА"
-
-msgid "ARE YOU SURE ?"
-msgstr "ВЫ УВЕРЕНЫ?"
 
 msgid "INSTALL"
 msgstr "УСТАНОВИТЬ"
@@ -1052,7 +1100,7 @@ msgstr[1] "%i ИГРЫ ПРОПУЩЕНЫ."
 msgstr[2] "%i ИГР ПРОПУЩЕНО."
 
 msgid "INSTALL BEZELS"
-msgstr "УСТНОВИТЬ РАМКИ (ОВЕРЛЕИ)"
+msgstr "УСТАНОВИТЬ РАМКИ (ОВЕРЛЕИ)"
 
 msgid "UNINSTALL BEZELS"
 msgstr "УДАЛИТЬ РАМКИ (ОВЕРЛЕИ)"
@@ -1118,6 +1166,9 @@ msgstr "ИНФ. О ИГРЕ НА ЗАСТАВКЕ"
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr "РАСТЯНУТЬ ВИДЕО НА ЗАСТАВКЕ"
 
+msgid "MUTE VIDEO AUDIO"
+msgstr ""
+
 msgid "SCRAPE THESE GAMES"
 msgstr "ЗАГРУЗИТЬ ДАННЫЕ ИГР"
 
@@ -1132,9 +1183,6 @@ msgstr "ФИЛЬТР"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "ЗАГРУЗИТЬ ДАННЫЕ ВЫБРАННЫХ СИСТЕМ"
-
-msgid "SYSTEMS"
-msgstr "СИСТЕМЫ"
 
 msgid "USER DECIDES ON CONFLICTS"
 msgstr "КОНФЛИКТЫ РАЗРЕШАЕТ ПОЛЬЗОВАТЕЛЬ"
@@ -1341,6 +1389,12 @@ msgstr "Время игры"
 msgid "how long the game has been played in total (seconds)"
 msgstr "как долго играли в игру (в секундах)"
 
+msgid "Languages"
+msgstr "Язык"
+
+msgid "Region"
+msgstr "Регион"
+
 msgid "favorite"
 msgstr "избранное"
 
@@ -1366,18 +1420,25 @@ msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "ВЫ ХОТИТЕ ЗАПУСТИТЬ МЕДИА-ЦЕНТР KODI?"
 
 #, c-format
-msgid "%i ITEM"
-msgid_plural "%i ITEMS"
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
 #, c-format
+msgid "%i ITEM"
+msgid_plural "%i ITEMS"
+msgstr[0] "ОБЪЕКТ"
+msgstr[1] "ОБЪЕКТА"
+msgstr[2] "ОБЪЕКТОВ"
+
+#, c-format
 msgid "%i GAME"
 msgid_plural "%i GAMES"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "ИГРА"
+msgstr[1] "ИГРЫ"
+msgstr[2] "ИГР"
 
 msgid "KODI"
 msgstr "KODI"
@@ -1400,23 +1461,20 @@ msgstr "Киоск"
 msgid "Kid"
 msgstr "Детский"
 
-msgid "Released"
-msgstr "Релиз"
-
-msgid "Times played"
-msgstr "Сыграно раз"
-
 msgid "No Entries Found"
 msgstr "Игр не найдено"
-
-msgid "OPTIONS"
-msgstr "ПАРАМЕТРЫ"
 
 msgid "Favorites"
 msgstr "Избранное"
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr "ЗАПУСТИТЬ ИГРУ В РЕЖИМЕ ХОСТА NETPLAY?"
+
+msgid "Released"
+msgstr "Релиз"
+
+msgid "Times played"
+msgstr "Сыграно раз"
 
 msgid "Preloading UI"
 msgstr "Предзагрузка интерфейса"
@@ -1514,11 +1572,20 @@ msgstr "ИЗДАТЕЛЬ / РАЗРАБОТЧИК"
 msgid "RATING"
 msgstr "РЕЙТИНГ"
 
+msgid "REGION"
+msgstr "РЕГИОН"
+
 msgid "KIDGAME"
 msgstr "ДЕТСКАЯ ИГРА"
 
+msgid "ALREADY PLAYED"
+msgstr "УЖЕ ИГРАЛ"
+
 msgid "HASHING GAMES"
 msgstr "ХЕШИРОВАНИЕ ИГР"
+
+msgid "Collections"
+msgstr "Коллекции"
 
 msgid "Extracting"
 msgstr "Распакова"
@@ -1558,6 +1625,9 @@ msgstr "ФОРМАТИРОВАНИЕ УСТРОЙСТВА"
 
 msgid "Formating"
 msgstr "ФОРМАТИРОВАНИЕ"
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
+msgstr ""
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
 msgstr "ФОРМАТИРОВАНИЕ УСТРОЙСТВА УЖЕ ЗАПУЩЕНО"
@@ -1616,19 +1686,11 @@ msgid "Various"
 msgstr "Различные"
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] "Коллекция содержит %1$i игру, включая %2$s."
-msgstr[1] "Коллекция содержит %1$i игры, включая %2$s."
-msgstr[2] "Коллекция содержит %1$i игр, включая %2$s."
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
-msgstr[0] "Коллекция содержит %1$i игру, включая %2$s и другие"
-msgstr[1] "Коллекция содержит %1$i игры, включая %2$s и другие"
-msgstr[2] "Коллекция содержит %1$i игр, включая %2$s и другие"
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "UP"
 msgstr "ВВЕРХ"
@@ -1733,14 +1795,57 @@ msgstr "КОНТРОЛЛЕРЫ НЕ ОБНАРУЖЕНЫ"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "УДЕРЖИВАЙТЕ КНОПКУ НА УСТРОЙСТВЕ ДЛЯ НАСТРОЙКИ."
 
-msgid "Unknown"
-msgstr "Неизвестно"
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "MOVE CURSOR"
 msgstr "ПЕРЕДВИНУТЬ КУРСОР"
-
-msgid "STOP EDITING"
-msgstr "ЗАВЕРШИТЬ РЕДАКТИРОВАНИЕ"
 
 msgid "EDIT"
 msgstr "РЕДАКТИРОВАТЬ"
@@ -1775,6 +1880,42 @@ msgstr "ОБРАБОТКА..."
 
 msgid "up/down"
 msgstr "вверх/вниз"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "ИСПОЛЬЗОВАНИЕ ДИСКА"
+
+#~ msgid "This collection contains %i game, including %s."
+#~ msgid_plural "This collection contains %i games, including %s."
+#~ msgstr[0] "Коллекция содержит %i игру, включая %s."
+#~ msgstr[1] "Коллекция содержит %i игры, включая %s."
+#~ msgstr[2] "Коллекция содержит %i игр, включая %s."
+
+#~ msgid "This collection contains %i game, including %s among other titles."
+#~ msgid_plural ""
+#~ "This collection contains %i games, including %s among other titles."
+#~ msgstr[0] "Коллекция содержит %i игру, включая %s и другие."
+#~ msgstr[1] "Коллекция содержит %i игры, включая %s и другие."
+#~ msgstr[2] "Коллекция содержит %i игр, включая %s и другие."
+
+#~ msgid "STOP EDITING"
+#~ msgstr "ЗАВЕРШИТЬ РЕДАКТИРОВАНИЕ"
+
+#~ msgid "CREATE NEW CUSTOM COLLECTION"
+#~ msgstr "СОЗДАТЬ НОВУЮ КОЛЛЕКЦИЮ"
+
+#~ msgid "This collection contains %1$i game, including %2$s."
+#~ msgid_plural "This collection contains %1$i games, including %2$s."
+#~ msgstr[0] "Коллекция содержит %1$i игру, включая %2$s."
+#~ msgstr[1] "Коллекция содержит %1$i игры, включая %2$s."
+#~ msgstr[2] "Коллекция содержит %1$i игр, включая %2$s."
+
+#~ msgid ""
+#~ "This collection contains %1$i game, including %2$s among other titles."
+#~ msgid_plural ""
+#~ "This collection contains %1$i games, including %2$s among other titles."
+#~ msgstr[0] "Коллекция содержит %1$i игру, включая %2$s и другие"
+#~ msgstr[1] "Коллекция содержит %1$i игры, включая %2$s и другие"
+#~ msgstr[2] "Коллекция содержит %1$i игр, включая %2$s и другие"
 
 #~ msgid "%i GAME AVAILABLE"
 #~ msgid_plural "%i GAMES AVAILABLE"

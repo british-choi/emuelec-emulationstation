@@ -46,6 +46,7 @@
 #include "views/gamelist/IGameListView.h"
 #include "components/MultiLineMenuEntry.h"
 #include "components/BatteryIndicatorComponent.h"
+#include "GuiLoading.h"
 
 #if WIN32
 #include "Win32ApiSystem.h"
@@ -82,7 +83,14 @@ GuiMenu::GuiMenu(Window *window, bool animate) : GuiComponent(window), mMenu(win
 	// KODI
 #ifdef _ENABLE_KODI_
 	if (SystemConf::getInstance()->getBool("kodi.enabled", true) && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::KODI))
-		addEntry(_("KODI MEDIA CENTER").c_str(), false, [this] { openKodiLauncher_batocera(); }, "iconKodi");	
+		addEntry(_("KODI MEDIA CENTER").c_str(), false, [this] 
+	{ 
+		Window *window = mWindow;
+		delete this;
+		if (!ApiSystem::getInstance()->launchKodi(window))
+			LOG(LogWarning) << "Shutdown terminated with non-zero result!";
+
+	}, "iconKodi");	
 #endif
 
 #ifdef _ENABLEEMUELEC
@@ -654,14 +662,6 @@ std::vector<HelpPrompt> GuiMenu::getHelpPrompts()
 	return prompts;
 }
 
-void GuiMenu::openKodiLauncher_batocera()
-{
-  Window *window = mWindow;
-  if (!ApiSystem::getInstance()->launchKodi(window)) {
-    LOG(LogWarning) << "Shutdown terminated with non-zero result!";
-  }
-}
-
 void GuiMenu::openSystemInformations_batocera()
 {
 	auto theme = ThemeData::getMenuTheme();
@@ -677,11 +677,17 @@ void GuiMenu::openSystemInformations_batocera()
 	informationsGui->addWithLabel(_("VERSION"), version);
 
 	bool warning = ApiSystem::getInstance()->isFreeSpaceLimit();
-	auto space = std::make_shared<TextComponent>(window,
-		ApiSystem::getInstance()->getFreeSpaceInfo(),
+	auto userspace = std::make_shared<TextComponent>(window,
+		ApiSystem::getInstance()->getFreeSpaceUserInfo(),
 		font,
 		warning ? 0xFF0000FF : color);
-	informationsGui->addWithLabel(_("DISK USAGE"), space);
+	informationsGui->addWithLabel(_("USER DISK USAGE"), userspace);
+
+	auto systemspace = std::make_shared<TextComponent>(window,
+		ApiSystem::getInstance()->getFreeSpaceSystemInfo(),
+		font,
+		color);
+	informationsGui->addWithLabel(_("SYSTEM DISK USAGE"), systemspace);
 
 	// various informations
 	std::vector<std::string> infos = ApiSystem::getInstance()->getSystemInformations();
@@ -806,6 +812,33 @@ void GuiMenu::openDeveloperSettings()
 	local_art->setState(Settings::getInstance()->getBool("LocalArt"));
 	s->addWithLabel(_("SEARCH FOR LOCAL ART"), local_art);
 	s->addSaveFunc([local_art] { Settings::getInstance()->setBool("LocalArt", local_art->getState()); });
+
+	s->addEntry(_("RESET FILE EXTENSIONS"), false, [this, s]
+	{
+		for (auto system : SystemData::sSystemVector)
+			Settings::getInstance()->setString(system->getName() + ".HiddenExt", "");
+
+		Settings::getInstance()->saveFile();
+		reloadAllGames(mWindow, false);		
+	});
+
+	s->addEntry(_("REDETECT GAMES LANG/REGION"), false, [this] 
+	{ 
+		Window* window = mWindow;
+		window->pushGui(new GuiLoading<int>(window, _("PLEASE WAIT"), []
+		{
+			for (auto system : SystemData::sSystemVector)
+			{
+				if (system->isCollection() || system->isGroupSystem())
+					continue;
+
+				for (auto game : system->getRootFolder()->getFilesRecursive(GAME))
+					game->detectLanguageAndRegion(true);
+			}
+
+			return 0;
+		}));
+	});
 
 #if defined(WIN32) && !defined(_DEBUG)
 	// full exit
@@ -938,10 +971,7 @@ void GuiMenu::openUpdatesSettings()
 	updateGui->addEntry(GuiUpdate::state == GuiUpdateState::State::UPDATE_READY ? _("APPLY UPDATE") : _("START UPDATE"), true, [this]
 	{
 		if (GuiUpdate::state == GuiUpdateState::State::UPDATE_READY)
-		{
-			if (runRestartCommand() != 0)
-				LOG(LogWarning) << "Reboot terminated with non-zero result!";
-		}
+			quitES(QuitMode::RESTART);
 		else if (GuiUpdate::state == GuiUpdateState::State::UPDATER_RUNNING)
 			mWindow->pushGui(new GuiMsgBox(mWindow, _("UPDATE IS ALREADY RUNNING")));
 		else
@@ -1903,26 +1933,7 @@ void GuiMenu::updateGameLists(Window* window)
 	
 	window->pushGui(new GuiMsgBox(window, _("REALLY UPDATE GAMES LISTS ?"), _("YES"), [window]
 		{
-			window->renderSplashScreen(_("Loading..."));
-
-			ViewController::get()->goToStart();
-			delete ViewController::get();
-			ViewController::init(window);
-			CollectionSystemManager::deinit();
-			CollectionSystemManager::init(window);
-			SystemData::loadConfig(window);
-
-			GuiComponent *gui;
-			while ((gui = window->peekGui()) != NULL) 
-			{
-				window->removeGui(gui);
-				delete gui;
-			}
-
-			ViewController::get()->reloadAll(nullptr, false); // Avoid reloading themes a second time
-			window->closeSplashScreen();
-
-			window->pushGui(ViewController::get());
+			reloadAllGames(window, true);
 		}, 
 		_("NO"), nullptr));
 }
@@ -2243,9 +2254,14 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 		std::vector<std::pair<std::string, std::string>> styles;
 		styles.push_back(std::pair<std::string, std::string>("automatic", _("automatic")));
 
+		bool showViewStyle = true;
+
 		if (system != NULL)
 		{
 			auto mViews = theme->getViewsOfTheme();
+
+			showViewStyle = mViews.size() > 1;
+
 			for (auto it = mViews.cbegin(); it != mViews.cend(); ++it)
 			{
 				if (it->first == "basic" || it->first == "detailed" || it->first == "grid")
@@ -2270,7 +2286,8 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 		if (!gamelist_style->hasSelection())
 			gamelist_style->selectFirstItem();
 
-		themeconfig->addWithLabel(_("GAMELIST VIEW STYLE"), gamelist_style);
+		if (showViewStyle)
+			themeconfig->addWithLabel(_("GAMELIST VIEW STYLE"), gamelist_style);
 	}
 
 	// Default grid size
@@ -2508,6 +2525,48 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 			if (Settings::getInstance()->setString(system->getName() + ".ShowParentFolder", parentFolder->getSelected()))
 				themeconfig->setVariable("reloadAll", true);
 		});
+
+		// File extensions
+		if (!system->isCollection() && !system->isGroupSystem())
+		{
+			auto hiddenExts = Utils::String::split(Settings::getInstance()->getString(system->getName() + ".HiddenExt"), ';');
+
+			auto hiddenCtrl = std::make_shared<OptionListComponent<std::string>>(mWindow, _("FILE EXTENSIONS"), true);
+
+			for (auto ext : system->getExtensions())
+			{
+				std::string extid = Utils::String::toLower(Utils::String::replace(ext, ".", ""));
+				hiddenCtrl->add(ext, extid, std::find(hiddenExts.cbegin(), hiddenExts.cend(), extid) == hiddenExts.cend());
+			}
+
+			themeconfig->addWithLabel(_("FILE EXTENSIONS"), hiddenCtrl);
+			themeconfig->addSaveFunc([themeconfig, system, hiddenCtrl]
+			{
+				std::string hiddenSystems;
+
+				std::vector<std::string> sel = hiddenCtrl->getSelectedObjects();
+
+				for (auto ext : system->getExtensions())
+				{
+					std::string extid = Utils::String::toLower(Utils::String::replace(ext, ".", ""));
+					if (std::find(sel.cbegin(), sel.cend(), extid) == sel.cend())
+					{
+						if (hiddenSystems.empty())
+							hiddenSystems = extid;
+						else
+							hiddenSystems = hiddenSystems + ";" + extid;
+					}
+				}
+
+				if (Settings::getInstance()->setString(system->getName() + ".HiddenExt", hiddenSystems))
+				{
+					Settings::getInstance()->saveFile();
+
+					themeconfig->setVariable("reloadAll", true);
+					themeconfig->setVariable("forceReloadGames", true);
+				}
+			});
+		}
 	}
 
 	if (systemTheme.empty())
@@ -2598,8 +2657,12 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 
 		if (reloadAll || themeconfig->getVariable("reloadAll"))
 		{
-			if (systemTheme.empty())
+			if (themeconfig->getVariable("forceReloadGames"))
 			{
+				reloadAllGames(window, false);
+			}
+			else if (systemTheme.empty())
+			{				
 				CollectionSystemManager::get()->updateSystemsList();
 				ViewController::get()->reloadAll(window);
 				window->closeSplashScreen();
@@ -2620,6 +2683,38 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 	});
 
 	mWindow->pushGui(themeconfig);
+}
+
+void GuiMenu::reloadAllGames(Window* window, bool deleteCurrentGui)
+{
+	window->renderSplashScreen(_("Loading..."));
+
+	ViewController::get()->goToStart();
+
+	if (!deleteCurrentGui)
+	{
+		GuiComponent* topGui = window->peekGui();
+		window->removeGui(topGui);
+	}
+
+	delete ViewController::get();
+
+	ViewController::init(window);
+	CollectionSystemManager::deinit();
+	CollectionSystemManager::init(window);
+	SystemData::loadConfig(window);
+	
+	GuiComponent *gui;
+	while ((gui = window->peekGui()) != NULL)
+	{
+		window->removeGui(gui);
+		delete gui;
+	}
+
+	ViewController::get()->reloadAll(nullptr, false); // Avoid reloading themes a second time
+	window->closeSplashScreen();
+
+	window->pushGui(ViewController::get());
 }
 
 void GuiMenu::openUISettings() 
@@ -3205,8 +3300,7 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 #ifdef WIN32
 	if (!forceWin32Menu && Settings::getInstance()->getBool("ShowOnlyExit"))
 	{
-		Scripting::fireEvent("quit");
-		quitES("");
+		quitES(QuitMode::QUIT);
 		return;
 	}
 #endif
@@ -3235,7 +3329,7 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 			[] {
     		   /*runSystemCommand("systemctl restart emustation.service", "", nullptr);*/
     		   Scripting::fireEvent("quit", "restart");
-			   quitES("");
+			   quitES(QuitMode::QUIT);
 		}, _("NO"), nullptr));
 	}, "iconRestart");
 
@@ -3246,7 +3340,7 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
             runSystemCommand("touch /var/lock/start.retro", "", nullptr);
 			runSystemCommand("systemctl start retroarch.service", "", nullptr);
 			Scripting::fireEvent("quit", "retroarch");
-			quitES("");
+			quitES(QuitMode::QUIT);
 		}, _("NO"), nullptr));
 	}, "iconControllers");
 	
@@ -3257,41 +3351,30 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 			runSystemCommand("rebootfromnand", "", nullptr);
 			runSystemCommand("sync", "", nullptr);
 			runSystemCommand("systemctl reboot", "", nullptr);
-			quitES("");
+			quitES(QuitMode::QUIT);
 		}, _("NO"), nullptr));
 	}, "iconAdvanced");
 
 #endif
 
 	s->addEntry(_("RESTART SYSTEM"), false, [window] {
-		window->pushGui(new GuiMsgBox(window, _("REALLY RESTART?"), _("YES"),
-			[] {
-			if (ApiSystem::getInstance()->reboot() != 0) {
-				LOG(LogWarning) <<
-					"Restart terminated with non-zero result!";
-			}
-		}, _("NO"), nullptr));
+		window->pushGui(new GuiMsgBox(window, _("REALLY RESTART?"), 
+			_("YES"), [] { quitES(QuitMode::REBOOT); }, 
+			_("NO"), nullptr));
 	}, "iconRestart");
 
+
 	s->addEntry(_("SHUTDOWN SYSTEM"), false, [window] {
-		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN?"), _("YES"),
-			[] {
-			if (ApiSystem::getInstance()->shutdown() != 0) {
-				LOG(LogWarning) <<
-					"Shutdown terminated with non-zero result!";
-			}
-		}, _("NO"), nullptr));
+		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN?"), 
+			_("YES"), [] { quitES(QuitMode::SHUTDOWN); }, 
+			_("NO"), nullptr));
 	}, "iconShutdown");
 
 #ifndef _ENABLEEMUELEC
 	s->addEntry(_("FAST SHUTDOWN SYSTEM"), false, [window] {
-		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN WITHOUT SAVING METADATAS?"), _("YES"),
-			[] {
-			if (ApiSystem::getInstance()->fastShutdown() != 0) {
-				LOG(LogWarning) <<
-					"Shutdown terminated with non-zero result!";
-			}
-		}, _("NO"), nullptr));
+		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN WITHOUT SAVING METADATAS?"), 
+			_("YES"), [] { quitES(QuitMode::FAST_SHUTDOWN); },
+			_("NO"), nullptr));
 	}, "iconFastShutdown");
 #endif
 
@@ -3299,12 +3382,9 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 	if (Settings::getInstance()->getBool("ShowExit"))
 	{
 		s->addEntry(_("QUIT EMULATIONSTATION"), false, [window] {
-			window->pushGui(new GuiMsgBox(window, _("REALLY QUIT?"), _("YES"),
-				[] 
-			{
-				Scripting::fireEvent("quit");
-				quitES("");
-			}, _("NO"), nullptr));
+			window->pushGui(new GuiMsgBox(window, _("REALLY QUIT?"), 
+				_("YES"), [] { quitES(QuitMode::QUIT); }, 
+				_("NO"), nullptr));
 		}, "iconQuit");
 	}
 #endif
@@ -3566,7 +3646,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		shaders_choices->add(_("ZFAST"), "zfast", currentShader == "zfast"); // batocera 5.25
 		shaders_choices->add(_("FLATTEN-GLOW"), "flatten-glow", currentShader == "flatten-glow"); // batocera 5.25
 		systemConfiguration->addWithLabel(_("SHADERS SET"), shaders_choices);
-		systemConfiguration->addSaveFunc([configName, shaders_choices] { SystemConf::getInstance()->set(configName + ".shaders", shaders_choices->getSelected()); });
+		systemConfiguration->addSaveFunc([configName, shaders_choices] { SystemConf::getInstance()->set(configName + ".shaderset", shaders_choices->getSelected()); });
 	}
 
 	// Integer scale

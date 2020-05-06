@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:21+0200\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,6 +112,18 @@ msgstr "ゲームのソート"
 msgid "OTHER FILTERS"
 msgstr ""
 
+msgid "COLLECTION"
+msgstr ""
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr ""
+
+msgid "DELETE COLLECTION"
+msgstr ""
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr ""
+
 msgid "GAMELIST VIEW STYLE"
 msgstr ""
 
@@ -157,6 +169,12 @@ msgstr ""
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr ""
 
+msgid "New Collection Name"
+msgstr ""
+
+msgid "ARE YOU SURE ?"
+msgstr ""
+
 msgid "FILTER GAMELIST BY"
 msgstr ""
 
@@ -165,6 +183,12 @@ msgstr ""
 
 msgid "FIND GAMES"
 msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "SYSTEMS"
+msgstr "システム"
 
 msgid "MANUAL INPUT"
 msgstr ""
@@ -338,8 +362,11 @@ msgstr ""
 msgid "VERSION"
 msgstr "バージョン"
 
-msgid "DISK USAGE"
-msgstr "ディスク使用"
+msgid "USER DISK USAGE"
+msgstr ""
+
+msgid "SYSTEM DISK USAGE"
+msgstr ""
 
 msgid "DEVELOPER"
 msgstr "開発"
@@ -381,6 +408,12 @@ msgid "PARSE GAMESLISTS ONLY"
 msgstr ""
 
 msgid "SEARCH FOR LOCAL ART"
+msgstr ""
+
+msgid "RESET FILE EXTENSIONS"
+msgstr ""
+
+msgid "REDETECT GAMES LANG/REGION"
 msgstr ""
 
 msgid "COMPLETE QUIT MENU"
@@ -732,6 +765,12 @@ msgstr "しない"
 msgid "having multiple games"
 msgstr ""
 
+msgid "SHOW '..' PARENT FOLDER"
+msgstr ""
+
+msgid "FILE EXTENSIONS"
+msgstr ""
+
 msgid "TOOLS"
 msgstr ""
 
@@ -952,7 +991,13 @@ msgstr ""
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
 msgstr ""
 
+msgid "COLLECTIONS TO DISPLAY"
+msgstr ""
+
 msgid "GROUPED SYSTEMS"
+msgstr ""
+
+msgid "CREATE CUSTOM COLLECTION"
 msgstr ""
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
@@ -961,11 +1006,11 @@ msgstr ""
 msgid "SELECT THEME FOLDER"
 msgstr ""
 
-msgid "CREATE NEW CUSTOM COLLECTION"
+msgid "CREATE NEW EDITABLE COLLECTION"
 msgstr ""
 
-msgid "New Collection Name"
-msgstr ""
+msgid "OPTIONS"
+msgstr "オプション"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr ""
@@ -985,6 +1030,12 @@ msgstr ""
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr ""
 
+msgid "EDITABLE COLLECTIONS"
+msgstr ""
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr ""
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr ""
 
@@ -995,9 +1046,6 @@ msgid "TARGET DEVICE"
 msgstr ""
 
 msgid "TARGET ARCHITECTURE"
-msgstr ""
-
-msgid "ARE YOU SURE ?"
 msgstr ""
 
 msgid "INSTALL"
@@ -1115,6 +1163,9 @@ msgstr ""
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr ""
 
+msgid "MUTE VIDEO AUDIO"
+msgstr ""
+
 msgid "SCRAPE THESE GAMES"
 msgstr "このゲームをスクレイプ"
 
@@ -1129,9 +1180,6 @@ msgstr "フィルター"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "このシステムをスクレイプ"
-
-msgid "SYSTEMS"
-msgstr "システム"
 
 #, fuzzy
 msgid "USER DECIDES ON CONFLICTS"
@@ -1337,6 +1385,12 @@ msgstr ""
 msgid "how long the game has been played in total (seconds)"
 msgstr ""
 
+msgid "Languages"
+msgstr ""
+
+msgid "Region"
+msgstr "地域"
+
 msgid "favorite"
 msgstr ""
 
@@ -1360,6 +1414,11 @@ msgstr ""
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "KODIメディアセンターを開始しますか？"
+
+#, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] ""
 
 #, c-format
 msgid "%i ITEM"
@@ -1392,23 +1451,20 @@ msgstr ""
 msgid "Kid"
 msgstr ""
 
-msgid "Released"
-msgstr "発売日"
-
-msgid "Times played"
-msgstr "回プレイ済み"
-
 msgid "No Entries Found"
 msgstr ""
-
-msgid "OPTIONS"
-msgstr "オプション"
 
 msgid "Favorites"
 msgstr ""
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr ""
+
+msgid "Released"
+msgstr "発売日"
+
+msgid "Times played"
+msgstr "回プレイ済み"
 
 msgid "Preloading UI"
 msgstr ""
@@ -1506,10 +1562,19 @@ msgstr ""
 msgid "RATING"
 msgstr "評価"
 
+msgid "REGION"
+msgstr ""
+
 msgid "KIDGAME"
 msgstr ""
 
+msgid "ALREADY PLAYED"
+msgstr ""
+
 msgid "HASHING GAMES"
+msgstr ""
+
+msgid "Collections"
 msgstr ""
 
 msgid "Extracting"
@@ -1550,6 +1615,9 @@ msgid "FORMATING DEVICE"
 msgstr ""
 
 msgid "Formating"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
 msgstr ""
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
@@ -1609,14 +1677,8 @@ msgid "Various"
 msgstr ""
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] ""
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
 msgstr[0] ""
 
 msgid "UP"
@@ -1716,14 +1778,43 @@ msgstr "ゲームパッドが検出されませんでした"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "ボタンを押し続けると、 デバイスの設定をします。"
 
-msgid "Unknown"
-msgstr ""
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
 
 msgid "MOVE CURSOR"
 msgstr "カーソル移動"
-
-msgid "STOP EDITING"
-msgstr "編集を中止"
 
 msgid "EDIT"
 msgstr "編集"
@@ -1757,6 +1848,12 @@ msgstr "処理中..."
 
 msgid "up/down"
 msgstr ""
+
+#~ msgid "STOP EDITING"
+#~ msgstr "編集を中止"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "ディスク使用"
 
 #, fuzzy
 #~ msgid "%i GAME AVAILABLE"
@@ -1834,9 +1931,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "enter ratio"
 #~ msgstr "比率を入力"
-
-#~ msgid "Region"
-#~ msgstr "地域"
 
 #~ msgid "enter region"
 #~ msgstr "地域を入力"

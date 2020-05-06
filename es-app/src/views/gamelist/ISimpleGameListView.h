@@ -31,19 +31,26 @@ public:
 	virtual void launch(FileData* game) = 0;
 	
 	virtual std::vector<std::wstring> getEntriesLetters() override;
+	virtual std::vector<FileData*> getFileDataEntries() = 0;
+
+	void	moveToFolder(FolderData* folder);
+	FolderData*		getCurrentFolder();
+
+	virtual void repopulate() override;
 
 protected:
 	FileData* getRandomGame();
+	void	  updateFolderPath();
 
-	virtual std::vector<FileData*> getFileDataEntries() = 0;
 	virtual std::string getQuickSystemSelectRightButton() = 0;
 	virtual std::string getQuickSystemSelectLeftButton() = 0;
 	virtual void populateList(const std::vector<FileData*>& files) = 0;
-
+	
 	TextComponent mHeaderText;
 	ImageComponent mHeaderImage;
 	ImageComponent mBackground;
-
+	TextComponent mFolderPath;
+	
 	std::vector<GuiComponent*> mThemeExtras;
 
 	std::stack<FileData*> mCursorStack;

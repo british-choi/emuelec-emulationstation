@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 07:17+0200\n"
+"POT-Creation-Date: 2020-05-04 21:21+0200\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,6 +112,18 @@ msgstr "ORDENA ELS JOCS PER"
 msgid "OTHER FILTERS"
 msgstr ""
 
+msgid "COLLECTION"
+msgstr ""
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr ""
+
+msgid "DELETE COLLECTION"
+msgstr ""
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr ""
+
 msgid "GAMELIST VIEW STYLE"
 msgstr ""
 
@@ -157,6 +169,12 @@ msgstr ""
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr ""
 
+msgid "New Collection Name"
+msgstr ""
+
+msgid "ARE YOU SURE ?"
+msgstr ""
+
 msgid "FILTER GAMELIST BY"
 msgstr ""
 
@@ -165,6 +183,12 @@ msgstr ""
 
 msgid "FIND GAMES"
 msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "SYSTEMS"
+msgstr "SISTEMES"
 
 msgid "MANUAL INPUT"
 msgstr ""
@@ -337,8 +361,11 @@ msgstr ""
 msgid "VERSION"
 msgstr "VERSIÓ"
 
-msgid "DISK USAGE"
-msgstr "ÚS DEL DISC"
+msgid "USER DISK USAGE"
+msgstr ""
+
+msgid "SYSTEM DISK USAGE"
+msgstr ""
 
 msgid "DEVELOPER"
 msgstr "DESENVOLUPADOR"
@@ -380,6 +407,12 @@ msgid "PARSE GAMESLISTS ONLY"
 msgstr ""
 
 msgid "SEARCH FOR LOCAL ART"
+msgstr ""
+
+msgid "RESET FILE EXTENSIONS"
+msgstr ""
+
+msgid "REDETECT GAMES LANG/REGION"
 msgstr ""
 
 msgid "COMPLETE QUIT MENU"
@@ -724,6 +757,12 @@ msgstr "mai"
 msgid "having multiple games"
 msgstr ""
 
+msgid "SHOW '..' PARENT FOLDER"
+msgstr ""
+
+msgid "FILE EXTENSIONS"
+msgstr ""
+
 msgid "TOOLS"
 msgstr ""
 
@@ -943,7 +982,13 @@ msgstr ""
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE ?"
 msgstr ""
 
+msgid "COLLECTIONS TO DISPLAY"
+msgstr ""
+
 msgid "GROUPED SYSTEMS"
+msgstr ""
+
+msgid "CREATE CUSTOM COLLECTION"
 msgstr ""
 
 msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
@@ -952,11 +997,11 @@ msgstr ""
 msgid "SELECT THEME FOLDER"
 msgstr ""
 
-msgid "CREATE NEW CUSTOM COLLECTION"
+msgid "CREATE NEW EDITABLE COLLECTION"
 msgstr ""
 
-msgid "New Collection Name"
-msgstr ""
+msgid "OPTIONS"
+msgstr "OPCIONS"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr ""
@@ -976,6 +1021,12 @@ msgstr ""
 msgid "AUTOMATIC GAME COLLECTIONS"
 msgstr ""
 
+msgid "EDITABLE COLLECTIONS"
+msgstr ""
+
+msgid "DYNAMIC COLLECTIONS"
+msgstr ""
+
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr ""
 
@@ -986,9 +1037,6 @@ msgid "TARGET DEVICE"
 msgstr ""
 
 msgid "TARGET ARCHITECTURE"
-msgstr ""
-
-msgid "ARE YOU SURE ?"
 msgstr ""
 
 msgid "INSTALL"
@@ -1107,6 +1155,9 @@ msgstr ""
 msgid "STRETCH VIDEO ON SCREENSAVER"
 msgstr ""
 
+msgid "MUTE VIDEO AUDIO"
+msgstr ""
+
 msgid "SCRAPE THESE GAMES"
 msgstr "OBTÉ DADES D'AQUESTS JOCS"
 
@@ -1121,9 +1172,6 @@ msgstr "FILTRA"
 
 msgid "SCRAPE THESE SYSTEMS"
 msgstr "OBTÉ DADES D'AQUESTS SISTEMES"
-
-msgid "SYSTEMS"
-msgstr "SISTEMES"
 
 msgid "USER DECIDES ON CONFLICTS"
 msgstr "L'USUARI DECIDEIX DAVANT CONFLICTES"
@@ -1324,6 +1372,12 @@ msgstr ""
 msgid "how long the game has been played in total (seconds)"
 msgstr ""
 
+msgid "Languages"
+msgstr ""
+
+msgid "Region"
+msgstr "Regió"
+
 msgid "favorite"
 msgstr ""
 
@@ -1347,6 +1401,12 @@ msgstr ""
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "VOLEU INICIAR EL CENTRE MULTIMÈDIA DEL KODI?"
+
+#, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%i ITEM"
@@ -1381,23 +1441,20 @@ msgstr ""
 msgid "Kid"
 msgstr ""
 
-msgid "Released"
-msgstr "Publicat"
-
-msgid "Times played"
-msgstr "Nombre de vegades que s'ha jugat"
-
 msgid "No Entries Found"
 msgstr ""
-
-msgid "OPTIONS"
-msgstr "OPCIONS"
 
 msgid "Favorites"
 msgstr ""
 
 msgid "LAUNCH THE GAME AS NETPLAY HOST ?"
 msgstr ""
+
+msgid "Released"
+msgstr "Publicat"
+
+msgid "Times played"
+msgstr "Nombre de vegades que s'ha jugat"
 
 msgid "Preloading UI"
 msgstr ""
@@ -1495,10 +1552,19 @@ msgstr ""
 msgid "RATING"
 msgstr "VALORACIÓ"
 
+msgid "REGION"
+msgstr ""
+
 msgid "KIDGAME"
 msgstr ""
 
+msgid "ALREADY PLAYED"
+msgstr ""
+
 msgid "HASHING GAMES"
+msgstr ""
+
+msgid "Collections"
 msgstr ""
 
 msgid "Extracting"
@@ -1538,6 +1604,9 @@ msgid "FORMATING DEVICE"
 msgstr ""
 
 msgid "Formating"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO COMPLETE THE OPERATION"
 msgstr ""
 
 msgid "DRIVE FORMAT IS ALREADY RUNNING."
@@ -1597,15 +1666,8 @@ msgid "Various"
 msgstr ""
 
 #, c-format
-msgid "This collection contains %1$i game, including %2$s."
-msgid_plural "This collection contains %1$i games, including %2$s."
-msgstr[0] ""
-msgstr[1] ""
-
-#, c-format
-msgid "This collection contains %1$i game, including %2$s among other titles."
-msgid_plural ""
-"This collection contains %1$i games, including %2$s among other titles."
+msgid "This collection contains %i game, including :%s"
+msgid_plural "This collection contains %i games, including :%s"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1706,14 +1768,50 @@ msgstr "NO S'HA DETECTAT CAP CONTROLADOR"
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "PREMEU UN BOTÓ DEL VOSTRE DISPOSITIU PER CONFIGURAR-LO."
 
-msgid "Unknown"
-msgstr ""
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "MOVE CURSOR"
 msgstr "MOVEU EL CURSOR"
-
-msgid "STOP EDITING"
-msgstr "ATURA L'EDICIÓ"
 
 msgid "EDIT"
 msgstr "EDITA"
@@ -1747,6 +1845,12 @@ msgstr "S'ESTÀ TREBALLANT…"
 
 msgid "up/down"
 msgstr ""
+
+#~ msgid "STOP EDITING"
+#~ msgstr "ATURA L'EDICIÓ"
+
+#~ msgid "DISK USAGE"
+#~ msgstr "ÚS DEL DISC"
 
 #~ msgid "%i GAME AVAILABLE"
 #~ msgid_plural "%i GAMES AVAILABLE"
@@ -1816,9 +1920,6 @@ msgstr ""
 
 #~ msgid "enter ratio"
 #~ msgstr "introduïu la proporció"
-
-#~ msgid "Region"
-#~ msgstr "Regió"
 
 #~ msgid "enter region"
 #~ msgstr "introduïu la regió"

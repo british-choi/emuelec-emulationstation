@@ -120,7 +120,9 @@ void GuiGamelistFilter::addFiltersToMenu()
 		optionList = std::make_shared< OptionListComponent<std::string> >(mWindow, menuLabel, true);
 		for (auto it : *allKeys)
 		{
-			if (it.first == "TRUE")
+			if (it.first == "UNKNOWN")
+				optionList->add(_("Unknown"), it.first, mFilterIndex->isKeyBeingFilteredBy(it.first, type));
+			else if (it.first == "TRUE")
 				optionList->add(_("YES"), it.first, mFilterIndex->isKeyBeingFilteredBy(it.first, type));
 			else if (it.first == "FALSE")
 				optionList->add(_("NO"), it.first, mFilterIndex->isKeyBeingFilteredBy(it.first, type));
@@ -210,5 +212,10 @@ void GuiGamelistFilter::applyFilters()
 	if (collectionFilter != nullptr)
 		collectionFilter->save();
 
+	auto finalize = mOnFinalizeFunc;
+
 	delete this;
+
+	if (finalize != nullptr)
+		finalize();
 }

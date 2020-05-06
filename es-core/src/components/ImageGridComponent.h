@@ -25,7 +25,8 @@ enum ImageSource
 {
 	THUMBNAIL,
 	IMAGE,
-	MARQUEE
+	MARQUEE,
+	MARQUEEORTEXT
 };
 
 enum CenterSelection
@@ -415,7 +416,8 @@ void ImageGridComponent<T>::render(const Transform4x4f& parentTrans)
 
 	bool splittedRendering = (mAnimateSelection && mAutoLayout.x() != 0);
 
-	if (mPadding != Vector4f::Zero() || mMargin != Vector2f::Zero())
+	bool shouldClip = mAutoLayout != Vector2f::Zero();
+	if (shouldClip)
 		Renderer::pushClipRect(pos, size);
 
 	// Render the selected image background on bottom of the others if needed
@@ -450,7 +452,7 @@ void ImageGridComponent<T>::render(const Transform4x4f& parentTrans)
 			selectedTile->render(tileTrans);
 	}
 
-	if (mPadding != Vector4f::Zero() || mMargin != Vector2f::Zero())
+	if (shouldClip)
 		Renderer::popClipRect();
 
 	listRenderTitleOverlay(trans);
@@ -493,6 +495,8 @@ void ImageGridComponent<T>::applyTheme(const std::shared_ptr<ThemeData>& theme, 
 				mImageSource = IMAGE;
 			else if (direction == "marquee")
 				mImageSource = MARQUEE;
+			else if (direction == "marqueeortext")
+				mImageSource = MARQUEEORTEXT;
 			else
 				mImageSource = THUMBNAIL;
 		}
@@ -900,7 +904,7 @@ void ImageGridComponent<T>::updateTileAtPos(int tilePos, int imgPos, bool allowA
 		tile->setVisible(false);
 	}
 	else
-	{
+	{		
 		tile->setVisible(true);
 
 		std::string name = mEntries.at(imgPos).name;
@@ -918,7 +922,12 @@ void ImageGridComponent<T>::updateTileAtPos(int tilePos, int imgPos, bool allowA
 				tile->setLabel(""); // _U("\uF114"));
 
 			tile->setImage(imagePath, mEntries.at(imgPos).data.virtualFolder);
+
+			if (mImageSource == MARQUEEORTEXT)
+				tile->setLabel("");
 		}
+		else if (mImageSource == MARQUEEORTEXT)
+			tile->setImage("");
 		else if (mEntries.at(imgPos).data.folder)
 			tile->setImage(mDefaultFolderTexture, mDefaultFolderTexture == ":/folder.svg");
 		else
