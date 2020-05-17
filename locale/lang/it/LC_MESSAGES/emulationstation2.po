@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 21:21+0200\n"
+"POT-Creation-Date: 2020-05-15 22:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -423,6 +423,9 @@ msgstr "ESCI DEFINITIVAMENTE DAL MENU"
 
 msgid "USE RETROARCH RGUI MENU"
 msgstr "USA RGUI MENU DI RETROARCH"
+
+msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
+msgstr ""
 
 msgid "LOG LEVEL"
 msgstr "LIVELLO DI LOG"
@@ -918,6 +921,9 @@ msgstr "VUOI PROCEDERE ALLA RACCOLTA DELLE INFORMAZIONI?"
 
 msgid "MANUAL SCRAPER"
 msgstr "RACCOLTA INFORMAZIONI MANUALE"
+
+msgid "SKIP TO NEXT SONG"
+msgstr ""
 
 msgid "LAUNCH SCREENSAVER"
 msgstr "AVVIA SALVASCHERMO"

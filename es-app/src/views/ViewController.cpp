@@ -528,8 +528,10 @@ bool ViewController::input(InputConfig* config, Input input)
 /* Detect unconfigured keyboad as well */
         if(config->isConfigured() == false) {
 			if(input.type == TYPE_BUTTON || input.type == TYPE_KEY) {
+				if(input.id != SDLK_POWER) {
 	    mWindow->pushGui(new GuiDetectDevice(mWindow, false, NULL));
 	    return true;
+	}
 	  }
         }
 #else
@@ -566,6 +568,24 @@ bool ViewController::input(InputConfig* config, Input input)
 		mWindow->pushGui(new GuiMenu(mWindow));
 		return true;
 	}
+
+#ifdef _ENABLEEMUELEC
+	// Emuelec next song
+	if(config->isMappedTo("leftthumb", input) && input.value != 0) // emuelec
+	{
+		// next song
+		AudioManager::getInstance()->playRandomMusic(false);
+		return true;
+	}
+#else
+	// Batocera next song
+	if(config->isMappedTo("l3", input) && input.value != 0) // batocera
+	{
+		// next song
+		AudioManager::getInstance()->playRandomMusic(false);
+		return true;
+	}
+#endif
 
 	if(UIModeController::getInstance()->listen(config, input))  // check if UI mode has changed due to passphrase completion
 	{
@@ -703,7 +723,7 @@ void ViewController::reloadGameListView(IGameListView* view, bool reloadTheme)
 			{
 				if (!cursorPath.empty())
 				{
-					for (auto file : view->getFileDataEntries())
+					for (auto file : system->getRootFolder()->getFilesRecursive(GAME, true))
 					{
 						if (file->getPath() == cursorPath)
 						{
