@@ -918,7 +918,7 @@ msgid "MANUAL SCRAPER"
 msgstr "게임 아트워크 수동 수집"
 
 msgid "SKIP TO NEXT SONG"
-msgstr ""
+msgstr "다음 곡으로 건너뛰기"
 
 msgid "LAUNCH SCREENSAVER"
 msgstr "화면보호기 실행"
