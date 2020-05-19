@@ -1368,7 +1368,7 @@ void GuiMenu::openSystemSettings_batocera()
 			SystemConf::getInstance()->set("system.language", selectedLanguage);
 			SystemConf::getInstance()->saveSystemConf();
 					runSystemCommand("systemctl restart emustation", "", nullptr); 
-			}, "NO",nullptr));
+			}, _("NO"),nullptr));
 #else
 			if (SystemConf::getInstance()->set("system.language", language_choice->getSelected()))
 			{
