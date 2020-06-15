@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-23 08:55+0200\n"
+"POT-Creation-Date: 2020-06-07 14:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -70,6 +70,12 @@ msgstr "POR FAVOR AGUARDE"
 msgid "CONTROLLERS LINKS HAVE BEEN DELETED."
 msgstr "OS COMANDOS EMPARELHADOS FORAM ELIMINADOS."
 
+msgid "CLOSE"
+msgstr "FECHAR"
+
+msgid "Loading..."
+msgstr "A Carregar..."
+
 msgid "CONNECT TO NETPLAY"
 msgstr "CONECTAR-SE AOS JOGOS EM REDE"
 
@@ -78,9 +84,6 @@ msgstr "Selecione o jogo que deseja participar"
 
 msgid "REFRESH"
 msgstr "ATUALIZAR"
-
-msgid "CLOSE"
-msgstr "FECHAR"
 
 msgid "FAILED"
 msgstr "FALHOU"
@@ -115,6 +118,15 @@ msgstr "ORDENAR JOGOS POR"
 msgid "OTHER FILTERS"
 msgstr "OUTROS FILTROS"
 
+msgid "GAME MEDIAS"
+msgstr "MÍDIAS DE JOGOS"
+
+msgid "VIEW GAME MANUAL"
+msgstr "VER MANUAL DO JOGO"
+
+msgid "VIEW GAME MAP"
+msgstr "VER MAPA DO JOGO"
+
 msgid "COLLECTION"
 msgstr "COLEÇÃO"
 
@@ -146,7 +158,7 @@ msgid "ADD/REMOVE GAMES TO THIS GAME COLLECTION"
 msgstr "ADICIONAR/REMOVER JOGOS A ESTA COLEÇÃO"
 
 msgid "FINISH EDITING COLLECTION"
-msgstr "EDIÇÃO DE COLEÇÃO TERMINADA"
+msgstr "FINALIZAR EDIÇÃO DE COLEÇÃO"
 
 msgid "GAME OPTIONS"
 msgstr "OPÇÕES DE JOGO"
@@ -163,11 +175,11 @@ msgstr "EDITAR PASTA METADATA"
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "EDITAR AS INFORMAÇÕES DO JOGO"
 
+msgid "RESET FILTERS"
+msgstr "REPOR FILTROS"
+
 msgid "FILTER GAMES BY TEXT"
 msgstr "FILTRAR JOGOS POR TEXTO"
-
-msgid "Loading..."
-msgstr "A Carregar..."
 
 msgid "THIS FUNCTION IS DISABLED WHEN SCRAPING IS RUNNING"
 msgstr "ESTA FUNÇÃO É DESATIVADA QUANDO A PROCURA ESTÁ EM CURSO"
@@ -182,7 +194,7 @@ msgid "FILTER GAMELIST BY"
 msgstr "FILTRAR LISTA DE JOGOS POR"
 
 msgid "RESET ALL FILTERS"
-msgstr "REINICIAR TODOS OS FILTROS"
+msgstr "REPOR TODOS OS FILTROS"
 
 msgid "FIND GAMES"
 msgstr "PROCURAR JOGOS"
@@ -286,6 +298,15 @@ msgstr "INFORMAÇÕES"
 msgid "QUIT"
 msgstr "SAIR"
 
+msgid "SCRAPING IS RUNNING. DO YOU WANT TO STOP IT ?"
+msgstr "A PROCURA ESTÁ EM CURSO. DESEJA PARAR ?"
+
+msgid "SCRAPER"
+msgstr "OBTER CAPAS"
+
+msgid "SCRAPE NOW"
+msgstr "INICIAR PROCURA"
+
 msgid "SCRAPE FROM"
 msgstr "OBTER A PARTIR DE:"
 
@@ -310,6 +331,9 @@ msgstr "CAIXA 2D"
 msgid "BOX 3D"
 msgstr "CAIXA 3D"
 
+msgid "FAN ART"
+msgstr "FAN ART"
+
 msgid "BOX SOURCE"
 msgstr "FONTE DA CAIXA"
 
@@ -320,7 +344,7 @@ msgid "LOGO SOURCE"
 msgstr "FONTE DO LOGOTIPO"
 
 msgid "WHEEL"
-msgstr "RODA"
+msgstr "LOGOTIPO"
 
 msgid "MARQUEE"
 msgstr "LETREIRO"
@@ -331,17 +355,17 @@ msgstr "OBTER CLASSIFICAÇÕES"
 msgid "SCRAPE VIDEOS"
 msgstr "OBTER VÍDEOS"
 
+msgid "SCRAPE FANART"
+msgstr "OBTER FANART"
+
+msgid "SCRAPE MANUAL"
+msgstr "PROCURA MANUAL"
+
 msgid "USERNAME"
 msgstr "NOME DE UTILIZADOR"
 
 msgid "PASSWORD"
 msgstr "PASSWORD"
-
-msgid "SCRAPING IS RUNNING. DO YOU WANT TO STOP IT ?"
-msgstr "A PROCURA ESTÁ EM CURSO. DESEJA PARAR ?"
-
-msgid "SCRAPE NOW"
-msgstr "INICIAR PROCURA"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
 msgstr "TEM A CERTEZA DE QUE DESEJA CONFIGURAR O COMANDO?"
@@ -374,7 +398,7 @@ msgid "SYSTEM DISK USAGE"
 msgstr "DISCO DO SISTEMA"
 
 msgid "DEVELOPER"
-msgstr "DESENVOLVEDOR"
+msgstr "PRODUTORA"
 
 msgid "VRAM LIMIT"
 msgstr "LIMITE DA VRAM"
@@ -416,7 +440,7 @@ msgid "SEARCH FOR LOCAL ART"
 msgstr "PROCURAR POR IMAGENS NO DISCO"
 
 msgid "RESET FILE EXTENSIONS"
-msgstr "REINICIAR EXTENSÕES DO ARQUIVO"
+msgstr "REPOR EXTENSÕES DO ARQUIVO"
 
 msgid "REDETECT GAMES LANG/REGION"
 msgstr "REDETECTAR O IDIOMA/REGIÃO DOS JOGOS"
@@ -580,6 +604,9 @@ msgstr "MODO VERBOSE"
 msgid "AUTOMATIC SCREENSHOT"
 msgstr "SCREENSHOT AUTOMÁTICO"
 
+msgid "SHOW IN MAIN MENU"
+msgstr "MOSTRAR NO MENU PRINCIPAL"
+
 msgid "SETTINGS"
 msgstr "DEFINIÇÕES"
 
@@ -606,6 +633,12 @@ msgstr "REINDEXAR TODO OS JOGOS"
 
 msgid "INDEX MISSING GAMES"
 msgstr "INDEXAR JOGOS EM FALTA"
+
+msgid "TOOLS"
+msgstr "FERRAMENTAS"
+
+msgid "UPDATE GAMES LISTS"
+msgstr "ATUALIZAR LISTAS DE JOGOS"
 
 msgid "DEFAULT SETTINGS"
 msgstr "DEFINIÇÕES PADRÃO"
@@ -666,9 +699,6 @@ msgstr "PAUSA NO ECRÃ TRADUZIDO"
 
 msgid "PER SYSTEM ADVANCED CONFIGURATION"
 msgstr "DEFINIÇÕES AVANÇADAS POR SISTEMA"
-
-msgid "UPDATE GAMES LISTS"
-msgstr "ATUALIZAR LISTAS DE JOGOS"
 
 msgid "NO MISSING BIOS"
 msgstr "SEM BIOS EM FALTA"
@@ -770,11 +800,8 @@ msgstr "MOSTRAR '..' PASTA PRINCIPAL"
 msgid "FILE EXTENSIONS"
 msgstr "EXTENSÕES DO ARQUIVO"
 
-msgid "TOOLS"
-msgstr "FERRAMENTAS"
-
 msgid "RESET GAMELIST CUSTOMISATIONS"
-msgstr "REINICIAR A LISTA DE JOGOS PERSONALIZADA"
+msgstr "REPOR A LISTA DE JOGOS PERSONALIZADA"
 
 msgid "APPEARENCE"
 msgstr "APARÊNCIA"
@@ -820,6 +847,9 @@ msgstr "OPÇÕES DE EXIBIÇÃO"
 
 msgid "TRANSITION STYLE"
 msgstr "ESTILO DE TRANSIÇÃO"
+
+msgid "GAME LAUNCH TRANSITION"
+msgstr "TRANSIÇÃO DE CARREGAMENTO DO JOGO"
 
 msgid "CAROUSEL TRANSITIONS"
 msgstr "TRANSIÇÃO CARROSSEL"
@@ -1019,8 +1049,17 @@ msgstr "OPÇÕES"
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
 msgstr "AGRUPAR COLEÇÕES SEM TEMAS"
 
-msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
-msgstr "ORGANIZAR COLEÇÕES MODIFICADAS E SISTEMAS"
+msgid "SORT COLLECTIONS AND SYSTEMS"
+msgstr "ORDENAR COLEÇÕES E SISTEMAS"
+
+msgid "ALPHABETICALLY"
+msgstr "ALFABETICAMENTE"
+
+msgid "BY MANUFACTURER"
+msgstr "PELO FABRICANTE"
+
+msgid "SORT SYSTEMS"
+msgstr "ORDENAR POR SISTEMAS"
 
 msgid "SHOW SYSTEM NAME IN COLLECTIONS"
 msgstr "MOSTRAR NOME DO SISTEMA NAS COLEÇÕES"
@@ -1294,17 +1333,65 @@ msgstr "Vídeo"
 msgid "enter path to video"
 msgstr "insire o caminho para o vídeo"
 
-msgid "Marquee"
-msgstr "Letreiro"
+msgid "Logo"
+msgstr "Logo"
 
-msgid "enter path to marquee"
-msgstr "insira o caminho para o letreiro"
+msgid "enter path to logo"
+msgstr "insira o caminho para o logo"
 
-msgid "Thumbnail"
-msgstr "Miniatura"
+msgid "Box"
+msgstr "caixa"
 
-msgid "enter path to thumbnail"
-msgstr "digite o caminho da miniatura"
+msgid "enter path to box"
+msgstr "insira o caminho para a caixa"
+
+msgid "Fan art"
+msgstr "Fan art"
+
+msgid "enter path to fanart"
+msgstr "insira o caminho para o fanart"
+
+msgid "Title shot"
+msgstr "Captura de ecrã"
+
+msgid "enter path to title shot"
+msgstr "insira o caminho para a captura de ecrã"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "enter path to manual"
+msgstr "insira o caminho para o manual"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "enter path to map"
+msgstr "insira o caminho para o mapa"
+
+msgid "Cartridge"
+msgstr "Cartucho"
+
+msgid "enter path to cartridge"
+msgstr "insira o caminho para o cartucho"
+
+msgid "Alt BoxArt"
+msgstr "Caixa Alternativa"
+
+msgid "enter path to alt boxart"
+msgstr "insira o caminho da caixa alternativa"
+
+msgid "Wheel"
+msgstr "Logotipo"
+
+msgid "enter path to wheel"
+msgstr "insira o caminho do logotipo"
+
+msgid "Mix"
+msgstr "Mix"
+
+msgid "enter path to mix"
+msgstr "insira o caminho para o mix"
 
 msgid "Rating"
 msgstr "AVALIAÇÃO"
@@ -1319,7 +1406,7 @@ msgid "enter release date"
 msgstr "digite a data de lançamento"
 
 msgid "Developer"
-msgstr "Desenvolvedor"
+msgstr "Produtora"
 
 msgid "enter game developer"
 msgstr "digite o nome da produtora"
@@ -1402,20 +1489,11 @@ msgstr "Idiomas"
 msgid "Region"
 msgstr "Região"
 
-msgid "favorite"
-msgstr "favorito"
-
 msgid "SCRAPING"
 msgstr "A PROCURAR"
 
-msgid "Searching"
-msgstr "Em andamento"
-
 msgid "SCRAPE FAILED"
 msgstr "FALHA NA PROCURA"
-
-msgid "Downloading"
-msgstr "A transferir"
 
 msgid "SCRAPING FINISHED. REFRESH UPDATE GAMES LISTS TO APPLY CHANGES."
 msgstr ""
@@ -1530,10 +1608,10 @@ msgid "GENRE, DESCENDING"
 msgstr "GÉNERO, DECRESCENTE"
 
 msgid "DEVELOPER, ASCENDING"
-msgstr "DESENVOLVEDOR, CRESCENTE"
+msgstr "PRODUTORA, CRESCENTE"
 
 msgid "DEVELOPER, DESCENDING"
-msgstr "DESENVOLVEDOR, DECRESCENTE"
+msgstr "PRODUTORA, DECRESCENTE"
 
 msgid "PUBLISHER, ASCENDING"
 msgstr "EDITORA, CRESCENTE"
@@ -1572,10 +1650,10 @@ msgid "PLAYERS"
 msgstr "JOGADORES"
 
 msgid "PUBLISHER / DEVELOPER"
-msgstr "EDITORA / DESENVOLVEDOR"
+msgstr "EDITORA / PRODUTORA"
 
 msgid "RATING"
-msgstr "Classificação"
+msgstr "CLASSIFICAÇÃO"
 
 msgid "REGION"
 msgstr "REGIÃO"
@@ -1595,6 +1673,9 @@ msgstr "Coleções"
 msgid "Extracting"
 msgstr "A extrair"
 
+msgid "Searching"
+msgstr "Em andamento"
+
 msgid "NO GAMES FOUND - SKIP"
 msgstr "NENHUM JOGO ENCONTRADO - PULAR"
 
@@ -1603,6 +1684,9 @@ msgstr "OCORREU UM ERRO"
 
 msgid "RETRY"
 msgstr "TENTE NOVAMENTE"
+
+msgid "Downloading"
+msgstr "A transferir"
 
 msgid "ACCEPT RESULT"
 msgstr "ACEITAR RESULTADOS"
@@ -1872,6 +1956,24 @@ msgstr "EM PROGRESSO..."
 
 msgid "up/down"
 msgstr "cima/baixo"
+
+#~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
+#~ msgstr "ORGANIZAR COLEÇÕES MODIFICADAS E SISTEMAS"
+
+#~ msgid "Marquee"
+#~ msgstr "Letreiro"
+
+#~ msgid "enter path to marquee"
+#~ msgstr "insira o caminho para o letreiro"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatura"
+
+#~ msgid "enter path to thumbnail"
+#~ msgstr "digite o caminho da miniatura"
+
+#~ msgid "favorite"
+#~ msgstr "favorito"
 
 #~ msgid "This collection contains %i game, including %s."
 #~ msgid_plural "This collection contains %i games, including %s."
@@ -2243,9 +2345,6 @@ msgstr "cima/baixo"
 
 #~ msgid "NO CONTROLLERS FOUND"
 #~ msgstr "NENHUM COMANDO DETECTADO"
-
-#~ msgid "SCRAPER"
-#~ msgstr "OBTER CAPAS"
 
 #~ msgid "NONE (700Mhz)"
 #~ msgstr "DESLIGADO (700Mhz)"
