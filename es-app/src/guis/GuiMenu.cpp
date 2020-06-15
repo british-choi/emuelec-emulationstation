@@ -195,7 +195,7 @@ void GuiMenu::openEmuELECSettings()
 
 	Window* window = mWindow;
 	std::string a;
-	auto emuelec_video_mode = std::make_shared< OptionListComponent<std::string> >(mWindow, "VIDEO MODE", false);
+	auto emuelec_video_mode = std::make_shared< OptionListComponent<std::string> >(mWindow, _("VIDEO MODE"), false);
         std::vector<std::string> videomode;
   /* for(std::stringstream ss(getShOutput(R"(~/.config/emuelec/scripts/get_supported_resolutions.sh)")); getline(ss, a, ','); ) {
         videomode.push_back(a);
@@ -259,7 +259,7 @@ void GuiMenu::openEmuELECSettings()
 		 }
 		});
 		
-		auto emuelec_audiodev_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "AUDIO DEVICE", false);
+		auto emuelec_audiodev_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("AUDIO DEVICE"), false);
 		std::vector<std::string> Audiodevices;
 		Audiodevices.push_back("auto");
 		Audiodevices.push_back("0,0");
@@ -303,10 +303,10 @@ void GuiMenu::openEmuELECSettings()
 			}
 		});
 			
-		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "START AT BOOT", false);
+		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("START AT BOOT"), false);
 		std::vector<std::string> devices;
-		devices.push_back("Emulationstation");
-		devices.push_back("Retroarch");
+		devices.push_back(_("Emulationstation"));
+		devices.push_back(_("Retroarch"));
 		for (auto it = devices.cbegin(); it != devices.cend(); it++)
 		emuelec_boot_def->add(*it, *it, SystemConf::getInstance()->get("ee_boot") == *it);
 		s->addWithLabel(_("START AT BOOT"), emuelec_boot_def);
