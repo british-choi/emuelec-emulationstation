@@ -1949,10 +1949,10 @@ msgstr "작업 중..."
 msgid "up/down"
 msgstr "위/아래"
 
-<<<<<<< HEAD
+
 msgid "DANGER ZONE!"
 msgstr "위험 구역!"
-=======
+
 #~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
 #~ msgstr "커스텀 컬렉션과 시스템을 분류"
 
@@ -1970,7 +1970,6 @@ msgstr "위험 구역!"
 
 #~ msgid "favorite"
 #~ msgstr "즐겨찾기"
->>>>>>> 92629ef9069bc879f2ba9f04d88c3b1bf81cbb13
 
 #~ msgid "STOP EDITING"
 #~ msgstr "편집 중단"
