@@ -191,7 +191,7 @@ if (!isKidUI) {
 /* < emuelec */
 void GuiMenu::openEmuELECSettings()
 {
-	auto s = new GuiSettings(mWindow, "EmuELEC Settings");
+	auto s = new GuiSettings(mWindow, _("EMUELEC SETTINGS").c_str()));
 
 	Window* window = mWindow;
 	std::string a;

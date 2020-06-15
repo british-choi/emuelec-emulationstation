@@ -356,7 +356,7 @@ msgid "SCRAPE FANART"
 msgstr "팬아트 수집"
 
 msgid "SCRAPE MANUAL"
-msgstr ""
+msgstr "매뉴얼 수집"
 
 msgid "USERNAME"
 msgstr "사용자 이름"
@@ -449,7 +449,7 @@ msgid "USE RETROARCH RGUI MENU"
 msgstr "레트로아크 RGUI 메뉴 사용"
 
 msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
-msgstr ""
+msgstr "에뮬레이터 컨트롤러 자동구성"
 
 msgid "LOG LEVEL"
 msgstr "로그 레벨"
@@ -1242,10 +1242,10 @@ msgid "NO GAMES FIT THAT CRITERIA."
 msgstr "조건에 맞는 게임이 없습니다."
 
 msgid "SCREENSAVER AFTER"
-msgstr "화면 보호기 작동"
+msgstr "화면보호기 대기시간"
 
 msgid "SCREENSAVER BEHAVIOR"
-msgstr "화면 보호기 행동"
+msgstr "화면보호기 동작"
 
 msgid ""
 "THE \"RANDOM VIDEO\" SCREENSAVER SHOWS VIDEOS FROM YOUR GAMELIST.\n"
@@ -1265,10 +1265,10 @@ msgid "SLIDESHOW SCREENSAVER SETTINGS"
 msgstr "슬라이스쇼 화면보호기 셋팅"
 
 msgid "SCREENSAVER CONTROLS"
-msgstr "스크린세이버 컨트롤"
+msgstr "화면보호기 컨트롤"
 
 msgid "SLIDESHOW SCREENSAVER"
-msgstr "슬라이드쇼 스크린세이버"
+msgstr "슬라이드쇼 화면보호기"
 
 msgid "NO DEVICE FOUND"
 msgstr "장치 찾기 없음"
@@ -1949,10 +1949,9 @@ msgstr "작업 중..."
 msgid "up/down"
 msgstr "위/아래"
 
-<<<<<<< HEAD
 msgid "DANGER ZONE!"
 msgstr "위험 구역!"
-=======
+
 #~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
 #~ msgstr "커스텀 컬렉션과 시스템을 분류"
 
@@ -1970,7 +1969,6 @@ msgstr "위험 구역!"
 
 #~ msgid "favorite"
 #~ msgstr "즐겨찾기"
->>>>>>> 92629ef9069bc879f2ba9f04d88c3b1bf81cbb13
 
 #~ msgid "STOP EDITING"
 #~ msgstr "편집 중단"
@@ -2057,7 +2055,6 @@ msgstr "RA 스플래시 활성화"
 msgid "ALWAYS SHOW BOOT VIDEO"
 msgstr "항상 부팅 시 비디오 보기"
 
-
 msgid "BACKUP EMUELEC CONFIGS"
 msgstr "EmuELEC 설정 백업"
 
@@ -2121,3 +2118,12 @@ msgstr "에뮬레이터"
 
 msgid "BEZEL"
 msgstr "베젤"
+
+msgid "AUTO CONFIG ADVANCEMAME GAMEPAD"
+msgstr "AdvanceMAME 게임패드 자동 구성"
+
+msgid "Emulationstation"
+msgstr "에뮬레이션스테이션"
+
+msgid "Retroarch"
+msgstr "레트로아크"
