@@ -305,8 +305,8 @@ void GuiMenu::openEmuELECSettings()
 			
 		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("START AT BOOT"), false);
 		std::vector<std::string> devices;
-		devices.push_back(_("Emulationstation"));
-		devices.push_back(_("Retroarch"));
+		devices.push_back("Emulationstation");
+		devices.push_back("Retroarch");
 		for (auto it = devices.cbegin(); it != devices.cend(); it++)
 		emuelec_boot_def->add(*it, *it, SystemConf::getInstance()->get("ee_boot") == *it);
 		s->addWithLabel(_("START AT BOOT"), emuelec_boot_def);
@@ -1101,7 +1101,7 @@ void GuiMenu::openSystemSettings_batocera()
 	language_choice->add("HUNGARIAN",            "hu_HU", language == "hu_HU");
 	language_choice->add("ITALIANO",             "it_IT", language == "it_IT");
 	language_choice->add("JAPANESE", 	     "ja_JP", language == "ja_JP");
-	language_choice->add("KOREAN",   	     "ko_KR", language == "ko_KR" || language == "ko");
+	language_choice->add("한국어",   	     "ko_KR", language == "ko_KR" || language == "ko");
 	language_choice->add("NORWEGIAN BOKMAL",     "nb_NO", language == "nb_NO");
 	language_choice->add("DUTCH",                "nl_NL", language == "nl_NL");
 	language_choice->add("NORWEGIAN",            "nn_NO", language == "nn_NO");

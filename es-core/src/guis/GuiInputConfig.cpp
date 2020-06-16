@@ -94,7 +94,6 @@ static const InputConfigStructure GUI_INPUT_CONFIG_LIST[inputCount] =
   { "r3",              true,  "R3",      ":/help/analog_thumb.svg" },
   { "hotkey",          true,  "HOTKEY",      ":/help/button_hotkey.svg" } // batocera
 };
-#endif
 
 #define fake_gettext_up _("UP")
 #define fake_gettext_down _("DOWN")
@@ -107,6 +106,7 @@ static const InputConfigStructure GUI_INPUT_CONFIG_LIST[inputCount] =
 #define fake_gettext_right_a_up _("RIGHT ANALOG UP")
 #define fake_gettext_right_a_left _("RIGHT ANALOG LEFT")
 #define fake_gettext_hotkey _("HOTKEY")
+#endif
 
 //MasterVolUp and MasterVolDown are also hooked up, but do not appear on this screen.
 //If you want, you can manually add them to es_input.cfg.
