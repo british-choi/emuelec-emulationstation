@@ -67,6 +67,7 @@ namespace PlatformIds
 		{ "psp",					PLAYSTATION_PORTABLE },
 		{ "snes",					SUPER_NINTENDO },
 		{ "scummvm",				SCUMMVM },
+		{ "x1",						SHARP_X1 },
 		{ "x68000",					SHARP_X6800 },
 		{ "pcengine",				TURBOGRAFX_16 }, // (aka PC Engine) HuCards onlyy
 		{ "pcenginecd",				TURBOGRAFX_CD }, // (aka PC Engine) CD-ROMs onlynly
@@ -93,6 +94,7 @@ namespace PlatformIds
 		{ "satellaview",			SATELLAVIEW },
 		{ "sufami",					SUFAMITURBO },
 		{ "zx81",					ZX81 },
+		{ "tic80",					TIC80 },
 
 		// batocera specific names
 		{ "gb2players",				GAME_BOY },
@@ -103,6 +105,7 @@ namespace PlatformIds
 		{ "oricatmos",				ORICATMOS },
 		{ "tyrquake",				QUAKE },
 		{ "mrboom",					MRBOOM },
+		{ "cannonball",					CANNONBALL },
 
 		// windows specific systems & names
 		{ "windows",				MOONLIGHT },

@@ -19,6 +19,10 @@
 #include "Playlists.h"
 #include "CollectionSystemManager.h"
 
+// buffer values for scrolling velocity (left, stopped, right)
+const int logoBuffersLeft[] = { -5, -2, -1 };
+const int logoBuffersRight[] = { 1, 2, 5 };
+
 SystemView::SystemView(Window* window) : IList<SystemViewData, SystemData*>(window, LIST_SCROLL_STYLE_SLOW, LIST_ALWAYS_LOOP),
 										 mViewNeedsReload(true),
 										 mSystemInfo(window, "SYSTEM INFO", Font::get(FONT_SIZE_SMALL), 0x33333300, ALIGN_CENTER)
@@ -96,7 +100,7 @@ void SystemView::populate()
 				   || (!defaultPath.empty() && ResourceManager::getInstance()->fileExists(defaultPath)))
 				{
 					// Remove dynamic flags for png & jpg files : themes can contain oversized images that can't be unloaded by the TextureResource manager
-					ImageComponent* logo = new ImageComponent(mWindow, false, Utils::String::toLower(Utils::FileSystem::getExtension(path)) != ".svg");
+					ImageComponent* logo = new ImageComponent(mWindow, false, false); // Utils::String::toLower(Utils::FileSystem::getExtension(path)) != ".svg");
 					logo->setMaxSize(mCarousel.logoSize * mCarousel.logoScale);
 					logo->applyTheme(theme, "system", "logo", ThemeFlags::COLOR | ThemeFlags::ALIGNMENT | ThemeFlags::VISIBLE); //  ThemeFlags::PATH | 
 
@@ -334,12 +338,12 @@ bool SystemView::input(InputConfig* config, Input input)
 		{
 		case VERTICAL:
 		case VERTICAL_WHEEL:
-			if (config->isMappedLike("up", input) || config->isMappedLike("r2", input))
+			if (config->isMappedLike("up", input) || config->isMappedLike("l2", input))
 			{
 				listInput(-1);
 				return true;
 			}
-			if (config->isMappedLike("down", input) || config->isMappedLike("l2", input))
+			if (config->isMappedLike("down", input) || config->isMappedLike("r2", input))
 			{
 				listInput(1);
 				return true;
@@ -380,9 +384,9 @@ bool SystemView::input(InputConfig* config, Input input)
 				return true;
 			}
 #ifdef _ENABLEEMUELEC
-			if (config->isMappedTo("righttrigger", input) && mEntries.size() > 10)
+			if (config->isMappedTo("righttrigger", input))
 #else
-			if (config->isMappedTo("pagedown", input) && mEntries.size() > 10)
+			if (config->isMappedTo("pagedown", input))
 #endif
 			{
 				int cursor = moveCursorFast(true);
@@ -390,9 +394,9 @@ bool SystemView::input(InputConfig* config, Input input)
 				return true;
 			}
 #ifdef _ENABLEEMUELEC
-			if (config->isMappedTo("lefttrigger", input) && mEntries.size() > 10)
+			if (config->isMappedTo("lefttrigger", input))
 #else
-			if (config->isMappedTo("pageup", input) && mEntries.size() > 10)
+			if (config->isMappedTo("pageup", input))
 #endif
 			{
 				int cursor = moveCursorFast(false);
@@ -409,6 +413,13 @@ bool SystemView::input(InputConfig* config, Input input)
 			ViewController::get()->goToGameList(getSelected());
 			return true;
 		}
+
+		if (config->isMappedTo(BUTTON_BACK, input) && SystemData::isManufacturerSupported() && Settings::getInstance()->getString("SortSystems") == "manufacturer")
+		{
+			showManufacturerBar();
+			return true;
+		}
+
 		if (config->isMappedTo("x", input))
 		{
 			// get random system
@@ -454,6 +465,54 @@ bool SystemView::input(InputConfig* config, Input input)
 	}
 
 	return GuiComponent::input(config, input);
+}
+
+void SystemView::showManufacturerBar()
+{
+	stopScrolling();
+
+	GuiSettings* gs = new GuiSettings(mWindow, _("GO TO MANUFACTURER"), "-----"); // , "", nullptr, true);
+
+	int idx = 0;
+
+	std::string man = "*-*";
+	for (int i = 0; i < SystemData::sSystemVector.size(); i++)
+	{
+		auto system = SystemData::sSystemVector[i];
+		if (!system->isVisible())
+			continue;
+
+		std::string sel = getSelected()->getSystemMetadata().manufacturer;
+		auto mf = system->getSystemMetadata().manufacturer;
+		if (man != mf)
+		{
+			std::vector<std::string> names;
+			for (auto sy : SystemData::sSystemVector)
+				if (sy->isVisible() && sy->getSystemMetadata().manufacturer == mf)
+					names.push_back(sy->getFullName());
+
+			gs->getMenu().addWithDescription(mf, Utils::String::join(names, ", "), nullptr, [this, gs, system, idx]
+			{
+				listInput(idx - mCursor);
+				listInput(0);
+
+				delete gs;
+			}, "", sel == mf);
+
+			man = mf;
+		}
+
+		idx++;
+	}
+
+	int w = Renderer::getScreenWidth() / 3;
+	gs->getMenu().setSize(w, Renderer::getScreenHeight());
+
+	gs->getMenu().animateTo(
+		Vector2f(-w, 0),
+		Vector2f(0, 0), AnimateFlags::OPACITY | AnimateFlags::POSITION);
+
+	mWindow->pushGui(gs);
 }
 
 void SystemView::update(int deltaTime)
@@ -866,8 +925,12 @@ void SystemView::renderCarousel(const Transform4x4f& trans)
 	int logoCount = Math::min(mCarousel.maxLogoCount, (int)mEntries.size());
 
 	// Adding texture loading buffers depending on scrolling speed and status
-	int bufferLeft = -1;
-	int bufferRight = 1;
+	int bufferIndex = getScrollingVelocity() + 1;
+	bufferIndex = Math::max(0, Math::min(2, bufferIndex));
+
+	int bufferLeft = logoBuffersLeft[bufferIndex];
+	int bufferRight = logoBuffersRight[bufferIndex];
+
 	if (logoCount == 1 && mCamOffset == 0)
 	{
 		bufferLeft = 0;
@@ -876,12 +939,10 @@ void SystemView::renderCarousel(const Transform4x4f& trans)
 
 	for (int i = center - logoCount / 2 + bufferLeft; i <= center + logoCount / 2 + bufferRight; i++)
 	{
-		int index = i;
-		while (index < 0)
+		int index = i % (int)mEntries.size();
+		if (index < 0)
 			index += (int)mEntries.size();
-		while (index >= (int)mEntries.size())
-			index -= (int)mEntries.size();
-
+		
 		Transform4x4f logoTrans = carouselTrans;
 		logoTrans.translate(Vector3f(i * logoSpacing[0] + xOff, i * logoSpacing[1] + yOff, 0));
 
@@ -899,6 +960,17 @@ void SystemView::renderCarousel(const Transform4x4f& trans)
 			comp->setRotationDegrees(mCarousel.logoRotation * distance);
 			comp->setRotationOrigin(mCarousel.logoRotationOrigin);
 		}
+
+		// Ensure texture loaded, query it if necessary
+		/*
+		auto ctrl = comp.get();
+		if (ctrl->isKindOf<ImageComponent>())
+		{
+			auto tex = ((ImageComponent*)ctrl)->getTexture();
+			if (tex != nullptr)
+				tex->reload();
+		}*/
+
 		comp->setScale(scale);
 		comp->setOpacity((unsigned char)opacity);
 		comp->render(logoTrans);
@@ -919,8 +991,14 @@ void SystemView::renderExtras(const Transform4x4f& trans, float lower, float upp
 {
 	int extrasCenter = (int)mExtrasCamOffset;
 
+	int bufferIndex = getScrollingVelocity() + 1;
+	bufferIndex = Math::max(0, Math::min(2, bufferIndex));
+
+	int bufferLeft = logoBuffersLeft[bufferIndex];
+	int bufferRight = logoBuffersRight[bufferIndex];
+
 	// Ensure texture loaded, query them if necessary ( & put it in the top order )
-	for (int i = extrasCenter - 1; i <= extrasCenter + 1; i++)
+	for (int i = extrasCenter + bufferLeft; i <= extrasCenter + bufferRight; i++)
 	{
 		int index = i % (int)mEntries.size();
 		if (index < 0)
@@ -1055,8 +1133,6 @@ void SystemView::renderExtras(const Transform4x4f& trans, float lower, float upp
 		{
 			if (extra->getZIndex() < lower || extra->getZIndex() >= upper)
 				continue;
-
-			updateExtraBindings(index);
 
 			// ExtrasFadeOpacity : Apply opacity only on elements that are not common with the original view
 			if (mExtrasFadeOpacity && !extra->isStaticExtra())
@@ -1318,62 +1394,6 @@ void SystemView::updateExtras(const std::function<void(GuiComponent*)>& func)
 		{
 			GuiComponent* extra = data.backgroundExtras[j];
 			func(extra);
-		}
-	}
-}
-
-void SystemView::updateExtraBindings(int cursor)
-{
-	if (cursor < 0 || cursor >= mEntries.size())
-		return;
-
-	SystemData* sys = mEntries.at(cursor).object;
-	if (sys->getTheme() == nullptr)
-		return;
-
-	bool bindingEnabled = SystemData::isManufacturerSupported();
-
-	SystemViewData data = mEntries.at(cursor).data;
-	for (unsigned int j = 0; j < data.backgroundExtras.size(); j++)
-	{
-		GuiComponent *extra = data.backgroundExtras[j];
-		if (!extra->isKindOf<TextComponent>())
-			continue;
-
-		TextComponent* tx = (TextComponent*)extra;
-
-		std::string label = tx->getOriginalThemeText();
-
-		auto xt = Utils::String::extractStrings(label, "{", "}");
-		if (xt.size() > 0)
-		{
-			if (bindingEnabled)
-			{
-				for (auto ss : xt)
-				{
-					if (ss == "fullName")
-						label = Utils::String::replace(label, "{manufacturer}", sys->getSystemMetadata().fullName);
-					else if (ss == "name")
-						label = Utils::String::replace(label, "{manufacturer}", sys->getSystemMetadata().name);
-					else if (ss == "manufacturer")
-						label = Utils::String::replace(label, "{manufacturer}", sys->getSystemMetadata().manufacturer);
-					else if (ss == "release")
-					{
-						if (sys->getSystemMetadata().releaseYear > 0)
-							label = Utils::String::replace(label, "{release}", std::to_string(sys->getSystemMetadata().releaseYear));
-						else
-							label = Utils::String::replace(label, "{release}", _("Unknown"));
-					}
-					else if (ss == "hardware")
-						label = Utils::String::replace(label, "{hardware}", sys->getSystemMetadata().hardwareType);
-					else
-						label = Utils::String::replace(label, "{" + ss + "}", "");
-				}
-
-				tx->setText(label);
-			}
-			else
-				tx->setText("");
 		}
 	}
 }

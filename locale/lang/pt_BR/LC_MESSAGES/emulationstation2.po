@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-10 03:02+0200\n"
+"POT-Creation-Date: 2020-07-09 21:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -475,6 +475,9 @@ msgstr "FORMATAR O DISCO"
 msgid "DOWNLOADS"
 msgstr "TRANSFERÊNCIAS"
 
+msgid "CONTENT DOWNLOADER"
+msgstr ""
+
 msgid "THEMES"
 msgstr "TEMAS"
 
@@ -544,6 +547,18 @@ msgstr "CONFIGURAÇÕES DE JOGOS EM REDE"
 msgid "MISSING BIOS"
 msgstr "BIOS FALTANDO"
 
+msgid "MULTIMEDIA KEYS"
+msgstr "TECLAS MULTIMÍDIA"
+
+msgid "AUTO"
+msgstr "AUTOMÁTICO"
+
+msgid "ON"
+msgstr "LIGADO"
+
+msgid "OFF"
+msgstr "DESLIGADO"
+
 msgid "OVERCLOCK"
 msgstr "OVERCLOCK"
 
@@ -577,20 +592,11 @@ msgstr "REDUÇÃO DE LATÊNCIA"
 msgid "RUN-AHEAD FRAMES"
 msgstr "SALTAR QUADROS"
 
-msgid "AUTO"
-msgstr "AUTOMÁTICO"
-
 msgid "USE RUN-AHEAD FRAMES"
 msgstr "USAR SALTO DE QUADROS"
 
 msgid "RUN-AHEAD USE SECOND INSTANCE"
 msgstr "USAR SALTO EM SEGUNDA INSTÂNCIA"
-
-msgid "ON"
-msgstr "LIGADO"
-
-msgid "OFF"
-msgstr "DESLIGADO"
 
 msgid "HARDCORE MODE"
 msgstr "MODO HARDCORE"
@@ -883,6 +889,9 @@ msgstr "VOLUME"
 msgid "SYSTEM VOLUME"
 msgstr "VOLUME DO SISTEMA"
 
+msgid "MUSIC VOLUME"
+msgstr ""
+
 msgid "SHOW OVERLAY WHEN VOLUME CHANGES"
 msgstr "MOSTRAR INDICADOR QUANDO MUDAR O VOLUME"
 
@@ -1055,7 +1064,7 @@ msgid "SORT COLLECTIONS AND SYSTEMS"
 msgstr "ORDENAR COLEÇÕES E SISTEMAS"
 
 msgid "ALPHABETICALLY"
-msgstr "ALFABETICAMENTE"
+msgstr "POR ORDEM ALFABÉTICA"
 
 msgid "BY MANUFACTURER"
 msgstr "PELO FABRICANTE"
@@ -1146,30 +1155,34 @@ msgid_plural "%i GAMES SKIPPED."
 msgstr[0] "%i SCRAPE IGNORADO."
 msgstr[1] "%i SCRAPES IGNORADOS."
 
-msgid "INSTALL BEZELS"
-msgstr "INSTALAR MOLDURAS"
+msgid "SELECT BEZELS TO INSTALL / REMOVE"
+msgstr ""
 
-msgid "UNINSTALL BEZELS"
-msgstr "DESINSTALAR MOLDURAS"
-
-msgid "INSTALL THE BEZEL PROJECT"
-msgstr "INSTALAR PROJETO DE MOLDURAS"
-
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
-msgstr "SELECIONE O SISTEMA ONDE AS MOLDURAS SERÃO (RE)INSTALADAS"
+msgid "UPDATE"
+msgstr ""
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
 msgstr "'%s' ADICIONADO A FILA DE DOWNLOAD"
 
-msgid "UNINSTALL THE BEZEL PROJECT"
-msgstr "DESINSTALAR PROJETO DE MOLDURAS"
+msgid "REMOVE"
+msgstr ""
 
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
-msgstr "SELECIONAR SISTEMA PARA REMOÇÃO DAS MOLDURAS"
+msgid "BEZELS UNINSTALLED SUCCESSFULLY"
+msgstr ""
 
-msgid "BEZELS DELETED SUCCESSFULLY"
-msgstr "MOLDURAS DESINSTALADAS COM SUCESSO"
+#, c-format
+msgid "CURRENTLY IN DOWNLOAD QUEUE"
+msgstr ""
+
+msgid "SELECT CONTENT TO INSTALL / REMOVE"
+msgstr ""
+
+msgid "MISC"
+msgstr ""
+
+msgid "UNINSTALL ADDED TO QUEUE"
+msgstr ""
 
 msgid "SWAP IMAGE AFTER (SECS)"
 msgstr "TROCAR IMAGEM APÓS (SEG)"
@@ -1415,7 +1428,7 @@ msgid "enter game developer"
 msgstr "digite o nome do desenvolvedor"
 
 msgid "Publisher"
-msgstr "Desenvolvedor"
+msgstr "Publicador"
 
 msgid "enter game publisher"
 msgstr "digite o nome do publicador"
@@ -1507,6 +1520,9 @@ msgstr "ERRO: TODOS OS SISTEMAS ESTÃO OCULTOS, REINICIANDO TODOS ELES AGORA"
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "DESEJA INICIAR O KODI MEDIA CENTER?"
+
+msgid "GO TO MANUFACTURER"
+msgstr "IR AO FABRICANTE"
 
 #, c-format
 msgid "%i COLLECTION"
@@ -1617,10 +1633,10 @@ msgid "DEVELOPER, DESCENDING"
 msgstr "DESENVOLVEDOR, NA ORDEM DECRESCENTE"
 
 msgid "PUBLISHER, ASCENDING"
-msgstr "EDITORA, NA ORDEM CRESCENTE"
+msgstr "PUBLICADOR, NA ORDEM CRESCENTE"
 
 msgid "PUBLISHER, DESCENDING"
-msgstr "EDITORA, NA ORDEM DECRESCENTE"
+msgstr "PUBLICADOR, NA ORDEM DECRESCENTE"
 
 msgid "SYSTEM, ASCENDING"
 msgstr "SISTEMA, NA ORDEM CRESCENTE"
@@ -1643,6 +1659,12 @@ msgstr "TEMA INSTALADO COM SUCESSO"
 msgid "BEZELS INSTALLED SUCCESSFULLY"
 msgstr "MOLDURAS INSTALADAS COM SUCESSO"
 
+msgid "PACKAGE INSTALLED SUCCESSFULLY"
+msgstr ""
+
+msgid "PACKAGE REMOVED SUCCESSFULLY"
+msgstr ""
+
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
@@ -1653,7 +1675,7 @@ msgid "PLAYERS"
 msgstr "JOGADORES"
 
 msgid "PUBLISHER / DEVELOPER"
-msgstr "PUBLICADO / DESENVOLVEDOR"
+msgstr "PUBLICADOR / DESENVOLVEDOR"
 
 msgid "RATING"
 msgstr "CLASSIFICAÇÃO"
@@ -1959,6 +1981,27 @@ msgstr "EM PROGRESSO..."
 
 msgid "up/down"
 msgstr "cima/baixo"
+
+#~ msgid "INSTALL BEZELS"
+#~ msgstr "INSTALAR MOLDURAS"
+
+#~ msgid "UNINSTALL BEZELS"
+#~ msgstr "DESINSTALAR MOLDURAS"
+
+#~ msgid "INSTALL THE BEZEL PROJECT"
+#~ msgstr "INSTALAR PROJETO DE MOLDURAS"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
+#~ msgstr "SELECIONE O SISTEMA ONDE AS MOLDURAS SERÃO (RE)INSTALADAS"
+
+#~ msgid "UNINSTALL THE BEZEL PROJECT"
+#~ msgstr "DESINSTALAR PROJETO DE MOLDURAS"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
+#~ msgstr "SELECIONAR SISTEMA PARA REMOÇÃO DAS MOLDURAS"
+
+#~ msgid "BEZELS DELETED SUCCESSFULLY"
+#~ msgstr "MOLDURAS DESINSTALADAS COM SUCESSO"
 
 #~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
 #~ msgstr "ORGANIZAR COLEÇÕES PERSONALIZADAS E SISTEMAS"

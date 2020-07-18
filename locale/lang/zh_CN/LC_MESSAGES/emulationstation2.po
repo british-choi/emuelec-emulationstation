@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-07 14:27+0200\n"
+"POT-Creation-Date: 2020-07-09 21:20+0200\n"
 "Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -472,6 +472,9 @@ msgstr "格式化磁盘"
 msgid "DOWNLOADS"
 msgstr "资料下载"
 
+msgid "CONTENT DOWNLOADER"
+msgstr ""
+
 msgid "THEMES"
 msgstr "主题"
 
@@ -541,6 +544,18 @@ msgstr "联网游戏设置"
 msgid "MISSING BIOS"
 msgstr "缺失的BIOS"
 
+msgid "MULTIMEDIA KEYS"
+msgstr ""
+
+msgid "AUTO"
+msgstr "自动"
+
+msgid "ON"
+msgstr "开"
+
+msgid "OFF"
+msgstr "关"
+
 msgid "OVERCLOCK"
 msgstr "超频"
 
@@ -574,20 +589,11 @@ msgstr "减少延迟"
 msgid "RUN-AHEAD FRAMES"
 msgstr "RUN-AHEAD 框架"
 
-msgid "AUTO"
-msgstr "自动"
-
 msgid "USE RUN-AHEAD FRAMES"
 msgstr "使用 RUN-AHEAD 框架"
 
 msgid "RUN-AHEAD USE SECOND INSTANCE"
 msgstr "RUN-AHEAD 使用第二个实例"
-
-msgid "ON"
-msgstr "开"
-
-msgid "OFF"
-msgstr "关"
 
 msgid "HARDCORE MODE"
 msgstr "专家模式"
@@ -880,6 +886,9 @@ msgstr "音量"
 msgid "SYSTEM VOLUME"
 msgstr "系统音量"
 
+msgid "MUSIC VOLUME"
+msgstr ""
+
 msgid "SHOW OVERLAY WHEN VOLUME CHANGES"
 msgstr "音量变化时屏幕提示"
 
@@ -1139,30 +1148,34 @@ msgid "%i GAME SKIPPED."
 msgid_plural "%i GAMES SKIPPED."
 msgstr[0] "跳过了 %i 个游戏。"
 
-msgid "INSTALL BEZELS"
-msgstr "安装框架"
+msgid "SELECT BEZELS TO INSTALL / REMOVE"
+msgstr ""
 
-msgid "UNINSTALL BEZELS"
-msgstr "卸载框架"
-
-msgid "INSTALL THE BEZEL PROJECT"
-msgstr "安装框架项目"
-
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
-msgstr "选择安装或重新安装边框的系统"
+msgid "UPDATE"
+msgstr ""
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
 msgstr "将 '%s' 添加到下载队列"
 
-msgid "UNINSTALL THE BEZEL PROJECT"
-msgstr "卸载框架项目"
+msgid "REMOVE"
+msgstr ""
 
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
-msgstr "选择移除框架的游戏平台"
+msgid "BEZELS UNINSTALLED SUCCESSFULLY"
+msgstr ""
 
-msgid "BEZELS DELETED SUCCESSFULLY"
-msgstr "框架删除程控"
+#, c-format
+msgid "CURRENTLY IN DOWNLOAD QUEUE"
+msgstr ""
+
+msgid "SELECT CONTENT TO INSTALL / REMOVE"
+msgstr ""
+
+msgid "MISC"
+msgstr ""
+
+msgid "UNINSTALL ADDED TO QUEUE"
+msgstr ""
 
 msgid "SWAP IMAGE AFTER (SECS)"
 msgstr "图像替换 (SECS)"
@@ -1497,6 +1510,9 @@ msgstr "错误：每个系统都被隐藏，现在重新显示"
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "是否启动 KODI 媒体中心?"
 
+msgid "GO TO MANUFACTURER"
+msgstr ""
+
 #, c-format
 msgid "%i COLLECTION"
 msgid_plural "%i COLLECTIONS"
@@ -1628,6 +1644,12 @@ msgstr "主题安装成功"
 
 msgid "BEZELS INSTALLED SUCCESSFULLY"
 msgstr "框架安装成功"
+
+msgid "PACKAGE INSTALLED SUCCESSFULLY"
+msgstr ""
+
+msgid "PACKAGE REMOVED SUCCESSFULLY"
+msgstr ""
 
 msgid "FAVORITES"
 msgstr "收藏"
@@ -1936,6 +1958,27 @@ msgstr "进行中..."
 
 msgid "up/down"
 msgstr "上/下"
+
+#~ msgid "INSTALL BEZELS"
+#~ msgstr "安装框架"
+
+#~ msgid "UNINSTALL BEZELS"
+#~ msgstr "卸载框架"
+
+#~ msgid "INSTALL THE BEZEL PROJECT"
+#~ msgstr "安装框架项目"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
+#~ msgstr "选择安装或重新安装边框的系统"
+
+#~ msgid "UNINSTALL THE BEZEL PROJECT"
+#~ msgstr "卸载框架项目"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
+#~ msgstr "选择移除框架的游戏平台"
+
+#~ msgid "BEZELS DELETED SUCCESSFULLY"
+#~ msgstr "框架删除程控"
 
 #~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
 #~ msgstr "对自定合辑和系统进行排序"

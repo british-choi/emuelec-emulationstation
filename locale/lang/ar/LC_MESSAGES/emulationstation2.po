@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BATOCERA.LINUX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-07 14:27+0200\n"
+"POT-Creation-Date: 2020-07-09 21:20+0200\n"
 "PO-Revision-Date: 2020-05-21 03:34+0300\n"
 "Last-Translator: sultan AlShaheen\n"
 "Language-Team: Arabic (Saudi Arabia)\n"
@@ -479,6 +479,9 @@ msgstr "تهيئة القرص"
 msgid "DOWNLOADS"
 msgstr "تنزيل"
 
+msgid "CONTENT DOWNLOADER"
+msgstr ""
+
 msgid "THEMES"
 msgstr "سِمات"
 
@@ -548,6 +551,18 @@ msgstr "إعدادات  NETPLAY"
 msgid "MISSING BIOS"
 msgstr "الـ BIOS المفقودة"
 
+msgid "MULTIMEDIA KEYS"
+msgstr ""
+
+msgid "AUTO"
+msgstr "تلقائي"
+
+msgid "ON"
+msgstr "تشغيل"
+
+msgid "OFF"
+msgstr "تعطيل"
+
 msgid "OVERCLOCK"
 msgstr "كسر السرعة"
 
@@ -581,20 +596,11 @@ msgstr "خفض الاستجابة"
 msgid "RUN-AHEAD FRAMES"
 msgstr "معالجة الإطارات بميزة RUN-AHEAD"
 
-msgid "AUTO"
-msgstr "تلقائي"
-
 msgid "USE RUN-AHEAD FRAMES"
 msgstr "استخدم ميزة RUN-AHEAD لمعالجة الإطارات"
 
 msgid "RUN-AHEAD USE SECOND INSTANCE"
 msgstr "استخدم RUN-AHEAD بديلاً ثانوي"
-
-msgid "ON"
-msgstr "تشغيل"
-
-msgid "OFF"
-msgstr "تعطيل"
 
 msgid "HARDCORE MODE"
 msgstr "وضع HARDCORE"
@@ -888,6 +894,9 @@ msgstr "مستوى الصوت"
 msgid "SYSTEM VOLUME"
 msgstr "مستوى صوت النظام"
 
+msgid "MUSIC VOLUME"
+msgstr ""
+
 msgid "SHOW OVERLAY WHEN VOLUME CHANGES"
 msgstr "عرض المستوى عند تغيير مستوى الصوت"
 
@@ -1158,30 +1167,34 @@ msgstr[3] "%i ألعاب تم تخطيهم"
 msgstr[4] "%i لعبة تم تخطيها"
 msgstr[5] "%i لعبة تم تخطيها"
 
-msgid "INSTALL BEZELS"
-msgstr "تثبيت البراويز"
+msgid "SELECT BEZELS TO INSTALL / REMOVE"
+msgstr ""
 
-msgid "UNINSTALL BEZELS"
-msgstr "إلغاء تثبيت البراويز"
-
-msgid "INSTALL THE BEZEL PROJECT"
-msgstr "تثبيت مشروع البرواز"
-
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
-msgstr "حدد النظام الذي سيتم فيه تثبيت البرواز"
+msgid "UPDATE"
+msgstr ""
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
 msgstr "'%s' تم اضافته لمسار التنزيلات"
 
-msgid "UNINSTALL THE BEZEL PROJECT"
-msgstr "إلغاء تثبيت مشروع البرواز"
+msgid "REMOVE"
+msgstr ""
 
-msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
-msgstr "حدد النظام الذي سيتم فيه إزالة البرواز"
+msgid "BEZELS UNINSTALLED SUCCESSFULLY"
+msgstr ""
 
-msgid "BEZELS DELETED SUCCESSFULLY"
-msgstr "تم حذف البراويز بنجاح"
+#, c-format
+msgid "CURRENTLY IN DOWNLOAD QUEUE"
+msgstr ""
+
+msgid "SELECT CONTENT TO INSTALL / REMOVE"
+msgstr ""
+
+msgid "MISC"
+msgstr ""
+
+msgid "UNINSTALL ADDED TO QUEUE"
+msgstr ""
 
 msgid "SWAP IMAGE AFTER (SECS)"
 msgstr "قم بتبديل الصورة بعد (ثوانِ)"
@@ -1518,6 +1531,9 @@ msgstr "خطأ: كل الأنظمة مخفية, قم بإعادة عرضها ك�
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "هل تريد بدء مشغل الوسائط KODI ؟"
 
+msgid "GO TO MANUFACTURER"
+msgstr ""
+
 #, c-format
 msgid "%i COLLECTION"
 msgid_plural "%i COLLECTIONS"
@@ -1664,6 +1680,12 @@ msgstr "تم تثبيت السمة بنجاح"
 
 msgid "BEZELS INSTALLED SUCCESSFULLY"
 msgstr "تم تثبيت البرواز بنجاح"
+
+msgid "PACKAGE INSTALLED SUCCESSFULLY"
+msgstr ""
+
+msgid "PACKAGE REMOVED SUCCESSFULLY"
+msgstr ""
 
 msgid "FAVORITES"
 msgstr "المفضلة"
@@ -2026,6 +2048,27 @@ msgstr "يعمل حالياً..."
 
 msgid "up/down"
 msgstr "أعلى/أسفل"
+
+#~ msgid "INSTALL BEZELS"
+#~ msgstr "تثبيت البراويز"
+
+#~ msgid "UNINSTALL BEZELS"
+#~ msgstr "إلغاء تثبيت البراويز"
+
+#~ msgid "INSTALL THE BEZEL PROJECT"
+#~ msgstr "تثبيت مشروع البرواز"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE (RE)INSTALLED"
+#~ msgstr "حدد النظام الذي سيتم فيه تثبيت البرواز"
+
+#~ msgid "UNINSTALL THE BEZEL PROJECT"
+#~ msgstr "إلغاء تثبيت مشروع البرواز"
+
+#~ msgid "SELECT SYSTEM WHERE BEZELS WILL BE REMOVED"
+#~ msgstr "حدد النظام الذي سيتم فيه إزالة البرواز"
+
+#~ msgid "BEZELS DELETED SUCCESSFULLY"
+#~ msgstr "تم حذف البراويز بنجاح"
 
 #~ msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
 #~ msgstr "فرز مخصص للمجموعات والأنظمه"

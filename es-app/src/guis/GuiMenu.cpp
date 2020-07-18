@@ -12,6 +12,7 @@
 #include "guis/GuiScraperStart.h"
 #include "guis/GuiThemeInstallStart.h" //batocera
 #include "guis/GuiBezelInstallStart.h" //batocera
+#include "guis/GuiBatoceraStore.h" //batocera
 #include "guis/GuiSettings.h"
 #include "guis/GuiRetroAchievements.h" //batocera
 #include "guis/GuiGamelistOptions.h"
@@ -348,7 +349,9 @@ void GuiMenu::openEmuELECSettings()
 		SystemConf::getInstance()->set("ee_bootvideo.enabled", bootvideoenabled ? "1" : "0");
 		SystemConf::getInstance()->saveSystemConf();
 	});
-	
+
+	createInputTextRow(s, _("DEFAULT YOUTUBE SEARCH WORD"), "youtube.searchword", false);
+
 	auto enable_advmamegp = std::make_shared<SwitchComponent>(mWindow);
 	bool advgpEnabled = SystemConf::getInstance()->get("advmame_auto_gamepad") == "1";
 	enable_advmamegp->setState(advgpEnabled);
@@ -370,6 +373,7 @@ void GuiMenu::openEmuELECSettings()
 	Window* window = mWindow;
 	ComponentListRow row;
 	GuiSettings *danger_zone = new GuiSettings(mWindow, _("DANGER ZONE!").c_str());
+	// backup configs
 	row.makeAcceptInputHandler([window] {
 		window->pushGui(new GuiMsgBox(window, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nAFTER THE SCRIPT IS DONE REMEMBER TO COPY THE FILE /storage/downloads/ee_backup_config.zip TO SOME PLACE SAFE OR IT WILL BE DELETED ON NEXT REBOOT!\n\nBACKUP CURRENT CONFIG AND RESTART?"), _("YES"),
 				[] { 
@@ -379,6 +383,7 @@ void GuiMenu::openEmuELECSettings()
 	row.addElement(std::make_shared<TextComponent>(window, _("BACKUP EMUELEC CONFIGS"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 	danger_zone->addRow(row);
 	row.elements.clear();
+	// emus config
 	row.makeAcceptInputHandler([window] {
 		window->pushGui(new GuiMsgBox(window, _("WARNING: SYSTEM WILL RESET SCRIPTS AND BINARIES !\nUPDATE, DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n\nRESET SCRIPTS AND BINARIES TO DEFAULT AND RESTART?"), _("YES"),
 				[] { 
@@ -388,6 +393,18 @@ void GuiMenu::openEmuELECSettings()
 	row.addElement(std::make_shared<TextComponent>(window, _("RESET EMUELEC SCRIPTS AND BINARIES TO DEFAULT"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 	danger_zone->addRow(row);
 	row.elements.clear();
+	// retroarch config
+	row.makeAcceptInputHandler([window] {
+		window->pushGui(new GuiMsgBox(window, _("WARNING: RETROARCH CONFIG WILL RESET TO DEFAULT\n\nPER-CORE CONFIGURATIONS WILL NOT BE AFFECTED BUT NO BACKUP WILL BE CREATED!\n\nRESET RETROARCH CONFIG TO DEFAULT?"), _("YES"),
+				[] { 
+				runSystemCommand("rm -f /storage/.config/retroarch/retroarch.cfg", "", nullptr);
+				runSystemCommand("cp -rf /usr/config/retroarch/retroarch.cfg /storage/.config/retroarch/retroarch.cfg", "", nullptr);
+				}, _("NO"), nullptr));
+	});
+	row.addElement(std::make_shared<TextComponent>(window, _("RESET RETROARCH CONFIG TO DEFAULT"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+	danger_zone->addRow(row);
+	row.elements.clear();
+	// all configs
 	row.makeAcceptInputHandler([window] {
 		window->pushGui(new GuiMsgBox(window, _("WARNING: ALL CONFIGURATIONS WILL BE RESET AND NO BACKUP WILL BE CREATED!\n\nIF YOU WANT TO KEEP YOUR SETTINGS MAKE A BACKUP AND SAVE IT ON AN EXTERNAL DRIVE BEFORE RUNING THIS OPTION!\n\nRESET SYSTEM TO DEFAULT CONFIG AND RESTART?"), _("YES"),
 				[] { 
@@ -759,11 +776,13 @@ void GuiMenu::openSystemInformations_batocera()
 		warning ? 0xFF0000FF : color);
 	informationsGui->addWithLabel(_("USER DISK USAGE"), userspace);
 
+#ifndef _ENABLEEMUELEC
 	auto systemspace = std::make_shared<TextComponent>(window,
 		ApiSystem::getInstance()->getFreeSpaceSystemInfo(),
 		font,
 		color);
 	informationsGui->addWithLabel(_("SYSTEM DISK USAGE"), systemspace);
+#endif
 
 	// various informations
 	std::vector<std::string> infos = ApiSystem::getInstance()->getSystemInformations();
@@ -1021,14 +1040,17 @@ void GuiMenu::openUpdatesSettings()
 
 	updateGui->addGroup(_("DOWNLOADS"));
 
+	// Batocera integration with Batocera Store
+	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::BATOCERASTORE))
+		updateGui->addEntry(_("CONTENT DOWNLOADER"), true, [this] { mWindow->pushGui(new GuiBatoceraStore(mWindow)); });
+
 	// Batocera themes installer/browser
 	updateGui->addEntry(_("THEMES"), true, [this] { mWindow->pushGui(new GuiThemeInstallStart(mWindow)); });
 
 	// Batocera integration with theBezelProject
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::DECORATIONS))
-		updateGui->addEntry(_("THE BEZEL PROJECT"), true, [this] { mWindow->pushGui(new GuiBezelInstallMenu(mWindow)); });
+		updateGui->addEntry(_("THE BEZEL PROJECT"), true, [this] { mWindow->pushGui(new GuiBezelInstallStart(mWindow)); });
 
-#ifndef _ENABLEEMUELEC
 	updateGui->addGroup(_("SOFTWARE UPDATES"));
 
 	// Enable updates
@@ -1040,7 +1062,7 @@ void GuiMenu::openUpdatesSettings()
 	{
 		SystemConf::getInstance()->setBool("updates.enabled", updates_enabled->getState());
 	});
-
+#ifndef _ENABLEEMUELEC
 	auto updatesTypeList = std::make_shared<OptionListComponent<std::string> >(mWindow, _("UPDATE TYPE"), false);
 	
 	std::string updatesType = SystemConf::getInstance()->get("updates.type");
@@ -1055,7 +1077,7 @@ void GuiMenu::openUpdatesSettings()
 	{
 		SystemConf::getInstance()->set("updates.type", updatesTypeList->getSelected());
 	});
-
+#endif
 	// Start update
 	updateGui->addEntry(GuiUpdate::state == GuiUpdateState::State::UPDATE_READY ? _("APPLY UPDATE") : _("START UPDATE"), true, [this]
 	{
@@ -1066,7 +1088,6 @@ void GuiMenu::openUpdatesSettings()
 		else
 			mWindow->pushGui(new GuiUpdate(mWindow));
 	});
-#endif
 	mWindow->pushGui(updateGui);
 }
 
@@ -1105,6 +1126,7 @@ void GuiMenu::openSystemSettings_batocera()
 	language_choice->add("NORWEGIAN BOKMAL",     "nb_NO", language == "nb_NO");
 	language_choice->add("DUTCH",                "nl_NL", language == "nl_NL");
 	language_choice->add("NORWEGIAN",            "nn_NO", language == "nn_NO");
+	language_choice->add("OCCITAN",              "oc_FR", language == "oc_FR");
 	language_choice->add("POLISH",               "pl_PL", language == "pl_PL");
 	language_choice->add("PORTUGUES BRASILEIRO", "pt_BR", language == "pt_BR");
 	language_choice->add("PORTUGUES PORTUGAL",   "pt_PT", language == "pt_PT");
@@ -1279,6 +1301,22 @@ void GuiMenu::openSystemSettings_batocera()
 #endif
 
 	std::shared_ptr<OptionListComponent<std::string>> overclock_choice;
+
+#ifdef ODROIDGOA
+	// multimedia keys
+	auto multimediakeys_enabled = std::make_shared<OptionListComponent<std::string>>(mWindow, _("MULTIMEDIA KEYS"));
+	multimediakeys_enabled->add(_("AUTO"), "auto", SystemConf::getInstance()->get("system.multimediakeys.enabled") != "0" && SystemConf::getInstance()->get("system.multimediakeys.enabled") != "1");
+	multimediakeys_enabled->add(_("ON"), "1", SystemConf::getInstance()->get("system.multimediakeys.enabled") == "1");
+	multimediakeys_enabled->add(_("OFF"), "0", SystemConf::getInstance()->get("system.multimediakeys.enabled") == "0");
+	s->addWithLabel(_("MULTIMEDIA KEYS"), multimediakeys_enabled);
+	s->addSaveFunc([this, multimediakeys_enabled]
+	{
+	  if (multimediakeys_enabled->changed()) {
+	    SystemConf::getInstance()->set("system.multimediakeys.enabled", multimediakeys_enabled->getSelected());
+	    this->mWindow->displayNotificationMessage(_U("\uF011  ") + _("A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"));
+	  }
+	});
+#endif
 
 	// Overclock choice
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::OVERCLOCK))
@@ -3246,6 +3284,14 @@ void GuiMenu::openSoundSettings()
 #endif
 		});
 
+		
+		// Music Volume
+		auto musicVolume = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "%");
+		musicVolume->setValue(Settings::getInstance()->getInt("MusicVolume"));		
+		musicVolume->setOnValueChanged([](const float &newVal) { Settings::getInstance()->setInt("MusicVolume", (int)round(newVal)); });
+		s->addWithLabel(_("MUSIC VOLUME"), musicVolume);
+		//s->addSaveFunc([this, musicVolume] { Settings::getInstance()->setInt("MusicVolume", (int)round(musicVolume->getValue())); });
+		
 		auto volumePopup = std::make_shared<SwitchComponent>(mWindow);
 		volumePopup->setState(Settings::getInstance()->getBool("VolumePopup"));
 		s->addWithLabel(_("SHOW OVERLAY WHEN VOLUME CHANGES"), volumePopup);
