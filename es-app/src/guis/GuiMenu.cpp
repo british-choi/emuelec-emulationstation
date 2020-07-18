@@ -1811,7 +1811,7 @@ void GuiMenu::openGamesSettings_batocera()
 		lang_choices->add("HUNGARIAN", "Hu", currentLang == "Hu");
 		lang_choices->add("ITALIANO", "It", currentLang == "It");
 		lang_choices->add("JAPANESE", "Ja", currentLang == "Ja");
-		lang_choices->add("KOREAN", "Ko", currentLang == "Ko");
+		lang_choices->add("한국어", "Ko", currentLang == "Ko");
 		lang_choices->add("DUTCH", "Nl", currentLang == "Nl");
 		lang_choices->add("NORWEGIAN", "Nn", currentLang == "Nn");
 		lang_choices->add("POLISH", "Po", currentLang == "Po");
