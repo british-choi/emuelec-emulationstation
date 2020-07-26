@@ -1148,33 +1148,33 @@ msgid_plural "%i GAMES SKIPPED."
 msgstr[0] "%i 개의 게임 아트워크 수집을 건너뛰었습니다."
 
 msgid "SELECT BEZELS TO INSTALL / REMOVE"
-msgstr ""
+msgstr "설치/제거할 베젤을 선택하세요"
 
 msgid "UPDATE"
-msgstr ""
+msgstr "업데이트"
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
 msgstr "다운로드 큐에 '%s' 개가 추가됨"
 
 msgid "REMOVE"
-msgstr ""
+msgstr "제거"
 
 msgid "BEZELS UNINSTALLED SUCCESSFULLY"
-msgstr ""
+msgstr "베젤이 성공적으로 제거되었습니다."
 
 #, c-format
 msgid "CURRENTLY IN DOWNLOAD QUEUE"
-msgstr ""
+msgstr "현재 다운로드 대기열"
 
 msgid "SELECT CONTENT TO INSTALL / REMOVE"
-msgstr ""
+msgstr "설치/제거할 컨텐츠을 선택하세요"
 
 msgid "MISC"
-msgstr ""
+msgstr "기타"
 
 msgid "UNINSTALL ADDED TO QUEUE"
-msgstr ""
+msgstr "제거 작업이 대기열에 추가됨"
 
 msgid "SWAP IMAGE AFTER (SECS)"
 msgstr "(몇 초) 후 이미지 필터 교체"
@@ -1512,7 +1512,7 @@ msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "KODI 미디어 센터를 실행하시겠습니까?"
 
 msgid "GO TO MANUFACTURER"
-msgstr ""
+msgstr "제조업체로 이동"
 
 #, c-format
 msgid "%i COLLECTION"
@@ -1647,10 +1647,10 @@ msgid "BEZELS INSTALLED SUCCESSFULLY"
 msgstr "베젤이 성공적으로 설치됨"
 
 msgid "PACKAGE INSTALLED SUCCESSFULLY"
-msgstr ""
+msgstr "패키지가 성공적으로 설치됨"
 
 msgid "PACKAGE REMOVED SUCCESSFULLY"
-msgstr ""
+msgstr "패키지가 성공적으로 제거됨"
 
 msgid "FAVORITES"
 msgstr "즐겨찾기"
@@ -1659,7 +1659,7 @@ msgid "GENRE"
 msgstr "장르"
 
 msgid "PLAYERS"
-msgstr "플레이어수"
+msgstr "인원 수"
 
 msgid "PUBLISHER / DEVELOPER"
 msgstr "유통사 / 개발사"
