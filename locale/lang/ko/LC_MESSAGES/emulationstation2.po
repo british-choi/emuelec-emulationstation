@@ -2098,6 +2098,9 @@ msgstr "RA 스플래시 활성화"
 msgid "ALWAYS SHOW BOOT VIDEO"
 msgstr "항상 부팅 시 비디오 보기"
 
+msgid "DEFAULT YOUTUBE SEARCH WORD"
+msgstr "기본 유튜브 검색어"
+
 msgid "BACKUP EMUELEC CONFIGS"
 msgstr "EmuELEC 설정 백업"
 
