@@ -65,6 +65,7 @@
 #define fake_gettext_battery      _("Battery")
 #define fake_gettext_cpu_model    _("Cpu model")
 #define fake_gettext_cpu_number   _("Cpu number")
+#define fake_gettext_cpu_number   _("Cpu max frequence")
 #define fake_gettext_cpu_feature  _("Cpu feature")
 
 GuiMenu::GuiMenu(Window *window, bool animate) : GuiComponent(window), mMenu(window, _("MAIN MENU").c_str()), mVersion(window)
@@ -3925,6 +3926,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		
 		colorizations_choices->add(_("AUTO"), "auto", currentColorization == "auto");
 		colorizations_choices->add(_("NONE"), "none", currentColorization == "none");
+		colorizations_choices->add(_("Best Guess"), "Best Guess", currentColorization == "Best Guess");
 
 		const char* all_gambate_gc_colors_modes[] = { "GB - DMG",
 								 "GB - Light",
@@ -4306,6 +4308,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		}
 		colorizations_choices->add(_("AUTO"), "auto", currentColorization == "auto");
 		colorizations_choices->add(_("NONE"), "none", currentColorization == "none");
+		colorizations_choices->add(_("Best Guess"), "Best Guess", currentColorization == "Best Guess");
 
 		const char* all_gambate_gc_colors_modes[] = { "GB - DMG",
 							 "GB - Light",
