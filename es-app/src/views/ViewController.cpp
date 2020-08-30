@@ -45,6 +45,7 @@ ViewController::ViewController(Window* window)
 {
 	mSystemListView = nullptr;
 	mState.viewing = NOTHING;
+	mDeferPlayViewTransition = false;
 }
 
 ViewController::~ViewController()
@@ -235,7 +236,13 @@ void ViewController::goToGameList(SystemData* system, bool forceImmediate)
 	if (AudioManager::isInitialized())
 		AudioManager::getInstance()->changePlaylist(system->getTheme());
 
-	playViewTransition(forceImmediate);
+	if (forceImmediate || Settings::getInstance()->getString("TransitionStyle") == "fade")
+		playViewTransition(forceImmediate);
+	else
+	{
+		cancelAnimation(0);
+		mDeferPlayViewTransition = true;
+	}
 }
 
 void ViewController::playViewTransition(bool forceImmediate)
@@ -343,7 +350,7 @@ void ViewController::launch(FileData* game, LaunchGameOptions options, Vector3f 
 
 	center += mCurrentView->getPosition();
 	stopAnimation(1); // make sure the fade in isn't still playing
-	mWindow->stopInfoPopup(); // make sure we disable any existing info popup
+	mWindow->stopNotificationPopups(); // make sure we disable any existing info popup
 	mLockInput = true;
 		
 	if (!Settings::getInstance()->getBool("HideWindow"))
@@ -641,12 +648,16 @@ bool ViewController::input(InputConfig* config, Input input)
 
 void ViewController::update(int deltaTime)
 {
-	if(mCurrentView)
-	{
+	if (mCurrentView)
 		mCurrentView->update(deltaTime);
-	}
 
 	updateSelf(deltaTime);
+
+	if (mDeferPlayViewTransition)
+	{
+		mDeferPlayViewTransition = false;
+		mWindow->postToUiThread([this](Window* w) { playViewTransition(false); });
+	}
 }
 
 void ViewController::render(const Transform4x4f& parentTrans)
@@ -691,14 +702,14 @@ void ViewController::render(const Transform4x4f& parentTrans)
 	// fade out
 	if (mFadeOpacity)
 	{
-		if (Settings::getInstance()->getBool("HideWindow"))
+		if (!Settings::getInstance()->getBool("HideWindow") && mLockInput) // We're launching a game
+			mWindow->renderSplashScreen(mFadeOpacity, false);
+		else
 		{
 			unsigned int fadeColor = 0x00000000 | (unsigned char)(mFadeOpacity * 255);
 			Renderer::setMatrix(parentTrans);
 			Renderer::drawRect(0.0f, 0.0f, Renderer::getScreenWidth(), Renderer::getScreenHeight(), fadeColor, fadeColor);
 		}
-		else
-			mWindow->renderSplashScreen(mFadeOpacity, false);
 	}
 }
 
@@ -730,6 +741,9 @@ void ViewController::preload()
 
 void ViewController::reloadGameListView(IGameListView* view, bool reloadTheme)
 {
+	if (view == nullptr)
+		return;
+
 	if (reloadTheme)
 		ThemeData::setDefaultTheme(nullptr);
 

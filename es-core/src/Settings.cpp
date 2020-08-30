@@ -132,6 +132,9 @@ void Settings::setDefaults()
 #elif defined(_RPI_) 
 	// Rpi 0, 1
 	mIntMap["MaxVRAM"] = 80;
+#elif defined(_ENABLEEMUELEC)
+	// EmuELEC
+	mIntMap["MaxVRAM"] = 180;
 #else 
 	// Other boards
 	mIntMap["MaxVRAM"] = 100;
@@ -171,6 +174,17 @@ void Settings::setDefaults()
 	mBoolMap["SlideshowScreenSaverGameName"] = true;	
 	mStringMap["ScreenSaverDecorations"] = "systems";
 	
+
+	mBoolMap["SlideshowScreenSaverCustomVideoSource"] = false;
+#ifdef _ENABLEEMUELEC
+	mStringMap["SlideshowScreenSaverVideoDir"] = "/storage/roms/mplayer"; // emuelec
+    mStringMap["SlideshowScreenSaverVideoFilter"] = ".mp4,.avi,.mkv,.flv,.mpg,.mov";
+	mBoolMap["SlideshowScreenSaverVideoRecurse"] = true;
+#else
+	mStringMap["SlideshowScreenSaverVideoDir"] = "/userdata/screenshots"; // batocera
+	mStringMap["SlideshowScreenSaverVideoFilter"] = ".mp4,.avi";
+	mBoolMap["SlideshowScreenSaverVideoRecurse"] = false;
+#endif
 
 	// This setting only applies to raspberry pi but set it for all platforms so
 	// we don't get a warning if we encounter it on a different platform

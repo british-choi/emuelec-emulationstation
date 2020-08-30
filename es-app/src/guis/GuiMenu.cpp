@@ -16,6 +16,7 @@
 #include "guis/GuiSettings.h"
 #include "guis/GuiRetroAchievements.h" //batocera
 #include "guis/GuiGamelistOptions.h"
+#include "guis/GuiImageViewer.h"
 #include "views/UIModeController.h"
 #include "views/ViewController.h"
 #include "CollectionSystemManager.h"
@@ -210,21 +211,25 @@ void GuiMenu::openEmuELECSettings()
 		videomode.push_back("1080i50hz");
 		videomode.push_back("576cvbs");
 		videomode.push_back("Custom");
+		videomode.push_back("-- AUTO-DETECTED RESOLUTIONS --");
    for(std::stringstream ss(getShOutput(R"(/emuelec/scripts/emuelec-utils resolutions)")); getline(ss, a, ','); ) {
         videomode.push_back(a);
 	}
 		for (auto it = videomode.cbegin(); it != videomode.cend(); it++) {
 		emuelec_video_mode->add(*it, *it, SystemConf::getInstance()->get("ee_videomode") == *it); }
 		s->addWithLabel(_("VIDEO MODE"), emuelec_video_mode);
-	   	s->addSaveFunc([emuelec_video_mode, window] {
-			if (emuelec_video_mode->changed()) {
+	   	
+		s->addSaveFunc([this, emuelec_video_mode, window] {
+		
+		//bool v_need_reboot = false;
+	
+		if (emuelec_video_mode->changed()) {
 			std::string selectedVideoMode = emuelec_video_mode->getSelected();
+		if (emuelec_video_mode->getSelected() != "-- AUTO-DETECTED RESOLUTIONS --") { 
 			if (emuelec_video_mode->getSelected() != "Custom") {
 			std::string msg = _("You are about to set EmuELEC resolution to:") +"\n" + selectedVideoMode + "\n";
-			if(Utils::FileSystem::exists("/ee_s905")) {
-			msg += _("Emulationstation will restart") + ".\n";
-		}
 			msg += _("Do you want to proceed ?");
+		
 			window->pushGui(new GuiMsgBox(window, msg,
 				_("YES"), [selectedVideoMode] {
 					runSystemCommand("echo "+selectedVideoMode+" > /sys/class/display/mode", "", nullptr);
@@ -232,22 +237,23 @@ void GuiMenu::openEmuELECSettings()
 					LOG(LogInfo) << "Setting video to " << selectedVideoMode;
 					runSystemCommand("/storage/.config/emuelec/scripts/setres.sh", "", nullptr);
 					SystemConf::getInstance()->saveSystemConf();
-				if(Utils::FileSystem::exists("/ee_s905")) {
-					runSystemCommand("systemctl restart emustation", "", nullptr); 
-				}
-			}, _("NO"),nullptr));
+				//	v_need_reboot = true;
+				}, _("NO"),nullptr));
+		
 		} else { 
 			if(Utils::FileSystem::exists("/storage/.config/EE_VIDEO_MODE")) {
 				runSystemCommand("echo $(cat /storage/.config/EE_VIDEO_MODE) > /sys/class/display/mode", "", nullptr);
 				LOG(LogInfo) << "Setting custom video mode from /storage/.config/EE_VIDEO_MODE to " << runSystemCommand("cat /storage/.config/EE_VIDEO_MODE", "", nullptr);
 				SystemConf::getInstance()->set("ee_videomode", selectedVideoMode);
 				SystemConf::getInstance()->saveSystemConf();
+				//v_need_reboot = true;
 			} else { 
 				if(Utils::FileSystem::exists("/flash/EE_VIDEO_MODE")) {
 				runSystemCommand("echo $(cat /flash/EE_VIDEO_MODE) > /sys/class/display/mode", "", nullptr);
 				LOG(LogInfo) << "Setting custom video mode from /flash/EE_VIDEO_MODE to " << runSystemCommand("cat /flash/EE_VIDEO_MODE", "", nullptr);
 				SystemConf::getInstance()->set("ee_videomode", selectedVideoMode);
 				SystemConf::getInstance()->saveSystemConf();
+				//v_need_reboot = true;
 					} else {
 					runSystemCommand("echo " + SystemConf::getInstance()->get("ee_videomode")+ " > /sys/class/display/mode", "", nullptr);
 					std::string msg = "/storage/.config/EE_VIDEO_MODE or /flash/EE_VIDEO_MODE not found";
@@ -258,6 +264,9 @@ void GuiMenu::openEmuELECSettings()
 					}
 				}
 			}
+		   }	
+			//if (v_need_reboot)
+		 	mWindow->displayNotificationMessage(_U("\uF011  ") + _("A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"));
 		 }
 		});
 		
@@ -339,7 +348,17 @@ void GuiMenu::openEmuELECSettings()
 				SystemConf::getInstance()->saveSystemConf();
 			}
 		});
-       
+
+       auto fps_enabled = std::make_shared<SwitchComponent>(mWindow);
+		bool fpsEnabled = SystemConf::getInstance()->get("global.showFPS") == "1";
+		fps_enabled->setState(fpsEnabled);
+		s->addWithLabel(_("SHOW RETROARCH FPS"), fps_enabled);
+		s->addSaveFunc([fps_enabled] {
+			bool fpsenabled = fps_enabled->getState();
+                SystemConf::getInstance()->set("global.showFPS", fpsenabled ? "1" : "0");
+				SystemConf::getInstance()->saveSystemConf();
+			});       
+
        auto bezels_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bool bezelsEnabled = SystemConf::getInstance()->get("global.bezel") == "1";
 		bezels_enabled->setState(bezelsEnabled);
@@ -1122,6 +1141,23 @@ void GuiMenu::openSystemSettings_batocera()
 
 	// System informations
 	s->addEntry(_("INFORMATION"), true, [this] { openSystemInformations_batocera(); });
+
+	auto emuelec_timezones = std::make_shared<OptionListComponent<std::string> >(mWindow, _("TIMEZONE"), false);
+	std::string currentTimezone = SystemConf::getInstance()->get("system.timezone");
+	if (currentTimezone.empty())
+		currentTimezone = std::string(getShOutput(R"(/emuelec/scripts/emuelec-utils current_timezone)"));
+	std::string a;
+	for(std::stringstream ss(getShOutput(R"(/emuelec/scripts/emuelec-utils timezones)")); getline(ss, a, ','); ) {
+		emuelec_timezones->add(a, a, currentTimezone == a); // emuelec
+	}
+	s->addWithLabel(_("TIMEZONE"), emuelec_timezones);
+	s->addSaveFunc([emuelec_timezones] {
+		if (emuelec_timezones->changed()) {
+			std::string selectedTimezone = emuelec_timezones->getSelected();
+			runSystemCommand("ln -sf /usr/share/zoneinfo/" + selectedTimezone + " $(readlink /etc/localtime)", "", nullptr);
+		}
+		SystemConf::getInstance()->set("system.timezone", emuelec_timezones->getSelected());
+	});
 
 	// language choice
 	auto language_choice = std::make_shared<OptionListComponent<std::string> >(window, _("LANGUAGE"), false);
@@ -3516,7 +3552,7 @@ void GuiMenu::openQuitMenu_batocera()
 }
 
 void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
-{	
+{
 #ifdef WIN32
 	if (!forceWin32Menu && Settings::getInstance()->getBool("ShowOnlyExit"))
 	{
@@ -3525,19 +3561,18 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 	}
 #endif
 
-	auto s = new GuiSettings(window, _("QUIT").c_str());
-	
-	// Don't like one of the songs? Press next
-	if (AudioManager::getInstance()->isSongPlaying())
-		s->addEntry(_("SKIP TO NEXT SONG"), false, [window] {
-			AudioManager::getInstance()->playRandomMusic(false);
-		});
+	auto s = new GuiSettings(window, _("QUICK ACCESS").c_str());
+	s->setCloseButton("select");
 
 	if (forceWin32Menu)
 	{
-		s->setCloseButton("select");
+		s->addGroup(_("QUICK ACCESS"));
 
-		s->addEntry(_("LAUNCH SCREENSAVER"), false, [s, window] 
+		// Don't like one of the songs? Press next
+		if (AudioManager::getInstance()->isSongPlaying())
+			s->addEntry(_("SKIP TO NEXT SONG"), false, [window] { AudioManager::getInstance()->playRandomMusic(false); }, "iconSound");
+
+		s->addEntry(_("LAUNCH SCREENSAVER"), false, [s, window]
 		{
 			window->postToUiThread([](Window* w)
 			{
@@ -3547,6 +3582,21 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 			delete s;
 
 		}, "iconScraper", true);
+		
+#if WIN32	
+#define BATOCERA_MANUAL_FILE Utils::FileSystem::getEsConfigPath() + "/notice.pdf"
+#else
+#define BATOCERA_MANUAL_FILE "/usr/share/batocera/doc/notice.pdf"
+#endif
+
+		if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::PDFEXTRACTION) && Utils::FileSystem::exists(BATOCERA_MANUAL_FILE))
+		{
+			s->addEntry(_("VIEW BATOCERA MANUAL"), false, [s, window]
+			{
+				GuiImageViewer::showPdf(window, BATOCERA_MANUAL_FILE);
+				delete s;
+			}, "iconManual");
+		}
 	}
 	
 #ifdef _ENABLEEMUELEC
@@ -3582,6 +3632,8 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool forceWin32Menu)
 	}, "iconAdvanced");
 
 #endif
+
+	s->addGroup(_("QUIT"));
 
 	s->addEntry(_("RESTART SYSTEM"), false, [window] {
 		window->pushGui(new GuiMsgBox(window, _("REALLY RESTART?"), 
@@ -4312,6 +4364,16 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		integerscale_enabled->add(_("OFF"), "0", getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".integerscale'") == "0");
 		systemConfiguration->addWithLabel(_("INTEGER SCALE (PIXEL PERFECT)"), integerscale_enabled);
 		systemConfiguration->addSaveFunc([integerscale_enabled, configName] { getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".integerscale' " + integerscale_enabled->getSelected()); });
+	}
+
+	// Vertical Game
+	if (systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::vertical))
+	{
+		auto vertical_enabled = std::make_shared<OptionListComponent<std::string>>(mWindow, _("ENABLE VERTICAL"));
+		vertical_enabled->add(_("OFF"), "auto", getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".vertical'") != "1");
+		vertical_enabled->add(_("ON"), "1", getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".vertical'") == "1");
+		systemConfiguration->addWithLabel(_("ENABLE VERTICAL"), vertical_enabled);
+		systemConfiguration->addSaveFunc([vertical_enabled, configName] { getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".vertical' " + vertical_enabled->getSelected()); });
 	}
 
 	if (systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::latency_reduction))	
