@@ -501,8 +501,12 @@ void GuiGamelistOptions::jumpToLetter()
 		getGamelist()->onFileChanged(root, FILE_SORTED);
 	}
 
+	std::string showFoldersMode = Settings::getInstance()->getString("FolderViewMode");
+	auto fvm = Settings::getInstance()->getString(mSystem->getName() + ".FolderViewMode");
+	if (!fvm.empty() && fvm != "auto") showFoldersMode = fvm;
+
 	// this is a really shitty way to get a list of files
-	const std::vector<FileData*>& files = gamelist->getCursor()->getParent()->getChildrenListToDisplay();
+	const std::vector<FileData*>& files = showFoldersMode == "never" ? mSystem->getRootFolder()->getChildrenListToDisplay() : gamelist->getCursor()->getParent()->getChildrenListToDisplay();
 
 	long min = 0;
 	long max = (long)files.size() - 1;
