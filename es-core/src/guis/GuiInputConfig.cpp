@@ -45,6 +45,10 @@ static const InputConfigStructure GUI_INPUT_CONFIG_LIST[inputCount] =
 	{ "RightAnalogRight", true,  "RIGHT ANALOG RIGHT", ":/help/analog_right.svg" },
 	{ "HotKeyEnable",     true,  "HOTKEY ENABLE",      ":/help/button_hotkey.svg" }
 };
+#define fake_gettext_left_a_down _("LEFT ANALOG DOWN")
+#define fake_gettext_left_a_right _("LEFT ANALOG RIGHT")
+#define fake_gettext_right_a_down _("RIGHT ANALOG DOWN")
+#define fake_gettext_right_a_right _("RIGHT ANALOG RIGHT")
 #else
 static const int inputCount = 21; // batocera
 
