@@ -793,16 +793,16 @@ msgid "MUTE VIDEO AUDIO"
 msgstr "비디오 오디오 음소거"
 
 msgid "USE CUSTOM VIDEOS"
-msgstr ""
+msgstr "사용자 비디오 사용"
 
 msgid "CUSTOM VIDEO DIR"
-msgstr ""
+msgstr "사용자 비디오 폴더"
 
 msgid "CUSTOM VIDEO DIR RECURSIVE"
-msgstr ""
+msgstr "사용자 비디오 폴더 재귀"
 
 msgid "CUSTOM VIDEO FILTER"
-msgstr ""
+msgstr "사용자 비디오 필터"
 
 msgid "fade"
 msgstr "페이드"
@@ -1027,7 +1027,7 @@ msgid "USE RETROARCH RGUI MENU"
 msgstr "레트로아크의 RGUI 메뉴 사용"
 
 msgid "SWITCH A/B BUTTONS IN EMULATIONSTATION"
-msgstr ""
+msgstr "에뮬레이션스태이션에서 A/B 버튼 변경"
 
 msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
 msgstr "에뮬레이터 컨트롤러 자동 설정"
@@ -1073,6 +1073,9 @@ msgstr "업데이트 시작"
 
 msgid "UPDATE IS ALREADY RUNNING"
 msgstr "업데이트가 이미 실행 중입니다"
+
+msgid "TIMEZONE"
+msgstr "타임존"
 
 msgid "LANGUAGE"
 msgstr "언어"
@@ -1523,7 +1526,7 @@ msgid "MANUAL SCRAPER"
 msgstr "게임 아트워크 수동 스크랩"
 
 msgid "QUICK ACCESS"
-msgstr ""
+msgstr "빠른 액세스"
 
 msgid "SKIP TO NEXT SONG"
 msgstr "다음 곡으로 건너뛰기"
@@ -2258,6 +2261,9 @@ msgstr "SSH 활성화"
 msgid "START AT BOOT"
 msgstr "부팅 시 시작"
 
+msgid "SHOW RETROARCH FPS"
+msgstr "레트로아크 FPS 보이기"
+
 msgid "ENABLE RA BEZELS"
 msgstr "RA 베젤 활성화"
 
@@ -2283,7 +2289,10 @@ msgstr ""
 "스크립트와 바이너리를 기본으로 초기화하고 재시작합니까?"
 
 msgid "RESET EMUELEC SCRIPTS AND BINARIES TO DEFAULT"
-msgstr "기본으로 EmuELEC 스크립트와 바이너리를 초기화"
+msgstr "EmuELEC 스크립트와 바이너리를 기본으로 초기화"
+
+msgid "RESET RETROARCH CONFIG TO DEFAULT"
+msgstr "레트로아크 구성을 기본으로 초기화"
 
 msgid ""
 "WARNING: ALL CONFIGURATIONS WILL BE RESET AND NO BACKUP WILL BE CREATED!\n\n"

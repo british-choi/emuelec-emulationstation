@@ -195,7 +195,7 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 		config->isMappedLike(getQuickSystemSelectRightButton(), input) || config->isMappedLike("r2", input))
 #endif
 		{
-			if(Settings::getInstance()->getBool("QuickSystemSelect"))
+		//	if(Settings::getInstance()->getBool("QuickSystemSelect"))
 			{
 				onFocusLost();
 				ViewController::get()->goToNextGameList();
@@ -208,7 +208,7 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 		config->isMappedLike(getQuickSystemSelectLeftButton(), input) || config->isMappedLike("l2", input))
 #endif
 		{
-			if(Settings::getInstance()->getBool("QuickSystemSelect"))
+		//	if(Settings::getInstance()->getBool("QuickSystemSelect"))
 			{
 				onFocusLost();
 				ViewController::get()->goToPrevGameList();
