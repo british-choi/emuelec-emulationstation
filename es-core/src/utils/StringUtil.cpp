@@ -368,11 +368,11 @@ namespace Utils
 
 		std::string trim(const std::string& _string)
 		{
-			const size_t strBegin = _string.find_first_not_of(" \t");
+			const size_t strBegin = _string.find_first_not_of(" \t\r\n");
 			if(strBegin == std::string::npos)
 				return "";
 
-			const size_t strEnd = _string.find_last_not_of(" \t");
+			const size_t strEnd = _string.find_last_not_of(" \t\r\n");			
 			return _string.substr(strBegin, strEnd - strBegin + 1);
 
 		} // trim
@@ -589,6 +589,43 @@ namespace Utils
 			}
 
 			return ret;
+		}
+
+		int compareIgnoreCase(const std::string& name1, const std::string& name2)
+		{
+			auto makeUp = [](unsigned int c)
+			{
+				if ((c & 0x80) == 0) return toupper(c);
+				return (int)toupperUnicode(c);
+			};
+
+			size_t p1 = 0;
+			size_t p2 = 0;
+
+			while (true)
+			{
+				int u1 = makeUp(chars2Unicode(name1, p1));
+				int u2 = makeUp(chars2Unicode(name2, p2));
+
+				if (u1 == 0 && u2 != 0)
+					return -1;
+				else if (u1 != 0 && u2 == 0)
+					return 1;
+				else if (u1 == 0 || u2 == 0)
+					return 0;
+
+				u1 -= u2;
+				if (u1)
+					return u1;
+			}
+		}
+
+		std::string proper(const std::string& _string)
+		{
+			if (_string.length() <= 1)
+				return Utils::String::toUpper(_string);
+
+			return Utils::String::toUpper(_string.substr(0, 1)) + _string.substr(1);
 		}
 
 #if defined(_WIN32)

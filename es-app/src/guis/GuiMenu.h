@@ -101,6 +101,11 @@ private:
 	void clearLoadedInput();
 	static void createDecorationItemTemplate(Window* window, std::vector<DecorationSetInfo> sets, std::string data, ComponentListRow& row);
 
+	bool checkNetwork();
+
+	static void saveSubsetSettings();
+	static void loadSubsetSettings(const std::string themeName);
+
 public:
 	static std::vector<DecorationSetInfo> getDecorationsSets(SystemData* system = nullptr);
 };
