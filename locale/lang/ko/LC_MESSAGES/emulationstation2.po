@@ -321,7 +321,7 @@ msgid "FIND GAMES"
 msgstr "게임 찾기"
 
 msgid "Unknown"
-msgstr "알 수 없음"
+msgstr "미확인"
 
 msgid "YES"
 msgstr "예"
