@@ -340,11 +340,16 @@ void GuiMenu::openEmuELECSettings()
 		});
 			
 		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("START AT BOOT"), false);
+#if 1 // for korean
+		emuelec_boot_def->add(_("Emulationstation"), "Emulationstation", SystemConf::getInstance()->get("ee_boot") == "Emulationstation");
+		emuelec_boot_def->add(_("Retroarch"), "Retroarch", SystemConf::getInstance()->get("ee_boot") == "Retroarch");
+#else
 		std::vector<std::string> devices;
 		devices.push_back("Emulationstation");
 		devices.push_back("Retroarch");
 		for (auto it = devices.cbegin(); it != devices.cend(); it++)
 		emuelec_boot_def->add(*it, *it, SystemConf::getInstance()->get("ee_boot") == *it);
+#endif
 		s->addWithLabel(_("START AT BOOT"), emuelec_boot_def);
 		s->addSaveFunc([emuelec_boot_def] {
 			if (emuelec_boot_def->changed()) {

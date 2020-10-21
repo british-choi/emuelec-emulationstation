@@ -339,7 +339,7 @@ msgid "COLLECTIONS TO DISPLAY"
 msgstr "디스플레이용 컬렉션"
 
 msgid "SYSTEMS DISPLAYED"
-msgstr "시스템이 표시됨"
+msgstr "표시된 시스템"
 
 msgid "GROUPED SYSTEMS"
 msgstr "그룹화된 시스템"
@@ -381,13 +381,13 @@ msgid "START ON SYSTEM"
 msgstr "시스템에서 시작하기"
 
 msgid "NONE"
-msgstr "없음 "
+msgstr "없음"
 
 msgid "START ON GAMELIST"
 msgstr "게임리스트로 시작하기"
 
 msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
-msgstr "테마가 없는 커스텀 컬렉션을 그룹"
+msgstr "테마없는 커스텀 컬렉션 그룹화"
 
 msgid "SHOW SYSTEM NAME IN COLLECTIONS"
 msgstr "컬렉션에서 시스템 이름 표시"
@@ -630,10 +630,10 @@ msgid "UNINSTALL ADDED TO QUEUE"
 msgstr "제거 작업이 대기열에 추가됨"
 
 msgid "NO MISSING BIOS"
-msgstr "바이오스가 모두 구성됨"
+msgstr "누락된 바이오스가 없음"
 
 msgid "MISSING BIOS"
-msgstr "바이오스 누락됨"
+msgstr "누락된 바이오스"
 
 msgid "dim"
 msgstr "어둡게"
@@ -654,7 +654,7 @@ msgid "start & end"
 msgstr "시작과 종료"
 
 msgid "never"
-msgstr "전혀"
+msgstr "없음"
 
 msgid "none"
 msgstr "없음"
@@ -684,10 +684,10 @@ msgid "USE OMX PLAYER FOR SCREENSAVER"
 msgstr "화면보호기를 위해 OMX 플레이어 사용"
 
 msgid "SHOW GAME INFO"
-msgstr "게임 정보 보여주기"
+msgstr "게임 정보 보이기"
 
 msgid "SHOW GAME INFO ON SCREENSAVER"
-msgstr "화면보호기에 게임 정보 보여주기"
+msgstr "화면보호기에 게임 정보 보이기"
 
 msgid "USE MARQUEE AS GAME INFO"
 msgstr "게임 정보로 마키 사용"
@@ -1094,7 +1094,7 @@ msgid "USE RETROARCH RGUI MENU"
 msgstr "레트로아크의 RGUI 메뉴 사용"
 
 msgid "SWITCH A/B BUTTONS IN EMULATIONSTATION"
-msgstr "에뮬레이션스태이션에서 A/B 버튼 변경"
+msgstr "에뮬레이션스테이션에서 A/B 버튼 변경"
 
 msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
 msgstr "에뮬레이터 컨트롤러 자동 설정"
@@ -1140,6 +1140,9 @@ msgstr "업데이트 시작"
 
 msgid "UPDATE IS ALREADY RUNNING"
 msgstr "업데이트가 이미 실행 중입니다"
+
+msgid "YOU ARE NOT CONNECTED TO A NETWORK"
+msgstr "네트워크에 접속되어 있지 않습니다"
 
 msgid "TIMEZONE"
 msgstr "타임존"
@@ -1247,7 +1250,7 @@ msgid "USE RUN-AHEAD FRAMES"
 msgstr "프레임 미리 실행 사용"
 
 msgid "RUN-AHEAD USE SECOND INSTANCE"
-msgstr "미리 실행 초 단위 사용"
+msgstr "두번째 인스턴스 사용한 미리 실행"
 
 msgid "HARDCORE MODE"
 msgstr "하드코어 모드"
@@ -1332,6 +1335,9 @@ msgstr "평면빛"
 
 msgid "INTEGER SCALE (PIXEL PERFECT)"
 msgstr "원본 게임 해상도(픽셀 일치)"
+
+msgid "ENABLE VERTICAL"
+msgstr "세로화면 활성화"
 
 msgid "DECORATION"
 msgstr "장식"
@@ -1419,19 +1425,19 @@ msgid "GAMELIST OPTIONS"
 msgstr "게임리스트 옵션"
 
 msgid "SHOW FAVORITES ON TOP"
-msgstr "최상단에 즐겨찾기 보여주기"
+msgstr "최상단 즐겨찾기 보이기"
 
 msgid "SHOW HIDDEN FILES"
-msgstr "숨겨진 파일 보여주기"
+msgstr "숨김 파일 보이기"
 
 msgid "SHOW FOLDERS"
-msgstr "폴더 보여주기"
+msgstr "폴더 보이기"
 
 msgid "having multiple games"
-msgstr "다수의 게임이 있을 경우"
+msgstr "중복 게임이 있을 경우"
 
 msgid "SHOW '..' PARENT FOLDER"
-msgstr "'..' 상위 폴더 보여주기"
+msgstr "'..'(상위 폴더) 보이기"
 
 msgid "FILE EXTENSIONS"
 msgstr "파일 확장자"
@@ -1461,16 +1467,16 @@ msgid "GAME LAUNCH TRANSITION"
 msgstr "게임 실행 전환"
 
 msgid "SHOW CLOCK"
-msgstr "시간 보기"
+msgstr "시계 보이기"
 
 msgid "ON-SCREEN HELP"
 msgstr "도움말 표시"
 
 msgid "SHOW BATTERY STATUS"
-msgstr "배터리 상태 보기"
+msgstr "배터리 상태 보이기"
 
 msgid "SHOW FILENAMES IN LISTS"
-msgstr "리스트에서 파일명 보여주기"
+msgstr "리스트에 파일명 보이기"
 
 msgid "VOLUME"
 msgstr "음량"
@@ -1566,10 +1572,10 @@ msgid "VIEW BATOCERA MANUAL"
 msgstr "바토세라 매뉴얼 보기"
 
 msgid "RESTART SYSTEM"
-msgstr "시스템 다시 시작"
+msgstr "시스템 재시작"
 
 msgid "REALLY RESTART?"
-msgstr "정말로 다시 시작 하시겠습니까?"
+msgstr "정말로 재시작 하시겠습니까?"
 
 msgid "SHUTDOWN SYSTEM"
 msgstr "시스템 종료"
@@ -1584,10 +1590,10 @@ msgid "REALLY SHUTDOWN WITHOUT SAVING METADATAS?"
 msgstr "게임 정보를 저장하지 않고 시스템을 종료하시겠습니까?"
 
 msgid "QUIT EMULATIONSTATION"
-msgstr "에뮬레이션스테이션 나가기"
+msgstr "에뮬레이션스테이션 종료"
 
 msgid "REALLY QUIT?"
-msgstr "정말로 나가시겠습니까?"
+msgstr "정말로 종료하시겠습니까?"
 
 msgid "COLORIZATION"
 msgstr "채색"
@@ -2349,10 +2355,10 @@ msgid "SHOW RETROARCH FPS"
 msgstr "레트로아크 FPS 보이기"
 
 msgid "ENABLE RA BEZELS"
-msgstr "RA 베젤 활성화"
+msgstr "레트로아크 베젤 활성화"
 
 msgid "ENABLE RA SPLASH"
-msgstr "RA 스플래시 활성화"
+msgstr "레트로아크 스플래시 활성화"
 
 msgid "ALWAYS SHOW BOOT VIDEO"
 msgstr "항상 부팅 시 비디오 보기"
@@ -2416,7 +2422,7 @@ msgid "EMUELEC SETTINGS"
 msgstr "EMUELEC 설정"
 
 msgid "ENABLE MAX PERFORMANCE"
-msgstr "MAX PERFORMANCE 활성화"
+msgstr "최대 성능 활성화"
 
 msgid "You are about to set EmuELEC resolution to:"
 msgstr "EmuELEC 해상도를 다음과 같이 설정합니다:"
@@ -2429,3 +2435,9 @@ msgstr "베젤"
 
 msgid "AUTO CONFIG ADVANCEMAME GAMEPAD"
 msgstr "AdvanceMAME 게임패드 자동 구성"
+
+msgid "Emulationstation"
+msgstr "에뮬레이션스테이션"
+
+msgid "Retroarch"
+msgstr "레트로아크"
