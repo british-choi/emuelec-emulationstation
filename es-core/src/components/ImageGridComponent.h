@@ -799,7 +799,7 @@ void ImageGridComponent<T>::onCursorChanged(const CursorState& state)
 			mStartPosition = 0;
 		else if ((col - centralCol) > lastScroll && mCenterSelection == CenterSelection::PARTIAL && !mScrollLoop)
 			mStartPosition = lastScroll * dimOpposite;
-		else if (maxCentralCol != centralCol && col == firstVisibleCol + maxCentralCol || col == firstVisibleCol + centralCol)
+		else if (maxCentralCol != centralCol && (col == firstVisibleCol + maxCentralCol || col == firstVisibleCol + centralCol))
 		{
 			if (col == firstVisibleCol + maxCentralCol)
 				mStartPosition = (col - maxCentralCol) * dimOpposite;

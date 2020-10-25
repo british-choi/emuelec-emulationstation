@@ -64,8 +64,8 @@ void NinePatchComponent::updateColors()
 		c = Renderer::mixColors(e, mAnimateColor, percent);
 	}
 
-	const unsigned int edgeColor = Renderer::convertColor(e & 0xFFFFFF00 | (unsigned char)((e & 0xFF) * opacity));
-	const unsigned int centerColor = Renderer::convertColor(c & 0xFFFFFF00 | (unsigned char)((c & 0xFF) * opacity));
+	const unsigned int edgeColor = Renderer::convertColor((e & 0xFFFFFF00) | (unsigned char)((e & 0xFF) * opacity));
+	const unsigned int centerColor = Renderer::convertColor((c & 0xFFFFFF00) | (unsigned char)((c & 0xFF) * opacity));
 
 	for(int i = 0; i < 6*9; i++)
 		mVertices[i].col = edgeColor;
@@ -157,7 +157,7 @@ void NinePatchComponent::render(const Transform4x4f& parentTrans)
 			e = Renderer::mixColors(e, mAnimateColor, percent);
 		}
 
-		const unsigned int edgeColor = e & 0xFFFFFF00 | (unsigned char)((e & 0xFF) * opacity);
+		const unsigned int edgeColor = (e & 0xFFFFFF00) | (unsigned char)((e & 0xFF) * opacity);
 
 		Renderer::setMatrix(trans);
 		
@@ -182,8 +182,8 @@ void NinePatchComponent::render(const Transform4x4f& parentTrans)
 			e = Renderer::mixColors(e, mAnimateColor, percent);
 			c = Renderer::mixColors(c, mAnimateColor, percent);
 
-			const unsigned int edgeColor = Renderer::convertColor(e & 0xFFFFFF00 | (unsigned char)((e & 0xFF) * opacity));
-			const unsigned int centerColor = Renderer::convertColor(c & 0xFFFFFF00 | (unsigned char)((c & 0xFF) * opacity));
+			const unsigned int edgeColor = Renderer::convertColor((e & 0xFFFFFF00) | (unsigned char)((e & 0xFF) * opacity));
+			const unsigned int centerColor = Renderer::convertColor((c & 0xFFFFFF00) | (unsigned char)((c & 0xFF) * opacity));
 
 			for (int i = 0; i < 6 * 9; i++)
 				mVertices[i].col = edgeColor;

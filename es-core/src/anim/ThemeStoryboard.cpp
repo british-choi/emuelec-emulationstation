@@ -52,7 +52,7 @@ bool ThemeStoryboard::fromXmlNode(const pugi::xml_node& root, std::map<std::stri
 
 	if (!sbrepeat.empty())
 	{
-		if (this->repeat = 1)
+		if (this->repeat == 1)
 			this->repeat = 0;
 
 		this->repeatAt = atoi(sbrepeat.c_str());

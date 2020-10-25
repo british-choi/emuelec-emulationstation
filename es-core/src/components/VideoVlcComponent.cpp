@@ -270,7 +270,7 @@ void VideoVlcComponent::render(const Transform4x4f& parentTrans)
 	if (hasStoryBoard())
 		opacity = (mOpacity / 255.0f);
 
-	unsigned int color = Renderer::convertColor(mColorShift & 0xFFFFFF00 | (unsigned char)((mColorShift & 0xFF) * opacity));
+	unsigned int color = Renderer::convertColor((mColorShift & 0xFFFFFF00) | (unsigned char)((mColorShift & 0xFF) * opacity));
 
 	Renderer::Vertex   vertices[4];
 	

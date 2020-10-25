@@ -2455,7 +2455,7 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 	// gamelist_style
 	std::shared_ptr<OptionListComponent<std::string>> gamelist_style = nullptr;
 
-	if (systemTheme.empty() || showGridFeatures && system != NULL && theme->hasView("grid"))
+	if (systemTheme.empty() || (showGridFeatures && system != NULL && theme->hasView("grid")))
 		themeconfig->addGroup(_("GAMELIST STYLE"));
 
 	if (systemTheme.empty())

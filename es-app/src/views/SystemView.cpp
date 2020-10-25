@@ -186,7 +186,7 @@ void SystemView::populate()
 
 					// If logosize is defined for full width/height, don't rotate by target size
 					// ex : <logoSize>1 .05< / logoSize>
-					if (mCarousel.size.x() != mCarousel.logoSize.x() & mCarousel.size.y() != mCarousel.logoSize.y())
+					if (mCarousel.size.x() != mCarousel.logoSize.x() && mCarousel.size.y() != mCarousel.logoSize.y())
 						logo->setRotateByTargetSize(true);
 					
 					e.data.logo = std::shared_ptr<GuiComponent>(logo);

@@ -103,7 +103,7 @@ void GuiInfoPopup::update(int deltaTime)
 		mFadeOut = (float) (255 - alpha) / 255.0;
 	}
 
-	if (alpha > mBackColor & 0xff)
+	if (alpha > (mBackColor & 0xff))
 		alpha = mBackColor & 0xff;
 
 	mGrid->setOpacity((unsigned char)alpha);

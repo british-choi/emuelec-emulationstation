@@ -68,7 +68,7 @@ ID3v2_header* get_tag_header_with_buffer(char *buffer, int length)
     tag_header->flags = buffer[position += ID3_HEADER_REVISION];
     tag_header->tag_size = syncint_decode(btoi(buffer, ID3_HEADER_SIZE, position += ID3_HEADER_FLAGS));
 
-    if(tag_header->flags&(1<<6)==(1<<6))
+    if((tag_header->flags&(1<<6))==(1<<6))
     {
       // an extended header exists, so we retrieve the actual size of it and save it into the struct
       tag_header->extended_header_size = syncint_decode(btoi(buffer, ID3_EXTENDED_HEADER_SIZE, position += ID3_HEADER_SIZE));

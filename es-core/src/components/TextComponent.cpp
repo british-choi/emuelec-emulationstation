@@ -169,7 +169,7 @@ void TextComponent::render(const Transform4x4f& parentTrans)
 	{
 		Renderer::setMatrix(trans);
 
-		auto bgColor = mBgColor & 0xFFFFFF00 | (unsigned char)((mBgColor & 0xFF) * (mOpacity / 255.0));
+		auto bgColor = (mBgColor & 0xFFFFFF00) | (unsigned char)((mBgColor & 0xFF) * (mOpacity / 255.0));
 		Renderer::drawRect(0.0f, 0.0f, mSize.x(), mSize.y(), bgColor, bgColor);
 	}
 
@@ -329,7 +329,7 @@ void TextComponent::onTextChanged()
 		addAbbrev = newline != std::string::npos;
 	}
 
-	auto color = mColor & 0xFFFFFF00 | (unsigned char)((mColor & 0xFF) * (mOpacity / 255.0));
+	auto color = (mColor & 0xFFFFFF00) | (unsigned char)((mColor & 0xFF) * (mOpacity / 255.0));
 
 	Vector2f size = f->sizeText(text);
 	if (!isMultiline)
@@ -455,7 +455,7 @@ void TextComponent::onColorChanged()
 {
 	if(mTextCache)
 	{
-		auto color = mColor & 0xFFFFFF00 | (unsigned char)((mColor & 0xFF) * (mOpacity / 255.0));
+		auto color = (mColor & 0xFFFFFF00) | (unsigned char)((mColor & 0xFF) * (mOpacity / 255.0));
 		mTextCache->setColor(color);
 	}
 }
