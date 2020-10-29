@@ -162,7 +162,10 @@ GuiMenu::GuiMenu(Window *window, bool animate) : GuiComponent(window), mMenu(win
 		addEntry(_("SYSTEM SETTINGS").c_str(), true, [this] { openSystemSettings_batocera(); }, "iconSystem");
 	}
 	else
+	{
 		addEntry(_("INFORMATIONS").c_str(), true, [this] { openSystemInformations_batocera(); }, "iconSystem");
+		addEntry(_("UNLOCK UI MODE").c_str(), true, [this] { exitKidMode(); }, "iconAdvanced");
+	}
 
 #ifdef WIN32
 	addEntry(_("QUIT").c_str(), !Settings::getInstance()->getBool("ShowOnlyExit"), [this] {openQuitMenu_batocera(); }, "iconQuit");
@@ -792,12 +795,40 @@ std::vector<HelpPrompt> GuiMenu::getHelpPrompts()
 	return prompts;
 }
 
+class ExitKidModeMsgBox : public GuiSettings
+{
+	public: ExitKidModeMsgBox(Window* window, const std::string& title, const std::string& text) : GuiSettings(window, title) { addEntry(text); }
+
+	bool input(InputConfig* config, Input input) override
+	{
+		if (UIModeController::getInstance()->listen(config, input))
+		{
+			mWindow->pushGui(new GuiMsgBox(mWindow, _("UI MODE IS NOW UNLOCKED"),
+				_("OK"), [this] 
+				{
+					Window* window = mWindow;
+					while (window->peekGui() && window->peekGui() != ViewController::get())
+						delete window->peekGui();
+				}));
+
+
+			return true;
+		}
+
+		return GuiComponent::input(config, input);
+	}
+};
+
+void GuiMenu::exitKidMode()
+{
+	mWindow->pushGui(new ExitKidModeMsgBox(mWindow, _("UNLOCK UI MODE"), _("PLEASE ENTER THE CODE TO UNLOCK THE CURRENT UI MODE")));
+}
+
 void GuiMenu::openSystemInformations_batocera()
 {
 	auto theme = ThemeData::getMenuTheme();
 	std::shared_ptr<Font> font = theme->Text.font;
 	unsigned int color = theme->Text.color;
-
 
 	Window *window = mWindow;
 	bool isFullUI = UIModeController::getInstance()->isUIModeFull();
@@ -906,13 +937,21 @@ void GuiMenu::openDeveloperSettings()
 	});
 #endif
 
+#ifdef _ENABLEEMUELEC 
+	s->addGroup(_("LOGGING"));
+#else
 	s->addGroup(_("TOOLS"));
+#endif
 
 	// log level
 	auto logLevel = std::make_shared< OptionListComponent<std::string> >(mWindow, _("LOG LEVEL"), false);
 	std::vector<std::string> modes;
 	modes.push_back("default");
+#ifdef _ENABLEEMUELEC 
+	modes.push_back("minimal");
+#else
 	modes.push_back("disabled");
+#endif
 	modes.push_back("warning");
 	modes.push_back("error");
 	modes.push_back("debug");
@@ -934,7 +973,7 @@ void GuiMenu::openDeveloperSettings()
 		}
 	});
 
-#if !defined(WIN32) || defined(_DEBUG)
+#if !defined(WIN32) && !defined _ENABLEEMUELEC || defined(_DEBUG)
 	// support
 	s->addEntry(_("CREATE A SUPPORT FILE"), true, [window] {
 		window->pushGui(new GuiMsgBox(window, _("CREATE A SUPPORT FILE ?"), _("YES"),
@@ -987,7 +1026,7 @@ void GuiMenu::openDeveloperSettings()
 			Settings::getInstance()->setString(system->getName() + ".HiddenExt", "");
 
 		Settings::getInstance()->saveFile();
-		reloadAllGames(mWindow, false);
+		ViewController::reloadAllGames(mWindow, false);
 	});
 
 	s->addEntry(_("REDETECT GAMES LANG/REGION"), false, [this]
@@ -1065,12 +1104,17 @@ void GuiMenu::openDeveloperSettings()
 		auto autoControllers = std::make_shared<SwitchComponent>(mWindow);
 		autoControllers->setState(SystemConf::getInstance()->get("global.disableautocontrollers") != "1");
 		s->addWithLabel(_("AUTOCONFIGURE EMULATORS CONTROLLERS"), autoControllers);
-		s->addSaveFunc([autoControllers]
-		{
-			SystemConf::getInstance()->set("global.disableautocontrollers", autoControllers->getState() ? "" : "1");
-		});
+		s->addSaveFunc([autoControllers] { SystemConf::getInstance()->set("global.disableautocontrollers", autoControllers->getState() ? "" : "1"); });
 #endif
 	}
+
+#if defined(WIN32)
+	// Network Indicator
+	auto networkIndicator = std::make_shared<SwitchComponent>(mWindow);
+	networkIndicator->setState(Settings::getInstance()->getBool("ShowNetworkIndicator"));
+	s->addWithLabel(_("SHOW NETWORK INDICATOR"), networkIndicator);
+	s->addSaveFunc([networkIndicator] { Settings::getInstance()->setBool("ShowNetworkIndicator", networkIndicator->getState()); });
+#endif
 
 	s->addGroup(_("OPTIMIZATIONS"));
 
@@ -2140,13 +2184,13 @@ void GuiMenu::updateGameLists(Window* window, bool confirm)
 	
 	if (!confirm)
 	{
-		reloadAllGames(window, true);
+		ViewController::reloadAllGames(window, true);
 		return;
 	}
 
 	window->pushGui(new GuiMsgBox(window, _("REALLY UPDATE GAMES LISTS ?"), _("YES"), [window]
 		{
-			reloadAllGames(window, true);
+		ViewController::reloadAllGames(window, true);
 		}, 
 		_("NO"), nullptr));
 }
@@ -2870,7 +2914,7 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 		{
 			if (themeconfig->getVariable("forceReloadGames"))
 			{
-				reloadAllGames(window, false);
+				ViewController::reloadAllGames(window, false);
 			}
 			else if (systemTheme.empty())
 			{				
@@ -2890,40 +2934,6 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 	});
 
 	mWindow->pushGui(themeconfig);
-}
-
-void GuiMenu::reloadAllGames(Window* window, bool deleteCurrentGui)
-{
-	Utils::FileSystem::FileSystemCacheActivator fsc;
-
-	auto viewMode = ViewController::get()->getViewMode();
-	auto systemName = ViewController::get()->getSelectedSystem()->getName();	
-
-	window->renderSplashScreen(_("Loading..."));
-
-	if (!deleteCurrentGui)
-	{
-		GuiComponent* topGui = window->peekGui();
-		window->removeGui(topGui);
-	}
-
-	GuiComponent *gui;
-	while ((gui = window->peekGui()) != NULL)
-	{
-		window->removeGui(gui);
-		delete gui;
-	}
-
-	ViewController::init(window);
-	CollectionSystemManager::deinit();
-	CollectionSystemManager::init(window);
-	SystemData::loadConfig(window);
-
-	ViewController::get()->goToSystemView(systemName, true, viewMode);
-	ViewController::get()->reloadAll(nullptr, false); // Avoid reloading themes a second time
-	window->closeSplashScreen();
-
-	window->pushGui(ViewController::get());
 }
 
 void GuiMenu::openUISettings() 
@@ -3041,109 +3051,6 @@ void GuiMenu::openUISettings()
 		}		
 	}
 
-
-	/*
-	s->addGroup(_("STARTUP SETTINGS"));
-
-	// Optionally start in selected system
-	std::string startupSystem = Settings::getInstance()->getString("StartupSystem");
-
-	auto systemfocus_list = std::make_shared< OptionListComponent<std::string> >(mWindow, _("START ON SYSTEM"), false);
-	systemfocus_list->add(_("NONE"), "", startupSystem == "");
-
-	if (SystemData::isManufacturerSupported() && Settings::getInstance()->getString("SortSystems") == "manufacturer")
-	{
-		std::string man;
-		for (auto system : SystemData::sSystemVector)
-		{
-			if (!system->isVisible())
-				continue;
-
-			if (man != system->getSystemMetadata().manufacturer)
-			{
-				systemfocus_list->addGroup(system->getSystemMetadata().manufacturer);
-				man = system->getSystemMetadata().manufacturer;
-			}
-
-			systemfocus_list->add(system->getName(), system->getName(), startupSystem == system->getName());
-		}
-	}
-	else
-	{
-		for (auto system : SystemData::sSystemVector)
-			if (system->isVisible())
-				systemfocus_list->add(system->getName(), system->getName(), startupSystem == system->getName());
-	}
-
-	s->addWithLabel(_("START ON SYSTEM"), systemfocus_list);
-	s->addSaveFunc([systemfocus_list] {
-		Settings::getInstance()->setString("StartupSystem", systemfocus_list->getSelected());
-	});
-
-	// Open gamelist at start
-	auto startOnGamelist = std::make_shared<SwitchComponent>(mWindow);
-	startOnGamelist->setState(Settings::getInstance()->getBool("StartupOnGameList"));
-	s->addWithLabel(_("START ON GAMELIST"), startOnGamelist);
-	s->addSaveFunc([startOnGamelist] { Settings::getInstance()->setBool("StartupOnGameList", startOnGamelist->getState()); });
-	
-	// Select systems to hide
-	auto hiddenSystems = Utils::String::split(Settings::getInstance()->getString("HiddenSystems"), ';');
-
-	auto displayedSystems = std::make_shared<OptionListComponent<SystemData*>>(mWindow, _("SYSTEMS DISPLAYED"), true);
-
-
-	if (SystemData::isManufacturerSupported() && Settings::getInstance()->getString("SortSystems") == "manufacturer")
-	{
-		std::string man;
-		for (auto system : SystemData::sSystemVector)
-		{
-			if (system->isCollection() || system->isGroupChildSystem())
-				continue;
-
-			if (man != system->getSystemMetadata().manufacturer)
-			{
-				displayedSystems->addGroup(system->getSystemMetadata().manufacturer);
-				man = system->getSystemMetadata().manufacturer;
-			}
-
-			displayedSystems->add(system->getFullName(), system, std::find(hiddenSystems.cbegin(), hiddenSystems.cend(), system->getName()) == hiddenSystems.cend());
-		}
-	}
-	else
-	{
-		for (auto system : SystemData::sSystemVector)
-			if (!system->isCollection() && !system->isGroupChildSystem())
-				displayedSystems->add(system->getFullName(), system, std::find(hiddenSystems.cbegin(), hiddenSystems.cend(), system->getName()) == hiddenSystems.cend());
-	}
-
-	s->addWithLabel(_("SYSTEMS DISPLAYED"), displayedSystems);
-	s->addSaveFunc([s, displayedSystems]
-	{
-		std::string hiddenSystems;
-
-		std::vector<SystemData*> sys = displayedSystems->getSelectedObjects();
-
-		for (auto system : SystemData::sSystemVector)
-		{
-			if (system->isCollection() || system->isGroupChildSystem())
-				continue;
-
-			if (std::find(sys.cbegin(), sys.cend(), system) == sys.cend())
-			{
-				if (hiddenSystems.empty())
-					hiddenSystems = system->getName();
-				else
-					hiddenSystems = hiddenSystems + ";" + system->getName();
-			}
-		}
-
-		if (Settings::getInstance()->setString("HiddenSystems", hiddenSystems))
-		{
-			Settings::getInstance()->saveFile();
-			s->setVariable("reloadAll", true);
-		}
-	});
-	*/
 	s->addGroup(_("DISPLAY OPTIONS"));
 
 	s->addEntry(_("SCREENSAVER SETTINGS"), true, std::bind(&GuiMenu::openScreensaverOptions, this));
@@ -3411,11 +3318,17 @@ void GuiMenu::openNetworkSettings_batocera(bool selectWifiEnable)
 	auto s = new GuiSettings(mWindow, _("NETWORK SETTINGS").c_str());
 	s->addGroup(_("INFORMATIONS"));
 
-	auto status = std::make_shared<TextComponent>(mWindow, ApiSystem::getInstance()->ping() ? _("CONNECTED") : _("NOT CONNECTED"), font, color);
-	s->addWithLabel(_("STATUS"), status);
-
 	auto ip = std::make_shared<TextComponent>(mWindow, ApiSystem::getInstance()->getIpAdress(), font, color);
 	s->addWithLabel(_("IP ADDRESS"), ip);
+
+	auto status = std::make_shared<TextComponent>(mWindow, ApiSystem::getInstance()->ping() ? _("CONNECTED") : _("NOT CONNECTED"), font, color);
+	s->addWithLabel(_("INTERNET STATUS"), status);
+
+	// Network Indicator
+	auto networkIndicator = std::make_shared<SwitchComponent>(mWindow);
+	networkIndicator->setState(Settings::getInstance()->getBool("ShowNetworkIndicator"));
+	s->addWithLabel(_("SHOW NETWORK INDICATOR"), networkIndicator);
+	s->addSaveFunc([networkIndicator] { Settings::getInstance()->setBool("ShowNetworkIndicator", networkIndicator->getState()); });
 
 	s->addGroup(_("SETTINGS"));
 
