@@ -375,10 +375,10 @@ msgid "BY MANUFACTURER"
 msgstr "제조업체 순"
 
 msgid "BY HARDWARE TYPE"
-msgstr ""
+msgstr "하드웨어 타입 순"
 
 msgid "BY RELEASE YEAR"
-msgstr ""
+msgstr "발매 연도 순"
 
 msgid "SORT SYSTEMS"
 msgstr "시스템 정렬"
@@ -633,7 +633,7 @@ msgid "MISC"
 msgstr "기타"
 
 msgid "There are no items in this view"
-msgstr ""
+msgstr "표시할 항목이 없습니다"
 
 msgid "UNINSTALL ADDED TO QUEUE"
 msgstr "제거 작업이 대기열에 추가됨"
@@ -687,7 +687,7 @@ msgid "SCREENSAVER BEHAVIOR"
 msgstr "화면보호기 동작"
 
 msgid "STOP MUSIC ON SCREENSAVER"
-msgstr ""
+msgstr "화면보호기에서 음악 멈추기"
 
 msgid "RANDOM VIDEO SCREENSAVER SETTINGS"
 msgstr "랜덤 비디오 화면보호기 셋팅"
@@ -968,7 +968,7 @@ msgid "INFORMATIONS"
 msgstr "정보"
 
 msgid "UNLOCK UI MODE"
-msgstr ""
+msgstr "UI 모드 해제"
 
 msgid "QUIT"
 msgstr "종료"
@@ -1040,10 +1040,10 @@ msgid "CHOOSE"
 msgstr "고르기"
 
 msgid "UI MODE IS NOW UNLOCKED"
-msgstr ""
+msgstr "UI 모드가 잠금 해제 되었습니다"
 
 msgid "PLEASE ENTER THE CODE TO UNLOCK THE CURRENT UI MODE"
-msgstr ""
+msgstr "UI 모드를 잠금해제 하기 위한 코드를 입력하세요"
 
 msgid "INFORMATION"
 msgstr "정보"
@@ -1142,7 +1142,7 @@ msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
 msgstr "에뮬레이터 컨트롤러 자동 설정"
 
 msgid "SHOW NETWORK INDICATOR"
-msgstr ""
+msgstr "네트워크 인디케이터 보이기"
 
 msgid "OPTIMIZATIONS"
 msgstr "최적화"
@@ -1428,7 +1428,7 @@ msgid "THEME CONFIGURATION"
 msgstr "테마 구성"
 
 msgid "GAMELIST STYLE"
-msgstr ""
+msgstr "게임리스트 스타일"
 
 msgid "basic"
 msgstr "기초"
@@ -1557,7 +1557,7 @@ msgid "NOT CONNECTED"
 msgstr "연결되지 않음"
 
 msgid "INTERNET STATUS"
-msgstr ""
+msgstr "인터넷 상태"
 
 msgid "HOSTNAME"
 msgstr "호스트 이름"
@@ -1687,25 +1687,25 @@ msgid "ERROR: EVERY SYSTEM IS HIDDEN, RE-DISPLAYING ALL OF THEM NOW"
 msgstr "모든 시스템이 숨겨져 있어, 지금 모든 시스템을 다시 표시합니다."
 
 msgid "QUICK SEARCH"
-msgstr ""
+msgstr "빠른 검색"
 
 msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
 msgstr "KODI 미디어 센터를 실행하시겠습니까?"
 
 msgid "GO TO LETTER"
-msgstr ""
+msgstr "바로가기"
 
 msgid "COLLECTIONS"
-msgstr ""
+msgstr "컬렉션"
 
 msgid "GO TO MANUFACTURER"
 msgstr "제조업체로 이동"
 
 msgid "GO TO HARDWARE"
-msgstr ""
+msgstr "하드웨어로 이동"
 
 msgid "GO TO DECADE"
-msgstr ""
+msgstr "발매연도로 이동"
 
 #, c-format
 msgid "%i COLLECTION"
@@ -1852,10 +1852,10 @@ msgid "DEVELOPER, DESCENDING"
 msgstr "개발사, 내림차순"
 
 msgid "PUBLISHER, ASCENDING"
-msgstr "퍼블리셔, 오름차순"
+msgstr "유통사, 오름차순"
 
 msgid "PUBLISHER, DESCENDING"
-msgstr "퍼블리셔, 내림차순"
+msgstr "유통사, 내림차순"
 
 msgid "SYSTEM, ASCENDING"
 msgstr "시스템, 오름차순"
@@ -1897,7 +1897,7 @@ msgid "RATING"
 msgstr "평점"
 
 msgid "YEAR"
-msgstr ""
+msgstr "발매연도"
 
 msgid "REGION"
 msgstr "지역"
@@ -1923,7 +1923,7 @@ msgid "SHIFTS FOR UPPER,LOWER, AND SPECIAL"
 msgstr "대문자, 소문자, 특수문자를 위한 쉬프트"
 
 msgid "ALT GR"
-msgstr ""
+msgstr "알트"
 
 msgid "RESET"
 msgstr "리셋"
@@ -2086,15 +2086,15 @@ msgstr "작업 중..."
 
 #, c-format
 msgid "%d h"
-msgstr ""
+msgstr "%d시"
 
 #, c-format
 msgid "%d m"
-msgstr ""
+msgstr "%d분"
 
 #, c-format
 msgid "%d s"
-msgstr ""
+msgstr "%d초"
 
 #~ msgid "STATUS"
 #~ msgstr "상태"
