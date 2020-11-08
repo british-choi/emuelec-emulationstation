@@ -23,6 +23,7 @@
 #include "CollectionSystemManager.h"
 #include "guis/GuiImageViewer.h"
 #include "ApiSystem.h"
+#include "guis/GuiMsgBox.h"
 
 #ifdef _ENABLEEMUELEC
 #include "ApiSystem.h"
@@ -43,6 +44,28 @@ void ViewController::init(Window* window)
 	sInstance = new ViewController(window);
 }
 
+void ViewController::saveState()
+{
+	if (sInstance == nullptr)
+		return;
+
+	if (Settings::getInstance()->getString("StartupSystem") != "lastsystem")
+		return;
+	
+	SystemData* activeSystem = nullptr;
+
+	if (sInstance->mState.viewing == GAME_LIST)
+		activeSystem = sInstance->mState.getSystem();
+	else if (sInstance->mState.viewing == SYSTEM_SELECT)
+		activeSystem = sInstance->mSystemListView->getActiveSystem();
+
+	if (activeSystem != nullptr)
+	{
+		if (Settings::getInstance()->setString("LastSystem", activeSystem->getName()))
+			Settings::getInstance()->saveFile();
+	}	
+}
+
 ViewController::ViewController(Window* window)
 	: GuiComponent(window), mCurrentView(nullptr), mCamera(Transform4x4f::Identity()), mFadeOpacity(0), mLockInput(false)
 {
@@ -51,7 +74,7 @@ ViewController::ViewController(Window* window)
 }
 
 ViewController::~ViewController()
-{
+{	
 	sInstance = nullptr;
 }
 
@@ -61,6 +84,9 @@ void ViewController::goToStart(bool forceImmediate)
 
 	// If specific system is requested, go directly to the game list
 	auto requestedSystem = Settings::getInstance()->getString("StartupSystem");
+	if (requestedSystem == "lastsystem")
+		requestedSystem = Settings::getInstance()->getString("LastSystem");
+
 	if("" != requestedSystem && "retropie" != requestedSystem)
 	{
 		auto system = SystemData::getSystem(requestedSystem);
@@ -138,7 +164,7 @@ void ViewController::goToSystemView(SystemData* system, bool forceImmediate)
 
 	mState.viewing = SYSTEM_SELECT;
 	mState.system = dest;
-
+	
 	auto systemList = getSystemListView();
 	systemList->setPosition(getSystemId(dest) * (float)Renderer::getScreenWidth(), systemList->getPosition().y());
 	systemList->goToSystem(dest, false);
@@ -333,8 +359,49 @@ bool ViewController::doLaunchGame(FileData* game, LaunchGameOptions options)
 	return false;
 }
 
-void ViewController::launch(FileData* game, LaunchGameOptions options, Vector3f center)
+bool ViewController::checkLaunchOptions(FileData* game, LaunchGameOptions options, Vector3f center)
+{	
+	if (!game->isExtensionCompatible())
+	{
+		auto gui = new GuiMsgBox(mWindow, _("WARNING : THIS GAME'S FORMAT IS NOT SUPPORTED BY THE CURRENT EMULATOR/CORE.\nDO YOU WANT TO LAUNCH IT ANYWAY ?"),
+			_("YES"), [this, game, options, center] { launch(game, options, center, false); },
+			_("NO"), nullptr, ICON_ERROR);
+
+		mWindow->pushGui(gui);
+		return false;
+	}
+
+	if (Settings::getInstance()->getBool("CheckBiosesAtLaunch") && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::BIOSINFORMATION))
+	{
+		auto bios = ApiSystem::getInstance()->getBiosInformations(game->getSourceFileData()->getSystem()->getName());
+		if (bios.size() != 0)
+		{
+			auto systemName = game->getSystem()->getName();
+			auto it = std::find_if(bios.cbegin(), bios.cend(), [&systemName](const BiosSystem& x) { return x.name == systemName; });
+			if (it != bios.cend() && it->bios.size() > 0)
+			{
+				bool hasMissing = std::find_if(it->bios.cbegin(), it->bios.cend(), [&systemName](const BiosFile& x) { return x.status == "MISSING"; }) != it->bios.cend();
+				if (hasMissing)
+				{
+					auto gui = new GuiMsgBox(mWindow, _("WARNING : THE SYSTEM HAS MISSING BIOS AND THE GAME MAY NOT WORK CORRECTLY.\nDO YOU WANT TO LAUNCH IT ANYWAY ?"),
+						_("YES"), [this, game, options, center] { launch(game, options, center, false); },
+						_("NO"), nullptr, ICON_ERROR);
+
+					mWindow->pushGui(gui);
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+void ViewController::launch(FileData* game, LaunchGameOptions options, Vector3f center, bool allowCheckLaunchOptions)
 {
+	if (allowCheckLaunchOptions && !checkLaunchOptions(game, options, center))
+		return;
+
 	if(game->getType() != GAME)
 	{
 		LOG(LogError) << "tried to launch something that isn't a game";
