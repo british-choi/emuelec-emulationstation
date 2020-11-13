@@ -1142,6 +1142,7 @@ void ApiSystem::setBrighness(int value)
 	
 	float percent = value / 100.0f * (float)max;
 	sprintf(buffer, "%d\n", (uint32_t)percent);
+	SystemConf::getInstance()->set("brightness.level", buffer);
 
 	count = write(fd, buffer, strlen(buffer));
 	if (count < 0)
