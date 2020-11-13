@@ -70,7 +70,7 @@ void Settings::setDefaults()
 	mBoolMap["SplashScreen"] = true;
 	mBoolMap["SplashScreenProgress"] = true;
 	mBoolMap["StartupOnGameList"] = false;
-	mStringMap["StartupSystem"] = "";
+	mStringMap["StartupSystem"] = "lastsystem";
 
 #if WIN32
 	mBoolMap["ShowOnlyExit"] = true;
@@ -107,13 +107,15 @@ void Settings::setDefaults()
 #endif
 	mBoolMap["ShowHelpPrompts"] = true;
 	mBoolMap["ScrapeRatings"] = true;
+	mBoolMap["ScrapePadToKey"] = true;	
 	mBoolMap["IgnoreGamelist"] = false;
 	mBoolMap["HideConsole"] = true;
 	mBoolMap["QuickSystemSelect"] = true;
 	mBoolMap["MoveCarousel"] = true;
 	mBoolMap["SaveGamelistsOnExit"] = true;
 	mBoolMap["ShowBatteryIndicator"] = true;	
-
+	mBoolMap["CheckBiosesAtLaunch"] = true;
+	
 #if WIN32
 	mBoolMap["ShowNetworkIndicator"] = false;
 #else
@@ -258,7 +260,7 @@ void Settings::setDefaults()
 
 	mBoolMap["ShowFilenames"] = false;
 	
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(X86) || defined(X86_64)
 	mBoolMap["HideWindow"] = false;
 #else
 	mBoolMap["HideWindow"] = true;
@@ -302,7 +304,6 @@ void Settings::setDefaults()
 	mBoolMap["global.netplay"] = false;
 	mBoolMap["kodi.enabled"] = false;
 	mBoolMap["kodi.atstartup"] = false;
-	mBoolMap["kodi.xbutton"] = false;	
 	mBoolMap["wifi.enabled"] = false;
 #endif
 

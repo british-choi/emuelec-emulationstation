@@ -87,6 +87,9 @@ void ISimpleGameListView::onFileChanged(FileData* /*file*/, FileChangeType /*cha
 	}
 	else
 	{
+		while (mCursorStack.size())
+			mCursorStack.pop();
+
 		populateList(mRoot->getChildrenListToDisplay());
 		setCursor(cursor);
 	}

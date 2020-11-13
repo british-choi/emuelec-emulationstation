@@ -48,6 +48,7 @@
 #include "components/BatteryIndicatorComponent.h"
 #include "GuiLoading.h"
 #include "guis/GuiBios.h"
+#include "guis/GuiKeyMappingEditor.h"
 
 #if WIN32
 #include "Win32ApiSystem.h"
@@ -620,8 +621,13 @@ void GuiMenu::openScraperSettings()
 		scrape_manual->setState(Settings::getInstance()->getBool("ScrapeManual"));
 		s->addWithLabel(_("SCRAPE MANUAL"), scrape_manual);
 		s->addSaveFunc([scrape_manual] { Settings::getInstance()->setBool("ScrapeManual", scrape_manual->getState()); });
-		
 
+		// SCRAPE PAD TO KEYBOARD
+		auto scrapePadToKey = std::make_shared<SwitchComponent>(mWindow);
+		scrapePadToKey->setState(Settings::getInstance()->getBool("ScrapePadToKey"));
+		s->addWithLabel(_("SCRAPE PADTOKEY SETTINGS"), scrapePadToKey);
+		s->addSaveFunc([scrapePadToKey] { Settings::getInstance()->setBool("ScrapePadToKey", scrapePadToKey->getState()); });
+		
 		// Account
 		createInputTextRow(s, _("USERNAME"), "ScreenScraperUser", false, true);
 		createInputTextRow(s, _("PASSWORD"), "ScreenScraperPass", true, true);
@@ -993,6 +999,14 @@ void GuiMenu::openDeveloperSettings()
 
 	s->addGroup(_("DATA MANAGEMENT"));
 
+	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::BIOSINFORMATION))
+	{
+		auto checkBiosesAtLaunch = std::make_shared<SwitchComponent>(mWindow);
+		checkBiosesAtLaunch->setState(Settings::getInstance()->getBool("CheckBiosesAtLaunch"));
+		s->addWithLabel(_("CHECK BIOSES BEFORE RUNNING A GAME"), checkBiosesAtLaunch);
+		s->addSaveFunc([checkBiosesAtLaunch] { Settings::getInstance()->setBool("CheckBiosesAtLaunch", checkBiosesAtLaunch->getState()); });
+	}
+
 	// enable filters (ForceDisableFilters)
 	auto enable_filter = std::make_shared<SwitchComponent>(mWindow);
 	enable_filter->setState(!Settings::getInstance()->getBool("ForceDisableFilters"));
@@ -1061,7 +1075,7 @@ void GuiMenu::openDeveloperSettings()
 	s->addWithLabel(_("ON SCREEN KEYBOARD"), osk_enable);
 	s->addSaveFunc([osk_enable] { Settings::getInstance()->setBool("UseOSK", osk_enable->getState()); });
 	
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(X86) || defined(X86_64)
 	// Hide EmulationStation Window when running a game ( windows only )
 	auto hideWindowScreen = std::make_shared<SwitchComponent>(mWindow);
 	hideWindowScreen->setState(Settings::getInstance()->getBool("HideWindow"));
@@ -1372,15 +1386,10 @@ void GuiMenu::openSystemSettings_batocera()
 			kodiAtStart->setState(SystemConf::getInstance()->getBool("kodi.atstartup"));
 			kodiGui->addWithLabel(_("KODI AT START"), kodiAtStart);
 
-			auto kodiX = std::make_shared<SwitchComponent>(mWindow);
-			kodiX->setState(SystemConf::getInstance()->getBool("kodi.xbutton"));
-			kodiGui->addWithLabel(_("START KODI WITH X"), kodiX);
-
-			kodiGui->addSaveFunc([kodiEnabled, kodiAtStart, kodiX] 
+			kodiGui->addSaveFunc([kodiEnabled, kodiAtStart]
 			{
 				SystemConf::getInstance()->setBool("kodi.enabled", kodiEnabled->getState());
-				SystemConf::getInstance()->setBool("kodi.atstartup", kodiAtStart->getState());
-				SystemConf::getInstance()->setBool("kodi.xbutton", kodiX->getState());				
+				SystemConf::getInstance()->setBool("kodi.atstartup", kodiAtStart->getState());		
 			});
 
 			mWindow->pushGui(kodiGui);
@@ -1711,52 +1720,55 @@ void GuiMenu::openSystemSettings_batocera()
 void GuiMenu::openLatencyReductionConfiguration(Window* mWindow, std::string configName)
 {
 	GuiSettings* guiLatency = new GuiSettings(mWindow, _("LATENCY REDUCTION").c_str());
-#ifdef _ENABLEEMUELEC
-	auto runaheadValue = getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".runahead'");
-#else
-	auto runaheadValue = SystemConf::getInstance()->get(configName + ".runahead");
-#endif
+
 	// run-ahead
 	auto runahead_enabled = std::make_shared<OptionListComponent<std::string>>(mWindow, _("RUN-AHEAD FRAMES"));
-	runahead_enabled->add(_("AUTO"), "auto", runaheadValue < "1");
-	runahead_enabled->add("1", "1", runaheadValue == "1");
-	runahead_enabled->add("2", "2", runaheadValue == "2");
-	runahead_enabled->add("3", "3", runaheadValue == "3");
-	runahead_enabled->add("4", "4", runaheadValue == "4");
-	runahead_enabled->add("5", "5", runaheadValue == "5");
-	runahead_enabled->add("6", "6", runaheadValue == "6");
 
-	if (!runahead_enabled->hasSelection())
-		runahead_enabled->selectFirstItem();
+#ifdef _ENABLEEMUELEC
 
-	guiLatency->addWithLabel(_("USE RUN-AHEAD FRAMES"), runahead_enabled);
+    if (configName != "global") {
+        runahead_enabled->addRange({ { _("AUTO"), "" }, { _("NONE"), "0" }, { "1", "1" }, { "2", "2" }, { "3", "3" }, { "4", "4" }, { "5", "5" }, { "6", "6" } }, getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".runahead'"));
+    } else {
+        runahead_enabled->addRange({ { _("AUTO"), "" }, { _("NONE"), "0" }, { "1", "1" }, { "2", "2" }, { "3", "3" }, { "4", "4" }, { "5", "5" }, { "6", "6" } }, SystemConf::getInstance()->get(configName + ".runahead"));
+    }
+#else
+    runahead_enabled->addRange({ { _("AUTO"), "" }, { _("NONE"), "0" }, { "1", "1" }, { "2", "2" }, { "3", "3" }, { "4", "4" }, { "5", "5" }, { "6", "6" } }, SystemConf::getInstance()->get(configName + ".runahead"));
+#endif	    
+
+    guiLatency->addWithLabel(_("USE RUN-AHEAD FRAMES"), runahead_enabled);
+
+
+#ifdef _ENABLEEMUELEC
+    if (configName != "global") {
+        guiLatency->addSaveFunc([configName, runahead_enabled] { getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".runahead' " + runahead_enabled->getSelected()); });
+    } else {
+        guiLatency->addSaveFunc([configName, runahead_enabled] { SystemConf::getInstance()->set(configName + ".runahead", runahead_enabled->getSelected()); });
+    }
+#else
+    guiLatency->addSaveFunc([configName, runahead_enabled] { SystemConf::getInstance()->set(configName + ".runahead", runahead_enabled->getSelected()); });
+#endif
 
 	// second instance
+	auto secondinstance = std::make_shared<OptionListComponent<std::string>>(mWindow, _("RUN-AHEAD USE SECOND INSTANCE"));
 #ifdef _ENABLEEMUELEC
-	auto secondinstanceValue = getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".secondinstance'");
+    if (configName != "global") {
+        secondinstance->addRange({ { _("AUTO"), "" }, { _("ON"), "1" }, { _("OFF"), "0" } }, getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + configName + ".secondinstance'"));
+    } else {
+        secondinstance->addRange({ { _("AUTO"), "" }, { _("ON"), "1" }, { _("OFF"), "0" } }, SystemConf::getInstance()->get(configName + ".secondinstance"));
+    }
 #else
-	auto secondinstanceValue = SystemConf::getInstance()->get(configName + ".secondinstance");
+	secondinstance->addRange({ { _("AUTO"), "" }, { _("ON"), "1" }, { _("OFF"), "0" } }, SystemConf::getInstance()->get(configName + ".secondinstance"));
 #endif
-	auto secondinstance_enabled = std::make_shared<OptionListComponent<std::string>>(mWindow, _("RUN-AHEAD USE SECOND INSTANCE"));
-	secondinstance_enabled->add(_("AUTO"), "auto", secondinstanceValue != "0" && secondinstanceValue != "1");
-	secondinstance_enabled->add(_("ON"), "1", secondinstanceValue == "1");
-	secondinstance_enabled->add(_("OFF"), "0", secondinstanceValue == "0");
-
-	if (!secondinstance_enabled->hasSelection())
-		secondinstance_enabled->selectFirstItem();
-
-	guiLatency->addWithLabel(_("RUN-AHEAD USE SECOND INSTANCE"), secondinstance_enabled);
-
-	guiLatency->addSaveFunc([configName, runahead_enabled, secondinstance_enabled]
-	{
+	guiLatency->addWithLabel(_("RUN-AHEAD USE SECOND INSTANCE"), secondinstance);
 #ifdef _ENABLEEMUELEC
-		getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".runahead' " + runahead_enabled->getSelected());
-		getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".secondinstance' " + secondinstance_enabled->getSelected());
+    if (configName != "global") {
+        guiLatency->addSaveFunc([configName, secondinstance] { getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + configName + ".secondinstance' " + secondinstance->getSelected()); });
+    } else {
+        guiLatency->addSaveFunc([configName, secondinstance] { SystemConf::getInstance()->set(configName + ".secondinstance", secondinstance->getSelected()); });
+    }
 #else
-		SystemConf::getInstance()->set(configName + ".runahead", runahead_enabled->getSelected());
-		SystemConf::getInstance()->set(configName + ".secondinstance", secondinstance_enabled->getSelected());
+	guiLatency->addSaveFunc([configName, secondinstance] { SystemConf::getInstance()->set(configName + ".secondinstance", secondinstance->getSelected()); });
 #endif
-	});
 	
 	mWindow->pushGui(guiLatency);
 }
@@ -1951,16 +1963,19 @@ void GuiMenu::openGamesSettings_batocera()
 	s->addSaveFunc([autosave_enabled] { SystemConf::getInstance()->set("global.autosave", autosave_enabled->getSelected()); });
 	
 	// Shaders preset
+#ifndef _ENABLEEMUELEC	
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::SHADERS))
 	{
 		auto installedShaders = ApiSystem::getInstance()->getShaderList();
 		if (installedShaders.size() > 0)
 		{
+#endif
 			std::string currentShader = SystemConf::getInstance()->get("global.shaderset");
 
 			auto shaders_choices = std::make_shared<OptionListComponent<std::string> >(mWindow, _("SHADERS SET"), false);			
 			shaders_choices->add(_("AUTO"), "auto", currentShader.empty() || currentShader == "auto");
 			shaders_choices->add(_("NONE"), "none", currentShader == "none");
+
 #ifdef _ENABLEEMUELEC	
 	std::string a;
 	for(std::stringstream ss(getShOutput(R"(/emuelec/scripts/emuelec-utils getshaders)")); getline(ss, a, ','); )
@@ -1975,8 +1990,10 @@ void GuiMenu::openGamesSettings_batocera()
 #endif
 			s->addWithLabel(_("SHADERS SET"), shaders_choices);
 			s->addSaveFunc([shaders_choices] { SystemConf::getInstance()->set("global.shaderset", shaders_choices->getSelected()); });
-		}
+#ifndef _ENABLEEMUELEC			
+        }
 	}
+#endif
 
 	// Integer scale
 	auto integerscale_enabled = std::make_shared<OptionListComponent<std::string>>(mWindow, _("INTEGER SCALE (PIXEL PERFECT)"));
@@ -3093,7 +3110,7 @@ void GuiMenu::openUISettings()
 	});
 
 	// Battery indicator
-	if (mWindow->getBatteryIndicator() && mWindow->getBatteryIndicator()->hasBattery())
+	if (queryBatteryInformation().hasBattery)
 	{
 		auto batteryStatus = std::make_shared<SwitchComponent>(mWindow);
 		batteryStatus->setState(Settings::getInstance()->getBool("ShowBatteryIndicator"));
@@ -3439,7 +3456,11 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool quickAccessMenu)
 
 		// Don't like one of the songs? Press next
 		if (AudioManager::getInstance()->isSongPlaying())
-			s->addEntry(_("SKIP TO NEXT SONG"), false, [window] { AudioManager::getInstance()->playRandomMusic(false); }, "iconSound");
+		{
+			auto sname = AudioManager::getInstance()->getSongName();
+			if (!sname.empty())
+				s->addWithDescription(_("SKIP TO NEXT SONG"), _("LISTENING NOW") + " : " + sname, nullptr, [window] { AudioManager::getInstance()->playRandomMusic(false); }, "iconSound");
+		}
 
 		s->addEntry(_("LAUNCH SCREENSAVER"), false, [s, window]
 		{
@@ -3460,7 +3481,11 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool quickAccessMenu)
 
 		if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::PDFEXTRACTION) && Utils::FileSystem::exists(BATOCERA_MANUAL_FILE))
 		{
+#if defined(WIN32)
+			s->addEntry(_("VIEW USER'S MANUAL"), false, [s, window]
+#else
 			s->addEntry(_("VIEW BATOCERA MANUAL"), false, [s, window]
+#endif
 			{
 				GuiImageViewer::showPdf(window, BATOCERA_MANUAL_FILE);
 				delete s;
@@ -4437,6 +4462,15 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		});
 	}
 
+
+	if (fileData == nullptr && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::EVMAPY) && systemData->isCurrentFeatureSupported(EmulatorFeatures::Features::padTokeyboard))
+	{
+		if (systemData->hasKeyboardMapping())
+			systemConfiguration->addEntry(_("EDIT PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData); });
+		else
+			systemConfiguration->addEntry(_("CREATE PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData); });
+	}
+
 	mWindow->pushGui(systemConfiguration);
 }
 
@@ -4768,4 +4802,9 @@ void GuiMenu::loadSubsetSettings(const std::string themeName)
 	}
 	else
 		LOG(LogError) << "Unable to open " << fileName;
+}
+
+void GuiMenu::editKeyboardMappings(Window *window, IKeyboardMapContainer* mapping)
+{
+	window->pushGui(new GuiKeyMappingEditor(window, mapping));
 }
