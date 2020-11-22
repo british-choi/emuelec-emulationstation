@@ -459,7 +459,7 @@ msgid "OTHER FILTERS"
 msgstr "다른 필터"
 
 msgid "FIND SIMILAR GAMES..."
-msgstr ""
+msgstr "유사게임 찾기"
 
 msgid "GAME MEDIAS"
 msgstr "게임 미디어"
@@ -516,7 +516,7 @@ msgid "EDIT THIS GAME'S METADATA"
 msgstr "게임 정보 편집"
 
 msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr ""
+msgstr "패드 to 키보드 정보 보기"
 
 msgid "RESET FILTERS"
 msgstr "필터 초기화"
@@ -651,7 +651,7 @@ msgid "SELECT CONTENT TO INSTALL / REMOVE"
 msgstr "설치/제거할 컨텐츠을 선택하세요"
 
 msgid "UPDATE INSTALLED CONTENT"
-msgstr ""
+msgstr "설치된 컨텐츠 업데이트"
 
 msgid "There are no items in this view"
 msgstr "표시할 항목이 없습니다"
@@ -1151,7 +1151,7 @@ msgid "OVERSCAN"
 msgstr "오버스캔"
 
 msgid "USE OMX PLAYER (HW ACCELERATED)"
-msgstr ""
+msgstr "OMX 플레이어 사용(HW 가속)"
 
 msgid "TOOLS"
 msgstr "도구"
@@ -1181,7 +1181,7 @@ msgid "Cleaning "
 msgstr "삭제중 "
 
 msgid "CLEAR CACHES"
-msgstr ""
+msgstr "캐시 삭제"
 
 msgid "RESET FILE EXTENSIONS"
 msgstr "파일 확장자 초기화"
@@ -1866,7 +1866,7 @@ msgid "SET VIEWER PASSWORD"
 msgstr "암호 보기 설정"
 
 msgid "Games similar to"
-msgstr ""
+msgstr "유사 게임"
 
 msgid "Searching"
 msgstr "검색 중"
