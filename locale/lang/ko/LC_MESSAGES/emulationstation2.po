@@ -402,7 +402,7 @@ msgid "SHOW SYSTEM NAME IN COLLECTIONS"
 msgstr "컬렉션에서 시스템 이름 표시"
 
 msgid "SHOW GAMES OF HIDDEN SYSTEMS IN COLLECTIONS"
-msgstr ""
+msgstr "컬렉션에서 숨김 시스템의 게임 표시"
 
 msgid "UPDATE GAMES LISTS"
 msgstr "게임 목록 업데이트"
@@ -1586,10 +1586,10 @@ msgid "SHOW BATTERY STATUS"
 msgstr "배터리 상태 보이기"
 
 msgid "ICON"
-msgstr ""
+msgstr "아이콘"
 
 msgid "ICON AND TEXT"
-msgstr ""
+msgstr "아이콘과 텍스트"
 
 msgid "SHOW FILENAMES IN LISTS"
 msgstr "리스트에 파일명 보이기"
