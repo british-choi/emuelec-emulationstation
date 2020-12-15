@@ -282,7 +282,7 @@ void GuiMenu::openEmuELECSettings()
 		});
 #endif
 #ifdef _ENABLEGAMEFORCE
-		auto emuelec_blrgboptions_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "BUTTON LED COLOR", false);
+		auto emuelec_blrgboptions_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("BUTTON LED COLOR"), false);
 		std::vector<std::string> blrgboptions;
 		blrgboptions.push_back("off");
 		blrgboptions.push_back("red");
@@ -310,15 +310,12 @@ void GuiMenu::openEmuELECSettings()
 			}
 		});
 		
-        auto emuelec_powerled_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "POWER LED COLOR", false);
+        auto emuelec_powerled_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("POWER LED COLOR"), false);
 		std::vector<std::string> powerledoptions;
 		powerledoptions.push_back("off");
 		powerledoptions.push_back("heartbeat");
         powerledoptions.push_back("on");
 		
-<<<<<<< HEAD
-		auto emuelec_audiodev_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("AUDIO DEVICE"), false);
-=======
 		auto powerledoptionsS = SystemConf::getInstance()->get("gf_powerled");
 		if (powerledoptionsS.empty())
 		powerledoptionsS = "heartbeat";
@@ -337,8 +334,7 @@ void GuiMenu::openEmuELECSettings()
 		});
 #endif	
 #ifndef _ENABLEGAMEFORCE && !defined(ODROIDGOA)		
-		auto emuelec_audiodev_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "AUDIO DEVICE", false);
->>>>>>> 27d1ca1281cc4370e1710663ed70ab9a6674099e
+		auto emuelec_audiodev_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("AUDIO DEVICE"), false);
 		std::vector<std::string> Audiodevices;
 		Audiodevices.push_back("auto");
 		Audiodevices.push_back("0,0");
