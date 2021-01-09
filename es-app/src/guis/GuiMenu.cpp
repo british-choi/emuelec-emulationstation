@@ -1311,16 +1311,19 @@ void GuiMenu::openUpdatesSettings()
 	}
 
 	// Batocera themes installer/browser
-	updateGui->addEntry(_("THEMES"), true, [this] 
-	{ 
-		if (!checkNetwork())
-			return;
+	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::THEMESDOWNLOADER))
+	{
+		updateGui->addEntry(_("THEMES"), true, [this]
+		{
+			if (!checkNetwork())
+				return;
 
-		mWindow->pushGui(new GuiThemeInstallStart(mWindow)); 
-	});
+			mWindow->pushGui(new GuiThemeInstallStart(mWindow));
+		});
+	}
 
 	// Batocera integration with theBezelProject
-	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::DECORATIONS))
+	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::DECORATIONS) && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::THEBEZELPROJECT))
 	{
 		updateGui->addEntry(_("THE BEZEL PROJECT"), true, [this]
 		{
@@ -1971,7 +1974,7 @@ void GuiMenu::openRetroachievementsSettings()
 			std::string error;
 			if (!RetroAchievements::testAccount(newUsername, newPassword, error))
 			{
-				window->pushGui(new GuiMsgBox(window, _("UNABLE TO ACTIVATE RETROACHIEVEMENTS :\r\n") + error, _("OK"), nullptr, GuiMsgBoxIcon::ICON_ERROR));
+				window->pushGui(new GuiMsgBox(window, _("UNABLE TO ACTIVATE RETROACHIEVEMENTS :") + "\n" + error, _("OK"), nullptr, GuiMsgBoxIcon::ICON_ERROR));
 				retroachievements_enabled->setState(false);
 				newState = false;
 			}
@@ -2993,6 +2996,30 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 				themeconfig->setVariable("reloadAll", true);
 		});
 
+
+		
+		// Show filenames
+		auto defFn = Settings::getInstance()->getBool("ShowFilenames") ? _("YES") : _("NO");
+		auto curFn = Settings::getInstance()->getString(system->getName() + ".ShowFilenames");
+
+		auto showFilenames = std::make_shared<OptionListComponent<std::string>>(mWindow, _("SHOW FILENAMES IN LISTS"), false);
+		showFilenames->add(_("AUTO"), "", curFn == "");
+		showFilenames->add(_("YES"), "1", curFn == "1");
+		showFilenames->add(_("NO"), "0", curFn == "0");
+		themeconfig->addWithDescription(_("SHOW FILENAMES IN LISTS"), _("DEFAULT VALUE") + " : " + defFn, showFilenames);
+		themeconfig->addSaveFunc([themeconfig, showFilenames, system]
+		{
+			if (Settings::getInstance()->setString(system->getName() + ".ShowFilenames", showFilenames->getSelected()))
+			{
+				SystemData::resetSettings();
+				FileData::resetSettings();
+
+		//		themeconfig->setVariable("reloadCollections", true);
+				themeconfig->setVariable("reloadAll", true);				
+			}
+		});
+		
+
 		// File extensions
 		if (!system->isCollection() && !system->isGroupSystem())
 		{
@@ -3052,6 +3079,7 @@ void GuiMenu::openThemeConfiguration(Window* mWindow, GuiComponent* s, std::shar
 				Settings::getInstance()->setString(system->getName() + ".FavoritesFirst", "");
 				Settings::getInstance()->setString(system->getName() + ".ShowHiddenFiles", "");
 				Settings::getInstance()->setString(system->getName() + ".FolderViewMode", "");
+				Settings::getInstance()->setString(system->getName() + ".ShowFilenames", "");
 			}
 			
 			themeconfig->setVariable("reloadAll", true);
@@ -3366,7 +3394,9 @@ void GuiMenu::openUISettings()
 	{ 
 		if (Settings::getInstance()->setBool("ShowFilenames", showFilesnames->getState()))
 		{
+			SystemData::resetSettings();
 			FileData::resetSettings();
+
 			s->setVariable("reloadCollections", true);
 			s->setVariable("reloadAll", true);
 		}
@@ -3667,7 +3697,8 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool quickAccessMenu,
 
 		s->addEntry(_("LAUNCH SCREENSAVER"), false, [s, window]
 		{
-			window->postToUiThread([](Window* w)
+			Window* w = window;
+			window->postToUiThread([w]()
 			{
 				w->startScreenSaver();
 				w->renderScreenSaver();
@@ -4014,7 +4045,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::SHADERS) &&
 		systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::shaders))
 	{
-		auto installedShaders = ApiSystem::getInstance()->getShaderList();
+		auto installedShaders = ApiSystem::getInstance()->getShaderList(systemData->getName());
 		if (installedShaders.size() > 0)
 		{
 			std::string currentShader = SystemConf::getInstance()->get(configName + ".shaderset");
