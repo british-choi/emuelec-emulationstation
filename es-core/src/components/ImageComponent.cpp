@@ -202,9 +202,12 @@ void ImageComponent::setImage(const char* path, size_t length, bool tile)
 
 	mTexture.reset();
 
-	mTexture = TextureResource::get("", tile);
-	mTexture->initFromMemory(path, length);
-	
+	if (path != nullptr)
+	{
+		mTexture = TextureResource::get("", tile);
+		mTexture->initFromMemory(path, length);
+	}
+
 	resize();
 }
 
@@ -755,20 +758,20 @@ void ImageComponent::applyTheme(const std::shared_ptr<ThemeData>& theme, const s
 	if (properties & PATH && elem->has("path"))
 	{
 		auto path = elem->get<std::string>("path");
-		if (ResourceManager::getInstance()->fileExists(path))
+		if (!path.empty())
 		{
 			mPath = "";
 
 			bool tile = (elem->has("tile") && elem->get<bool>("tile"));
 			if(tile)
-				setImage(path, true);
+				setImage(path, true, MaxSizeInfo(), false);
 			else
 			{
 				auto sz = getMaxSizeInfo();
 				if (!mLinear && sz.x() > 32 && sz.y() > 32)
-					setImage(path, tile, sz);
+					setImage(path, tile, sz, false);
 				else
-					setImage(path, false);
+					setImage(path, false, MaxSizeInfo(), false);
 			}
 		}
 	}

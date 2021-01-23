@@ -20,6 +20,7 @@
 #include "ThreadedHasher.h"
 #include <unordered_set>
 #include <algorithm>
+#include "SaveStateRepository.h"
 
 #if WIN32
 #include "Win32ApiSystem.h"
@@ -33,6 +34,8 @@ std::vector<CustomFeature> SystemData::mGlobalFeatures;
 SystemData::SystemData(const SystemMetadata& meta, SystemEnvironmentData* envData, std::vector<EmulatorData>* pEmulators, bool CollectionSystem, bool groupedSystem, bool withTheme, bool loadThemeOnlyIfElements) : // batocera
 	mMetadata(meta), mEnvData(envData), mIsCollectionSystem(CollectionSystem), mIsGameSystem(true)
 {
+	mSaveRepository = nullptr;
+	mIsCheevosSupported = -1;
 	mIsGroupSystem = groupedSystem;
 	mGameListHash = 0;
 	mGameCountInfo = nullptr;
@@ -86,6 +89,9 @@ SystemData::SystemData(const SystemMetadata& meta, SystemEnvironmentData* envDat
 SystemData::~SystemData()
 {
 	delete mRootFolder;
+
+	if (mSaveRepository != nullptr)
+		delete mSaveRepository;
 
 	if (mGameCountInfo != nullptr)
 		delete mGameCountInfo;
@@ -1552,8 +1558,12 @@ void SystemData::loadTheme()
 		else
 			sysData.insert(std::pair<std::string, std::string>("system.releaseYear", _("Unknown")));
 
+		if (isCheevosSupported())
+			sysData.insert(std::pair<std::string, std::string>("system.cheevos", "true"));
+
 		mTheme->loadFile(getThemeFolder(), sysData, path);
-	} catch(ThemeException& e)
+	} 
+	catch(ThemeException& e)
 	{
 		LOG(LogError) << e.what();
 		mTheme = std::make_shared<ThemeData>(); // reset to empty
@@ -1625,34 +1635,48 @@ bool SystemData::isCheevosSupported()
 	if (isCollection())
 		return false;
 
-	const std::set<std::string> cheevosSystems = {
-#ifdef _ENABLEEMUELEC
-		"3do", "arcade", "atari2600", "atari7800", "atarilynx", "coleco", "colecovision", "famicom", "fbn", "fbneo", "fds", "gamegear", 
-        "gb", "gba", "gbc", "lynx", "mame", "genesis", "mastersystem", "megadrive", "megadrive-japan", "msx", "n64", "neogeo", "nes", "ngp", 
-        "pcengine", "pcfx", "pokemini", "psx", "saturn", "sega32x", "segacd", "sfc", "sg-1000", "snes", "tg16", "vectrex", "virtualboy", "wonderswan"
-#else
-		"megadrive", "n64", "snes", "gb", "gba", "gbc", "nes", "fds", "pcengine", "segacd", "sega32x", "mastersystem", 
-		"atarilynx", "lynx", "ngp", "gamegear", "pokemini", "atari2600", "fbneo", "fbn", "virtualboy", "pcfx", "tg16", "famicom", "msx1",
-		"psx", "sg-1000", "sg1000", "coleco", "colecovision", "atari7800", "wonderswan", "pc88", "saturn", "3do", "apple2", "neogeo", "arcade", "mame"
-#endif 
-    };
-
-	// "nds" -> Disabled for now
-	// "psx" -> Missing cd reader library	
-	// "atarijaguar", "jaguar" -> No games yet
-
-	if (cheevosSystems.find(getName()) != cheevosSystems.cend())
+	if (mIsCheevosSupported < 0)
 	{
-		if (!es_features_loaded)
-			return true;
+		mIsCheevosSupported = 0;
 
-		for (auto emul : mEmulators)
-			for (auto core : emul.cores)
-				if ((core.features & EmulatorFeatures::cheevos) == EmulatorFeatures::cheevos)
-					return true;
+		const std::set<std::string> cheevosSystems = {
+#ifdef _ENABLEEMUELEC
+			"3do", "arcade", "atari2600", "atari7800", "atarilynx", "coleco", "colecovision", "famicom", "fbn", "fbneo", "fds", "gamegear", 
+			"gb", "gba", "gbc", "lynx", "mame", "genesis", "mastersystem", "megadrive", "megadrive-japan", "msx", "n64", "neogeo", "nes", "ngp", 
+			"pcengine", "pcfx", "pokemini", "psx", "saturn", "sega32x", "segacd", "sfc", "sg-1000", "snes", "tg16", "vectrex", "virtualboy", "wonderswan" };
+#else
+			"megadrive", "n64", "snes", "gb", "gba", "gbc", "nes", "fds", "pcengine", "segacd", "sega32x", "mastersystem",
+			"atarilynx", "lynx", "ngp", "gamegear", "pokemini", "atari2600", "fbneo", "fbn", "virtualboy", "pcfx", "tg16", "famicom", "msx1",
+			"psx", "sg-1000", "sg1000", "coleco", "colecovision", "atari7800", "wonderswan", "pc88", "saturn", "3do", "apple2", "neogeo", "arcade", "mame" };
+#endif
+
+		// "nds" -> Disabled for now
+		// "psx" -> Missing cd reader library	
+		// "atarijaguar", "jaguar" -> No games yet
+
+		if (cheevosSystems.find(getName()) != cheevosSystems.cend())
+		{
+			if (!es_features_loaded)
+			{
+				mIsCheevosSupported = 1;
+				return true;
+			}
+
+			for (auto emul : mEmulators)
+			{
+				for (auto core : emul.cores)
+				{
+					if ((core.features & EmulatorFeatures::cheevos) == EmulatorFeatures::cheevos)
+					{
+						mIsCheevosSupported = 1;
+						return true;
+					}
+				}
+			}
+		}
 	}
 
-	return false;
+	return mIsCheevosSupported != 0;
 }
 
 bool SystemData::isNetplayActivated()
@@ -1941,4 +1965,12 @@ bool SystemData::getShowFilenames()
 	}
 
 	return *mShowFilenames;
+}
+
+SaveStateRepository* SystemData::getSaveStateRepository()
+{
+	if (mSaveRepository == nullptr)
+		mSaveRepository = new SaveStateRepository(this);
+
+	return mSaveRepository;
 }
