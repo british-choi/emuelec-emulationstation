@@ -85,9 +85,6 @@ const std::string FileData::getConfigurationName()
 	std::string gameConf = Utils::FileSystem::getFileName(getPath());
 	gameConf = Utils::String::replace(gameConf, "=", "");
 	gameConf = Utils::String::replace(gameConf, "#", "");
-#ifdef _ENABLEEMUELEC
-	gameConf = Utils::String::replace(gameConf, "'", "'\\''");
-#endif
 	gameConf = getSourceFileData()->getSystem()->getName() + std::string("[\"") + gameConf + std::string("\"]");
 	return gameConf;
 }
@@ -171,15 +168,20 @@ const std::string FileData::getThumbnailPath()
 			}
 		}
 
-		if (thumbnail.empty() && getSystemName() == "imageviewer")
+		if (thumbnail.empty() && getType() == GAME && getSourceFileData()->getSystem()->hasPlatformId(PlatformIds::IMAGEVIEWER))
 		{
-			auto ext = Utils::String::toLower(Utils::FileSystem::getExtension(getPath()));
-			if (ext == ".pdf" && ResourceManager::getInstance()->fileExists(":/pdf.jpg"))
-				return ":/pdf.jpg";
-			else if ((ext == ".mp4" || ext == ".avi" || ext == ".mkv") && ResourceManager::getInstance()->fileExists(":/vid.jpg"))
-				return ":/vid.jpg";
+			if (getType() == FOLDER && ((FolderData*)this)->mChildren.size())
+				return ((FolderData*)this)->mChildren[0]->getThumbnailPath();
+			else if (getType() == GAME)
+			{
+				thumbnail = getPath();
 
-			return getPath();
+				auto ext = Utils::String::toLower(Utils::FileSystem::getExtension(thumbnail));
+				if (ext == ".pdf" && ResourceManager::getInstance()->fileExists(":/pdf.jpg"))
+					return ":/pdf.jpg";
+				else if ((ext == ".mp4" || ext == ".avi" || ext == ".mkv") && ResourceManager::getInstance()->fileExists(":/vid.jpg"))
+					return ":/vid.jpg";
+			}
 		}
 
 	}
@@ -301,15 +303,20 @@ const std::string FileData::getImagePath()
 			}
 		}
 
-		if (image.empty() && getSystemName() == "imageviewer")
+		if (image.empty() && getSourceFileData()->getSystem()->hasPlatformId(PlatformIds::IMAGEVIEWER))
 		{
-			image = getPath();
+			if (getType() == FOLDER && ((FolderData*)this)->mChildren.size())
+				return ((FolderData*)this)->mChildren[0]->getImagePath();
+			else if (getType() == GAME)
+			{
+				image = getPath();
 
-			auto ext = Utils::String::toLower(Utils::FileSystem::getExtension(image));
-			if (ext == ".pdf" && ResourceManager::getInstance()->fileExists(":/pdf.jpg"))
-				return ":/pdf.jpg";
-			else if ((ext == ".mp4" || ext == ".avi" || ext == ".mkv") && ResourceManager::getInstance()->fileExists(":/vid.jpg"))
-				return ":/vid.jpg";
+				auto ext = Utils::String::toLower(Utils::FileSystem::getExtension(image));
+				if (ext == ".pdf" && ResourceManager::getInstance()->fileExists(":/pdf.jpg"))
+					return ":/pdf.jpg";
+				else if ((ext == ".mp4" || ext == ".avi" || ext == ".mkv") && ResourceManager::getInstance()->fileExists(":/vid.jpg"))
+					return ":/vid.jpg";
+			}
 		}
 	}
 
@@ -326,6 +333,17 @@ const bool FileData::isArcadeAsset()
 	{	
 		const std::string stem = Utils::FileSystem::getStem(getPath());
 		return MameNames::getInstance()->isBios(stem) || MameNames::getInstance()->isDevice(stem);		
+	}
+
+	return false;
+}
+
+const bool FileData::isVerticalArcadeGame()
+{
+	if (mSystem && mSystem->hasPlatformId(PlatformIds::ARCADE))
+	{
+		const std::string stem = Utils::FileSystem::getStem(getPath());
+		return MameNames::getInstance()->isVertical(stem);
 	}
 
 	return false;
@@ -944,11 +962,7 @@ const std::string FileData::getCore(bool resolveDefault)
 #if WIN32 && !_DEBUG
 	std::string core = getMetadata(MetaDataId::Core);
 #else
-#ifndef _ENABLEEMUELEC	
 	std::string core = SystemConf::getInstance()->get(getConfigurationName() + ".core"); 
-#else
-	std::string core = getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + getConfigurationName() + ".core'");
-#endif
 #endif
 
 	if (core == "auto")
@@ -998,11 +1012,7 @@ const std::string FileData::getEmulator(bool resolveDefault)
 #if WIN32 && !_DEBUG
 	std::string emulator = getMetadata(MetaDataId::Emulator);
 #else
-#ifndef _ENABLEEMUELEC	
 	std::string emulator = SystemConf::getInstance()->get(getConfigurationName() + ".emulator");
-#else
-	std::string emulator = getShOutput(R"(/emuelec/scripts/emuelec-utils setemu get ')" + getConfigurationName() + ".emulator'");
-#endif
 #endif
 
 	if (emulator == "auto")
@@ -1031,11 +1041,7 @@ void FileData::setCore(const std::string value)
 #if WIN32 && !_DEBUG
 	setMetadata(MetaDataId::Core, value == "auto" ? "" : value);
 #else
-#ifndef _ENABLEEMUELEC	
 	SystemConf::getInstance()->set(getConfigurationName() + ".core", value);
-#else
-	getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + getConfigurationName() + ".core' " + value);
-#endif
 #endif
 }
 
@@ -1044,11 +1050,7 @@ void FileData::setEmulator(const std::string value)
 #if WIN32 && !_DEBUG
 	setMetadata(MetaDataId::Emulator, value == "auto" ? "" : value);
 #else
-#ifndef _ENABLEEMUELEC
 	SystemConf::getInstance()->set(getConfigurationName() + ".emulator", value);
-#else
-	getShOutput(R"(/emuelec/scripts/emuelec-utils setemu set ')" + getConfigurationName() + ".emulator' " + value);
-#endif
 #endif
 }
 

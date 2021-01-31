@@ -63,7 +63,7 @@ SystemData::SystemData(const SystemMetadata& meta, SystemEnvironmentData* envDat
 				return;
 		}
 
-		if(!Settings::getInstance()->getBool("IgnoreGamelist") && mMetadata.name != "imageviewer")
+		if(!Settings::getInstance()->getBool("IgnoreGamelist")) // && !hasPlatformId(PlatformIds::IMAGEVIEWER))
 			parseGamelist(this, fileMap);
 	}
 	else
@@ -1091,7 +1091,12 @@ SystemData* SystemData::loadSystem(pugi::xml_node system, bool fullMode)
 		{
 			// when platform is ignore, do not allow other platforms
 			platformIds.clear();
-			platformIds.push_back(platformId);
+
+			if (md.name == "imageviewer")
+				platformIds.push_back(PlatformIds::IMAGEVIEWER);
+			else
+				platformIds.push_back(platformId);
+
 			break;
 		}
 
@@ -1101,7 +1106,6 @@ SystemData* SystemData::loadSystem(pugi::xml_node system, bool fullMode)
 		else if (str != NULL && str[0] != '\0' && platformId == PlatformIds::PLATFORM_UNKNOWN)
 			LOG(LogWarning) << "  Unknown platform for system \"" << md.name << "\" (platform \"" << str << "\" from list \"" << platformList << "\")";
 	}
-
 
 	//validate
 	if (md.name.empty() || path.empty() || extensions.empty() || cmd.empty())
@@ -1472,8 +1476,19 @@ GameCountInfo* SystemData::getGameCountInfo()
 
 	std::vector<FileData*> games = mRootFolder->getFilesRecursive(GAME, true);
 
+	int realTotal = games.size();
+	if (mFilterIndex != nullptr)
+	{
+		auto savedFilter = mFilterIndex;
+		mFilterIndex = nullptr;
+		realTotal = mRootFolder->getFilesRecursive(GAME, true).size();
+		mFilterIndex = savedFilter;
+	}
+
+
 	mGameCountInfo = new GameCountInfo();
-	mGameCountInfo->totalGames = games.size();
+	mGameCountInfo->visibleGames = games.size();
+	mGameCountInfo->totalGames = realTotal;
 	mGameCountInfo->favoriteCount = 0;
 	mGameCountInfo->hiddenCount = 0;
 	mGameCountInfo->playCount = 0;
@@ -1740,11 +1755,7 @@ std::string SystemData::getEmulator(bool resolveDefault)
 #if WIN32 && !_DEBUG
 	std::string emulator = Settings::getInstance()->getString(getName() + ".emulator");
 #else
-#ifndef _ENABLEEMUELEC
 	std::string emulator = SystemConf::getInstance()->get(getName() + ".emulator");
-#else
-	std::string emulator = getShOutput(R"(emuelec-utils setemu get ')" + getName() + ".emulator' ");
-#endif
 #endif
 
 	for (auto emul : mEmulators)
@@ -1762,11 +1773,7 @@ std::string SystemData::getCore(bool resolveDefault)
 #if WIN32 && !_DEBUG
 	std::string core = Settings::getInstance()->getString(getName() + ".core");
 #else
-#ifndef _ENABLEEMUELEC
 	std::string core = SystemConf::getInstance()->get(getName() + ".core");
-#else
-	std::string core = getShOutput(R"(emuelec-utils setemu get ')" + getName() + ".core' ");
-#endif
 #endif
 
 	if (!core.empty() && core != "auto")
