@@ -88,7 +88,11 @@ SystemData::SystemData(const SystemMetadata& meta, SystemEnvironmentData* envDat
 
 SystemData::~SystemData()
 {
-	delete mRootFolder;
+	if (mRootFolder)
+		delete mRootFolder;
+
+	if (!mIsCollectionSystem && mEnvData != nullptr)
+		delete mEnvData;
 
 	if (mSaveRepository != nullptr)
 		delete mSaveRepository;
@@ -954,13 +958,19 @@ bool SystemData::loadConfig(Window* window)
 		delete[] systems;
 		delete pThreadPool;
 
-		
-
 		if (window != NULL)
 			window->renderSplashScreen(_("Collections"), systemCount == 0 ? 0 : currentSystem / systemCount);
 
-		// updateSystemsList can't be run async, systems have to be created before
 		createGroupedSystems();
+
+		// Load features before creating collections
+		loadFeatures();
+
+		// precalc value of isCheevosSupported
+		for (auto system : SystemData::sSystemVector)
+			system->isCheevosSupported();
+
+		// updateSystemsList can't be run async, systems have to be created before
 		CollectionSystemManager::get()->updateSystemsList();
 	}
 	else
@@ -969,6 +979,14 @@ bool SystemData::loadConfig(Window* window)
 			window->renderSplashScreen(_("Collections"), systemCount == 0 ? 0 : currentSystem / systemCount);
 
 		createGroupedSystems();
+
+		// Load features before creating collections
+		loadFeatures();
+
+		// precalc value of isCheevosSupported
+		for (auto system : SystemData::sSystemVector)
+			system->isCheevosSupported();
+
 		CollectionSystemManager::get()->loadCollectionSystems();
 	}
 
@@ -977,8 +995,6 @@ bool SystemData::loadConfig(Window* window)
 		auto theme = SystemData::sSystemVector.at(0)->getTheme();
 		ViewController::get()->onThemeChanged(theme);		
 	}
-
-	loadFeatures();
 
 	if (window != nullptr && SystemConf::getInstance()->getBool("global.netplay") && !ThreadedHasher::isRunning())
 	{
@@ -1662,7 +1678,8 @@ bool SystemData::isCheevosSupported()
 #else
 			"megadrive", "n64", "snes", "gb", "gba", "gbc", "nes", "fds", "pcengine", "segacd", "sega32x", "mastersystem",
 			"atarilynx", "lynx", "ngp", "gamegear", "pokemini", "atari2600", "fbneo", "fbn", "virtualboy", "pcfx", "tg16", "famicom", "msx1",
-			"psx", "sg-1000", "sg1000", "coleco", "colecovision", "atari7800", "wonderswan", "pc88", "saturn", "3do", "apple2", "neogeo", "arcade", "mame" };
+			"psx", "sg-1000", "sg1000", "coleco", "colecovision", "atari7800", "wonderswan", "pc88", "saturn", "3do", "apple2", "neogeo", "arcade", "mame", 
+			"nds" };
 #endif
 
 		// "nds" -> Disabled for now

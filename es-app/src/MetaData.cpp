@@ -8,6 +8,7 @@
 #include "LocaleES.h"
 #include "Settings.h"
 #include "FileData.h"
+#include "ImageIO.h"
 
 std::vector<MetaDataDecl> MetaDataList::mMetaDataDecls;
 
@@ -47,6 +48,7 @@ void MetaDataList::initMetadata()
 		// Non scrappable /editable medias
 		{ Cartridge,        "cartridge",   MD_PATH,                "",                 true,      _("Cartridge"),            _("enter path to cartridge"),  true },
 		{ BoxArt,			"boxart",	   MD_PATH,                "",                 true,      _("Alt BoxArt"),		      _("enter path to alt boxart"), true },
+		{ BoxBack,			"boxback",	   MD_PATH,                "",                 true,      _("Box backside"),		  _("enter path to box background"), true },
 		{ Wheel,			"wheel",	   MD_PATH,                "",                 true,      _("Wheel"),		          _("enter path to wheel"),      true },
 		{ Mix,			    "mix",	       MD_PATH,                "",                 true,      _("Mix"),                  _("enter path to mix"),		 true },
 		
@@ -339,7 +341,7 @@ int MetaDataList::getInt(MetaDataId id) const
 
 float MetaDataList::getFloat(MetaDataId id) const
 {
-	return (float)atof(get(id).c_str());
+	return Utils::String::toFloat(get(id));
 }
 
 bool MetaDataList::wasChanged() const
@@ -372,6 +374,9 @@ void MetaDataList::importScrappedMetadata(const MetaDataList& source)
 
 		if (!Settings::getInstance()->getBool("ScrapeFanart"))
 			type &= ~MetaDataImportType::Types::FANART;
+
+		if (!Settings::getInstance()->getBool("ScrapeBoxBack"))
+			type &= ~MetaDataImportType::Types::BOXBACK;
 
 		if (!Settings::getInstance()->getBool("ScrapeTitleShot"))
 			type &= ~MetaDataImportType::Types::TITLESHOT;
@@ -418,6 +423,9 @@ void MetaDataList::importScrappedMetadata(const MetaDataList& source)
 		if (mdd.id == MetaDataId::FanArt && (source.get(mdd.id).empty() || (type & MetaDataImportType::Types::FANART) != MetaDataImportType::Types::FANART))
 			continue;
 
+		if (mdd.id == MetaDataId::BoxBack && (source.get(mdd.id).empty() || (type & MetaDataImportType::Types::BOXBACK) != MetaDataImportType::Types::BOXBACK))
+			continue;
+
 		if (mdd.id == MetaDataId::Map && (source.get(mdd.id).empty() || (type & MetaDataImportType::Types::MAP) != MetaDataImportType::Types::MAP))
 			continue;
 
@@ -431,6 +439,15 @@ void MetaDataList::importScrappedMetadata(const MetaDataList& source)
 			continue;
 
 		set(mdd.id, source.get(mdd.id));
+
+
+		if (mdd.type == MetaDataType::MD_PATH)
+		{
+			ImageIO::removeImageCache(source.get(mdd.id));
+
+			unsigned int x, y;
+			ImageIO::loadImageSize(source.get(mdd.id).c_str(), &x, &y);
+		}
 	}
 
 	if (Utils::String::startsWith(source.getName(), "ZZZ(notgame)"))

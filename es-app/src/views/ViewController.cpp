@@ -74,6 +74,7 @@ ViewController::ViewController(Window* window)
 {
 	mSystemListView = nullptr;
 	mState.viewing = NOTHING;	
+	mState.system = nullptr;
 }
 
 ViewController::~ViewController()
@@ -106,9 +107,6 @@ void ViewController::goToStart(bool forceImmediate)
 
 			return;
 		}
-
-		// Requested system doesn't exist
-		Settings::getInstance()->setString("StartupSystem", "");
 	}
 
 	if (startOnGamelist)
@@ -779,7 +777,11 @@ bool ViewController::input(InputConfig* config, Input input)
 	}
 #else
 	// Batocera next song
+#ifdef _ENABLEEMUELEC
+	if ((mState.viewing != GAME_LIST && config->isMappedTo("LeftThumb", input)) && input.value != 0) // emuelec
+#else
 	if (((mState.viewing != GAME_LIST && config->isMappedTo("l3", input)) || config->isMappedTo("r3", input)) && input.value != 0) // batocera
+#endif    
 	{
 		// next song
 		AudioManager::getInstance()->playRandomMusic(false);
@@ -1162,6 +1164,9 @@ void ViewController::onScreenSaverDeactivate()
 
 void ViewController::reloadAllGames(Window* window, bool deleteCurrentGui)
 {
+	if (sInstance == nullptr)
+		return;
+
 	Utils::FileSystem::FileSystemCacheActivator fsc;
 
 	auto viewMode = ViewController::get()->getViewMode();
@@ -1173,24 +1178,25 @@ void ViewController::reloadAllGames(Window* window, bool deleteCurrentGui)
 	if (!deleteCurrentGui)
 	{
 		GuiComponent* topGui = window->peekGui();
-		window->removeGui(topGui);
+		if (topGui != nullptr)
+			window->removeGui(topGui);
 	}
 
 	GuiComponent *gui;
 	while ((gui = window->peekGui()) != NULL)
 	{
 		window->removeGui(gui);
-		delete gui;
+
+		if (gui != sInstance)
+			delete gui;
 	}
 
 	ViewController::init(window);
-
-	CollectionSystemManager::deinit();
-	CollectionSystemManager::init(window);
-
+	
+	CollectionSystemManager::init(window);		
 	SystemData::loadConfig(window);
-
-	ViewController::get()->goToSystemView(systemName, true, viewMode);
+	
+	ViewController::get()->goToSystemView(systemName, true, viewMode);	
 	ViewController::get()->reloadAll(nullptr, false); // Avoid reloading themes a second time
 
 	window->closeSplashScreen();

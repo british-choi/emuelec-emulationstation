@@ -190,7 +190,7 @@ GameInfoAndUserProgress RetroAchievements::getGameInfoAndUserProgress(int gameId
 	GameInfoAndUserProgress ret;
 	ret.ID = 0;
 
-	HttpReq httpreq(getApiUrl("API_GetGameInfoAndUserProgress", "u=" + usrName + "&g=" + std::to_string(gameId)));
+	HttpReq httpreq(getApiUrl("API_GetGameInfoAndUserProgress", "u=" + HttpReq::urlEncode(usrName) + "&g=" + std::to_string(gameId)));
 	httpreq.wait();
 
 	rapidjson::Document doc;
@@ -260,7 +260,7 @@ UserSummary RetroAchievements::getUserSummary(const std::string userName, int ga
 
 	std::string count = std::to_string(gameCount);
 
-	HttpReq httpreq(getApiUrl("API_GetUserSummary", "u="+ usrName +"&g="+ count +"&a="+ count));
+	HttpReq httpreq(getApiUrl("API_GetUserSummary", "u="+ HttpReq::urlEncode(usrName) +"&g="+ count +"&a="+ count));
 	httpreq.wait();
 
 	rapidjson::Document doc;
@@ -470,7 +470,6 @@ std::string RetroAchievements::getCheevosHashFromFile(int consoleId, const std::
 
 	try
 	{
-
 		char hash[33];
 		if (generateHashFromFile(hash, consoleId, fileName.c_str()))
 			return hash;
@@ -556,7 +555,7 @@ bool RetroAchievements::testAccount(const std::string& username, const std::stri
 
 	try
 	{
-		HttpReq request("https://retroachievements.org/dorequest.php?r=login&u=" + username + "&p=" + password);
+		HttpReq request("https://retroachievements.org/dorequest.php?r=login&u=" + HttpReq::urlEncode(username) + "&p=" + HttpReq::urlEncode(password));
 		if (!request.wait())
 		{						
 			error = request.getErrorMsg();
@@ -584,3 +583,4 @@ bool RetroAchievements::testAccount(const std::string& username, const std::stri
 
 	return false;
 }
+
