@@ -1474,10 +1474,10 @@ msgid "AUTOMATIC SCREENSHOT"
 msgstr "자동 스크린샷"
 
 msgid "RETROACHIEVEMENTS UNLOCK SOUND"
-msgstr ""
+msgstr "레트로 도전 과제 잠금 해제 사운드"
 
 msgid "UNLOCK SOUND"
-msgstr ""
+msgstr "잠금 해제 사운드"
 
 msgid "SHOW IN MAIN MENU"
 msgstr "메인 메뉴에 보이기"
@@ -1531,7 +1531,7 @@ msgid "AUTO SAVE/LOAD"
 msgstr "자동 저장/불러오기"
 
 msgid "SHOW SAVE SNAPSHOTS"
-msgstr ""
+msgstr "저장된 스냅샷 보기"
 
 msgid "SHADERS SET"
 msgstr "셰이더 선택"
@@ -1646,7 +1646,7 @@ msgid "FILE EXTENSIONS"
 msgstr "파일 확장자"
 
 msgid "RESET CUSTOMISATIONS"
-msgstr ""
+msgstr "사용자 설정 초기화"
 
 msgid "APPEARENCE"
 msgstr "추가항목"
@@ -2795,3 +2795,6 @@ msgstr "타임존"
 
 msgid "ENABLE VERTICAL"
 msgstr "세로화면 활성화"
+
+msgid "RANDOM/FAVORITE"
+msgstr "랜덤/즐겨찾기"
