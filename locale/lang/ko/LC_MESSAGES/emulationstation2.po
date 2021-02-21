@@ -2678,8 +2678,8 @@ msgstr "%d초"
 #~ msgid "sortname"
 #~ msgstr "분류명"
 
-msgid "DANGER ZONE!"
-msgstr "위험 구역!"
+msgid "DANGER ZONE"
+msgstr "위험 구역"
 
 msgid "You are about to set EmuELEC resolution to"
 msgstr "EmuELEC 해상도를 다음으로 설정합니다"
@@ -2743,6 +2743,20 @@ msgstr ""
 
 msgid "RESET SYSTEM TO DEFAULT CONFIG"
 msgstr "기본 구성으로 시스템 초기화"
+
+msgid ""
+"WARNING: A FORCE UPDATE WILL DOWNLOAD WHATEVER VERSION IS AVAILABLE FOR UPDATE REGARDLESS OF VERSION BASED ON THE TYPE YOU HAVE SELECTED IN THE UPDATE & DOWNLOADS (beta or stable)\n\n"
+"SYSTEM WILL RESET SCRIPTS AND BINARIES !\n"
+"DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n\n"
+"CONTINUE WITH FORCE UPDATE?"
+msgstr ""
+"경고: 강제 업데이트는 업데이트 및 다운로드(beta 또는 stable)에서 선택한 유형에 따라 업데이트에 사용할 수 있는 모든 버전을 다운로드합니다.\n\n"
+"스크립트와 바이너리는 모두 초기화 됩니다 !\n"
+"다운로드, 테마, 블루투스 페어링 및 ROMS 폴더는 영향을 받지 않습니다.\n\n"
+"강제 업데이트를 계속 하시겠습니까?"
+
+msgid "FORCE UPDATE"
+msgstr "강제 업데이트"
 
 msgid "You are about to set EmuELEC Language to:"
 msgstr "EmuELEC 언어를 다음으로 설정합니다:"
