@@ -139,7 +139,7 @@ std::string ApiSystem::getVersion()
 {
 	LOG(LogDebug) << "ApiSystem::getVersion";
 #ifdef _ENABLEEMUELEC
-	std::ifstream ifs("/storage/.config/EE_VERSION");
+	std::ifstream ifs("/usr/config/EE_VERSION");
 #else
 	std::ifstream ifs("/usr/share/batocera/batocera.version");
 #endif
@@ -403,7 +403,7 @@ bool ApiSystem::launchFileManager(Window *window)
 {
 	LOG(LogDebug) << "ApiSystem::launchFileManager";
 
-	std::string command = "/emuelec/scripts/emuelec-utils filemanager";
+	std::string command = "/usr/bin/emuelec-utils filemanager";
 
 	ApiSystem::launchExternalWindow_before(window);
 
@@ -420,7 +420,7 @@ bool ApiSystem::launchErrorWindow(Window *window)
 {
 	LOG(LogDebug) << "ApiSystem::launchErrorWindow";
 
-	std::string command = "/emuelec/scripts/emuelec-utils error";
+	std::string command = "/usr/bin/emuelec-utils error";
 
 	ApiSystem::launchExternalWindow_before(window);
 
@@ -1180,7 +1180,7 @@ bool ApiSystem::isScriptingSupported(ScriptId script)
 
 	for (auto executable : executables)
 #ifdef _ENABLEEMUELEC
-		if (!Utils::FileSystem::exists("/emuelec/scripts/batocera/" + executable))
+		if (!Utils::FileSystem::exists("/usr/bin/batocera/" + executable))
 			return false;
 #else
 		if (!Utils::FileSystem::exists("/usr/bin/" + executable))
