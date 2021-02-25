@@ -110,10 +110,10 @@ msgid "enter path to wheel"
 msgstr "휠 경로 입력"
 
 msgid "Mix"
-msgstr "혼합"
+msgstr "믹스"
 
 msgid "enter path to mix"
-msgstr "혼합 경로 입력"
+msgstr "믹스 경로 입력"
 
 msgid "Rating"
 msgstr "평점"
@@ -259,7 +259,7 @@ msgstr "'%s'를 '%s'에 추가함"
 
 #, c-format
 msgid "Removed '%s' from '%s'"
-msgstr "'%s'에서 '%s'를 제거함"
+msgstr "''%s'를 %s'에서 삭제함"
 
 msgid "This collection is empty."
 msgstr "이 컬렉션은 비어 있습니다."
@@ -274,7 +274,7 @@ msgstr "다수"
 #, c-format
 msgid "This collection contains %i game, including :%s"
 msgid_plural "This collection contains %i games, including :%s"
-msgstr[0] "이 컬렉션은  %s 포함하여, %i 게임이 들어 있습니다."
+msgstr[0] "이 컬렉션에는 다음을 포함한 %i 게임이 포함되어 있습니다 :%s"
 
 msgid "SCANNING BLUETOOTH"
 msgstr "블루투스를 검색 중입니다."
@@ -627,7 +627,7 @@ msgstr "업데이트"
 
 #, c-format
 msgid "'%s' ADDED TO DOWNLOAD QUEUE"
-msgstr "다운로드 대기열에 '%개'가 추가됨"
+msgstr "'%s'가 다운로드 대기열에 추가됨"
 
 msgid "REMOVE"
 msgstr "제거"
@@ -640,7 +640,7 @@ msgstr "설치"
 
 #, c-format
 msgid "CURRENTLY IN DOWNLOAD QUEUE"
-msgstr "현재 다운로드 대기열"
+msgstr "현재 다운로드 대기열에 있음"
 
 msgid "NO MISSING BIOS"
 msgstr "누락된 바이오스가 없음"
@@ -655,7 +655,7 @@ msgid "black"
 msgstr "검정"
 
 msgid "random video"
-msgstr "랜덤 비디오"
+msgstr "랜덤 재생(비디오)"
 
 msgid "slideshow"
 msgstr "슬라이드쇼"
@@ -1124,10 +1124,10 @@ msgid "TITLE SCREENSHOT"
 msgstr "타이틀 스크린샷"
 
 msgid "MIX V1"
-msgstr "혼합 V1"
+msgstr "믹스 V1"
 
 msgid "MIX V2"
-msgstr "혼합 V2"
+msgstr "믹스 V2"
 
 msgid "BOX 2D"
 msgstr "박스 2D"
@@ -1892,17 +1892,17 @@ msgstr "설정"
 #, c-format
 msgid "%i COLLECTION"
 msgid_plural "%i COLLECTIONS"
-msgstr[0] "%i 컬렉션"
+msgstr[0] "컬렉션 %i"
 
 #, c-format
 msgid "%i ITEM"
 msgid_plural "%i ITEMS"
-msgstr[0] "%i 아이템"
+msgstr[0] "%i 개의 아이템"
 
 #, c-format
 msgid "%i GAME"
 msgid_plural "%i GAMES"
-msgstr[0] "%i 게임"
+msgstr[0] "%i 개의 게임"
 
 msgid "RANDOM"
 msgstr "랜덤"
@@ -2122,11 +2122,11 @@ msgstr "게임 아트워크 스크랩이 완료됨"
 
 #, c-format
 msgid "%s connected"
-msgstr "%s 연결"
+msgstr "%s에 연결됨"
 
 #, c-format
 msgid "%s disconnected"
-msgstr "%s 연결종료"
+msgstr "%s에 연결종료"
 
 msgid "SHIFTS FOR UPPER,LOWER, AND SPECIAL"
 msgstr "대문자, 소문자, 특수문자를 위한 쉬프트"
@@ -2589,7 +2589,7 @@ msgstr "%d초"
 #~ msgstr "스크랩 실패: 오늘 스크랩 다운로드 용량 초과"
 
 #~ msgid "MIX"
-#~ msgstr "혼합"
+#~ msgstr "믹스"
 
 #~ msgid "CONTROLLER PAIRED"
 #~ msgstr "컨트롤러 페어링 완료"
