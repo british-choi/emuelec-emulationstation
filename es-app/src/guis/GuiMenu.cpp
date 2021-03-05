@@ -470,11 +470,11 @@ void GuiMenu::openEmuELECSettings()
 		SystemConf::getInstance()->saveSystemConf();
 	});
 
-		auto emuelec_retroarch_menu_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "RETROARCH MENU", false);
+		auto emuelec_retroarch_menu_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("RETROARCH MENU"), false);
 		std::vector<std::string> ramenuoptions;
 		ramenuoptions.push_back("auto");
 		ramenuoptions.push_back("ozone");
-		ramenuoptions.push_back("xbm");
+		ramenuoptions.push_back("xmb");
 		ramenuoptions.push_back("rgui");
 		
 		auto ramenuoptionsS = SystemConf::getInstance()->get("global.retroarch.menu_driver");
@@ -3873,6 +3873,7 @@ void GuiMenu::openQuitMenu_batocera_static(Window *window, bool quickAccessMenu,
 			[] {
 			remove("/var/lock/start.games");
             runSystemCommand("touch /var/lock/start.retro", "", nullptr);
+			runSystemCommand("/usr/bin/setsettings.sh", "", nullptr);	// update retroarch.cfg
 			runSystemCommand("systemctl start retroarch.service", "", nullptr);
 			Scripting::fireEvent("quit", "retroarch");
 			quitES(QuitMode::QUIT);

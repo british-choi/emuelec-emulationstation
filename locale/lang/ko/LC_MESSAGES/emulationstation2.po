@@ -2831,6 +2831,9 @@ msgstr "베젤"
 msgid "AUTO CONFIG ADVANCEMAME GAMEPAD"
 msgstr "AdvanceMAME 게임패드 자동 구성"
 
+msgid "RETROARCH MENU"
+msgstr "레트로아크 메뉴"
+
 msgid "Emulationstation"
 msgstr "에뮬레이션스테이션"
 
