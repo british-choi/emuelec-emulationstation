@@ -2848,3 +2848,21 @@ msgstr "세로화면 활성화"
 
 msgid "RANDOM/FAVORITE"
 msgstr "랜덤/즐겨찾기"
+
+msgid "disabled"
+msgstr "사용안함"
+
+msgid "enhanced"
+msgstr "향상됨"
+
+msgid "minimal"
+msgstr "최소화"
+
+msgid "warning"
+msgstr "경고"
+
+msgid "error"
+msgstr "에러"
+
+msgid "debug"
+msgstr "디버그"
