@@ -2846,6 +2846,9 @@ msgstr "타임존"
 msgid "ENABLE VERTICAL"
 msgstr "세로화면 활성화"
 
+msgid "VERTICAL ASPECT RATIO"
+msgstr "세로화면 비율"
+
 msgid "RANDOM/FAVORITE"
 msgstr "랜덤/즐겨찾기"
 
