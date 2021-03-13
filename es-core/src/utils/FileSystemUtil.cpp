@@ -91,23 +91,6 @@ namespace Utils
 				}
 			}
 #else
-			FileCache(const std::string& name, dirent* entry)
-			{
-				exists = true;
-				hidden = (getFileName(name)[0] == '.');
-
-				if (entry->d_type == 10)
-				{
-					struct stat64 info;
-					if (stat64(resolveSymlink(name).c_str(), &info) == 0)
-						directory = S_ISDIR(info.st_mode);
-				}
-				else
-					directory = (entry->d_type == 4);
-
-				isSymLink = (entry->d_type == 10); // DT_LNK;
-			}
-
 			FileCache(const std::string& name, dirent* entry, bool _hidden)
 			{
 				exists = true;
@@ -118,18 +101,12 @@ namespace Utils
 					struct stat64 info;
 					if (stat64(resolveSymlink(name).c_str(), &info) == 0)
 						directory = S_ISDIR(info.st_mode);
+					else 
+						directory = false;
 				}
 				else
 					directory = (entry->d_type == 4);
 
-				isSymLink = (entry->d_type == 10); // DT_LNK;
-			}
-
-			FileCache(dirent* entry, bool _hidden)
-			{
-				exists = true;
-				hidden = _hidden;
-				directory = (entry->d_type == 4); // DT_DIR;
 				isSymLink = (entry->d_type == 10); // DT_LNK;
 			}
 #endif
@@ -314,15 +291,19 @@ namespace Utils
 						{
 							std::string fullName(getGenericPath(path + "/" + name));
 
-							FileCache::add(fullName, FileCache(fullName, entry));
+							FileCache cache(fullName, entry, getFileName(fullName)[0] == '.');
+							FileCache::add(fullName, cache);
 
-							if (!includeHidden && Utils::FileSystem::isHidden(fullName))
+							if (!includeHidden && cache.hidden)
 								continue;
 
 							contentList.push_back(fullName);
 
-							if (_recursive && isDirectory(fullName))
-								contentList.merge(getDirContent(fullName, true));
+							if (_recursive && cache.directory)
+							{
+								for (auto item : getDirContent(fullName, true, includeHidden))
+									contentList.push_back(item);
+							}
 						}
 					}
 
@@ -402,9 +383,15 @@ namespace Utils
 							fi.hidden = Utils::FileSystem::isHidden(fullName);
 
 							if (entry->d_type == 10) // DT_LNK
-								fi.directory = isDirectory(resolveSymlink(fullName));
+							{
+								struct stat64 si;
+								if (stat64(resolveSymlink(fullName).c_str(), &si) == 0)
+									fi.directory = S_ISDIR(si.st_mode);
+								else
+									fi.directory = false;
+							}
 							else
-								fi.directory = (entry->d_type == 4); // DT_DIR;                            
+								fi.directory = (entry->d_type == 4); // DT_DIR;
 
 							FileCache::add(fullName, FileCache(fullName, entry, fi.hidden));
 
