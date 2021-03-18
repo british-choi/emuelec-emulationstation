@@ -733,7 +733,7 @@ std::string ApiSystem::getUpdateUrl()
 	if (!systemsetting.empty())
 		return systemsetting;
 #ifdef _ENABLEEMUELEC
-	return "https://raw.githubusercontent.com/EmuELEC/emuelec.github.io/master/";
+	return "https://raw.githubusercontent.com/british-choi/emuelec.github.io/master/";
 #else
 	return "https://updates.batocera.org";
 #endif
