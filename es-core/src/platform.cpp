@@ -381,7 +381,7 @@ std::string getShOutput(const std::string& mStr)
     while(fgets(buffer, sizeof(buffer), pipe) != NULL)
     {
         file = buffer;
-        result += file.substr(0, file.size() - 1);
+        result += file.substr(0, file.size());
     }
 
     pclose(pipe);
