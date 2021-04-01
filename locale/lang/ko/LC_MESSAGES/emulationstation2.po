@@ -2867,9 +2867,6 @@ msgstr "에뮬레이션스테이션"
 msgid "Retroarch"
 msgstr "레트로아크"
 
-msgid "TIMEZONE"
-msgstr "타임존"
-
 msgid "ENABLE VERTICAL"
 msgstr "세로화면 활성화"
 
