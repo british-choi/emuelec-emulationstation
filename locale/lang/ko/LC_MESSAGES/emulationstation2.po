@@ -1363,13 +1363,13 @@ msgid "LANGUAGE"
 msgstr "언어"
 
 msgid "SELECT YOUR TIMEZONE"
-msgstr ""
+msgstr "타임존을 선택하세요"
 
 msgid "TIMEZONE"
-msgstr ""
+msgstr "타임존"
 
 msgid "SHOW CLOCK IN 12-HOUR FORMAT"
-msgstr ""
+msgstr "12시 표시"
 
 msgid "POWER SAVER MODES"
 msgstr "절전 모드"
@@ -2085,16 +2085,16 @@ msgid "GAME TIME, DESCENDING"
 msgstr "게임시간, 내림차순"
 
 msgid "SYSTEM, RELEASE YEAR, ASCENDING"
-msgstr ""
+msgstr "시스템, 발매일, 오름차순"
 
 msgid "SYSTEM, RELEASE YEAR, DESCENDING"
-msgstr ""
+msgstr "시스템, 발매일, 내림차순"
 
 msgid "RELEASE YEAR, SYSTEM, ASCENDING"
-msgstr ""
+msgstr "발매일, 시스템, 오름차순"
 
 msgid "RELEASE YEAR, SYSTEM, DESCENDING"
-msgstr ""
+msgstr "발매일, 시스템, 내림차순"
 
 msgid "Extracting"
 msgstr "추출 중"
