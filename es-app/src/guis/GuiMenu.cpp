@@ -1578,6 +1578,34 @@ void GuiMenu::openSystemSettings_batocera()
 	language_choice->add("正體中文", 	     "zh_TW", language == "zh_TW");
 	s->addWithLabel(_("LANGUAGE"), language_choice);
 
+	// Timezone
+#if !defined(WIN32) || defined(_DEBUG)
+	auto availableTimezones = ApiSystem::getInstance()->getTimezones();
+	if (availableTimezones.size() > 0)
+	{
+		std::string currentTZ = SystemConf::getInstance()->get("system.timezone");
+
+		auto tzChoices= std::make_shared<OptionListComponent<std::string> >(mWindow, _("SELECT YOUR TIMEZONE"), false);
+
+		for (auto tz : availableTimezones)
+			tzChoices->add(_(Utils::String::toUpper(tz).c_str()), tz, currentTZ == tz);
+
+		if (!tzChoices->hasSelection())
+			tzChoices->selectFirstItem();
+
+		s->addWithLabel(_("TIMEZONE"), tzChoices);
+		s->addSaveFunc([tzChoices] {
+				SystemConf::getInstance()->set("system.timezone", tzChoices->getSelected());
+				ApiSystem::getInstance()->setTimezone(tzChoices->getSelected());
+				});
+	}
+#endif
+	// Clock time format (14:42 or 2:42 pm)
+	auto tmFormat = std::make_shared<SwitchComponent>(mWindow);
+	tmFormat->setState(Settings::getInstance()->getBool("ClockMode12"));
+	s->addWithLabel(_("SHOW CLOCK IN 12-HOUR FORMAT"), tmFormat);
+	s->addSaveFunc([tmFormat] { Settings::getInstance()->setBool("ClockMode12", tmFormat->getState()); });
+
 	// power saver
 	auto power_saver = std::make_shared< OptionListComponent<std::string> >(mWindow, _("POWER SAVER MODES"), false);
 	std::vector<std::string> modes;
@@ -1761,16 +1789,17 @@ void GuiMenu::openSystemSettings_batocera()
 		if (SystemData::isNetplayActivated() && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::NETPLAY))
 			s->addEntry(_("NETPLAY SETTINGS"), true, [this] { openNetplaySettings(); }, "iconNetplay");
 
-#ifndef _ENABLEEMUELEC
 		if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::BIOSINFORMATION))
 		{
 			s->addEntry(_("MISSING BIOS"), true, [this, s] { openMissingBiosSettings(); });
+#ifndef _ENABLEEMUELEC
 			auto checkBiosesAtLaunch = std::make_shared<SwitchComponent>(mWindow);
 			checkBiosesAtLaunch->setState(Settings::getInstance()->getBool("CheckBiosesAtLaunch"));
 			s->addWithLabel(_("CHECK BIOSES BEFORE RUNNING A GAME"), checkBiosesAtLaunch);
 			s->addSaveFunc([checkBiosesAtLaunch] { Settings::getInstance()->setBool("CheckBiosesAtLaunch", checkBiosesAtLaunch->getState()); });
-		}
 #endif
+		}
+
 	}
 
 	std::shared_ptr<OptionListComponent<std::string>> overclock_choice;
