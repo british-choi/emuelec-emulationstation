@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:48+0200\n"
+"POT-Creation-Date: 2021-04-15 16:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -607,7 +607,19 @@ msgstr ""
 msgid "CONTROLLERS LINKS HAVE BEEN DELETED."
 msgstr ""
 
+msgid "FILE BROWSER"
+msgstr ""
+
 msgid "RESET"
+msgstr ""
+
+msgid "PARENT FOLDER"
+msgstr ""
+
+msgid "SCREENSHOTS FOLDER"
+msgstr ""
+
+msgid "SELECT"
 msgstr ""
 
 msgid "ADD COMBINATION KEY"
@@ -840,9 +852,6 @@ msgstr ""
 msgid "TARGET DEVICE"
 msgstr ""
 
-msgid "SELECT"
-msgstr ""
-
 msgid "TARGET ARCHITECTURE"
 msgstr ""
 
@@ -1028,6 +1037,9 @@ msgid "System"
 msgstr ""
 
 msgid "Architecture"
+msgstr ""
+
+msgid "Disk format"
 msgstr ""
 
 msgid "Temperature"
@@ -1306,13 +1318,19 @@ msgstr ""
 msgid "COMPLETE QUIT MENU"
 msgstr ""
 
-msgid "USE RETROARCH RGUI MENU"
+msgid "RETROARCH MENU DRIVER"
+msgstr ""
+
+msgid "AUTO"
+msgstr ""
+
+msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
 msgstr ""
 
 msgid "SWITCH A/B BUTTONS IN EMULATIONSTATION"
 msgstr ""
 
-msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
+msgid "CONTROL EMULATIONSTATION ONLY WITH FIRST JOYSTICK"
 msgstr ""
 
 msgid "SHOW NETWORK INDICATOR"
@@ -1424,9 +1442,6 @@ msgid "CHECK BIOSES BEFORE RUNNING A GAME"
 msgstr ""
 
 msgid "MULTIMEDIA KEYS"
-msgstr ""
-
-msgid "AUTO"
 msgstr ""
 
 msgid "ON"
@@ -1876,6 +1891,11 @@ msgstr ""
 msgid ""
 "THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
 "ARE YOU SURE?"
+msgstr ""
+
+msgid ""
+"SOME FILES YOU LINKED ARE LOCATED OUSIDE THE GAMELIST PATH.\n"
+"DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
 msgstr ""
 
 msgid "NO DEVICE FOUND"

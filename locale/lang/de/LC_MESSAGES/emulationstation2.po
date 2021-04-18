@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:47+0200\n"
+"POT-Creation-Date: 2021-04-15 16:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -77,10 +77,10 @@ msgid "enter path to title shot"
 msgstr "Pfad zum Title shot eingeben"
 
 msgid "Manual"
-msgstr "Anleitung"
+msgstr "Handbuch"
 
 msgid "enter path to manual"
-msgstr "Pfad zur Anleitung eingeben"
+msgstr "Pfad zum Handbuch eingeben"
 
 msgid "Map"
 msgstr "Karte"
@@ -603,8 +603,20 @@ msgstr "KEINE BLUETOOTH-GERÄTE GEFUNDEN"
 msgid "CONTROLLERS LINKS HAVE BEEN DELETED."
 msgstr "CONTROLLER-VERBINDUNGEN WURDEN GELÖSCHT."
 
+msgid "FILE BROWSER"
+msgstr ""
+
 msgid "RESET"
 msgstr "RESET"
+
+msgid "PARENT FOLDER"
+msgstr ""
+
+msgid "SCREENSHOTS FOLDER"
+msgstr ""
+
+msgid "SELECT"
+msgstr "AUSWÄHLEN"
 
 msgid "ADD COMBINATION KEY"
 msgstr "FÜGE EINE KOMBINATIONSTASTE"
@@ -836,9 +848,6 @@ msgstr "INSTALLIERE BATOCERA"
 msgid "TARGET DEVICE"
 msgstr "ZIELGERÄT"
 
-msgid "SELECT"
-msgstr "AUSWÄHLEN"
-
 msgid "TARGET ARCHITECTURE"
 msgstr "ZIELARCHITEKTUR"
 
@@ -1028,6 +1037,9 @@ msgstr "System"
 
 msgid "Architecture"
 msgstr "Architektur"
+
+msgid "Disk format"
+msgstr "Dateisystem"
 
 msgid "Temperature"
 msgstr "Temperatur"
@@ -1305,14 +1317,20 @@ msgstr "VERSTECKEN, WENN SPIEL LÄUFT"
 msgid "COMPLETE QUIT MENU"
 msgstr "VOLLSTÄNDIGES EXIT-MENÜ ANZEIGEN"
 
-msgid "USE RETROARCH RGUI MENU"
-msgstr "BENUTZE DAS RETROARCH RGUI MENÜ"
+msgid "RETROARCH MENU DRIVER"
+msgstr ""
+
+msgid "AUTO"
+msgstr "AUTO"
+
+msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
+msgstr "AUTOKONFIGURIERE EMULATOREN CONTROLLER"
 
 msgid "SWITCH A/B BUTTONS IN EMULATIONSTATION"
 msgstr "A/B BUTTONS IN EMULATIONSTATION WECHSELN"
 
-msgid "AUTOCONFIGURE EMULATORS CONTROLLERS"
-msgstr "AUTOKONFIGURIERE EMULATOREN CONTROLLER"
+msgid "CONTROL EMULATIONSTATION ONLY WITH FIRST JOYSTICK"
+msgstr ""
 
 msgid "SHOW NETWORK INDICATOR"
 msgstr "NETZWERK INDIKATOR ANZEIGEN"
@@ -1431,9 +1449,6 @@ msgstr "ÜBERPRÜFE DIE BIOS VOR DEM SPIELSTART"
 
 msgid "MULTIMEDIA KEYS"
 msgstr "MULTIMEDIA TASTEN"
-
-msgid "AUTO"
-msgstr "AUTO"
 
 msgid "ON"
 msgstr "EIN"
@@ -1619,7 +1634,7 @@ msgid "SHOW CONTROLLER ACTIVITY"
 msgstr "ZEIGE CONTROLLER-AKTIVITÄT"
 
 msgid "SHOW CONTROLLER BATTERY LEVEL"
-msgstr ""
+msgstr "CONTROLLER AKKU-LEVEL ANZEIGEN"
 
 msgid "YOU MUST APPLY THE THEME BEFORE EDIT CONFIGURATION"
 msgstr "DU MUSST DAS THEME ANWENDEN, BEVOR DU DIE KONFIGURATION BEARBEITEST"
@@ -1667,19 +1682,19 @@ msgid "SHOW '..' PARENT FOLDER"
 msgstr "ZEIGE  '..' ÜBERGEORDNETEN ORDNER"
 
 msgid "BEFORE NAME"
-msgstr ""
+msgstr "VOR NAME"
 
 msgid "AFTER NAME"
-msgstr ""
+msgstr "NACH NAME"
 
 msgid "SHOW LANGUAGE FLAG IN LISTS"
-msgstr ""
+msgstr "SPRACH-SYMBOL IN LISTEN ANZEIGEN"
 
 msgid "SHOW SAVESTATES FLAG IN LISTS"
-msgstr ""
+msgstr "SPEICHERSTANDS-SYMBOL IN LISTEN ANZEIGEN"
 
 msgid "SHOW MANUAL ICON IN LISTS"
-msgstr ""
+msgstr "HANDBUCH-SYMBOL IN LISTEN ANZEIGEN"
 
 msgid "SHOW FILENAMES IN LISTS"
 msgstr "DATEINAMEN IN LISTEN ANZEIGEN"
@@ -1891,6 +1906,11 @@ msgid ""
 msgstr ""
 "DIES WIRD DIE AKTUELLE(N) SPIELE-DATEI(EN) LÖSCHEN!\n"
 "BIST DU SICHER?"
+
+msgid ""
+"SOME FILES YOU LINKED ARE LOCATED OUSIDE THE GAMELIST PATH.\n"
+"DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
+msgstr ""
 
 msgid "NO DEVICE FOUND"
 msgstr "KEIN GERÄT GEFUNDEN"
@@ -2376,6 +2396,9 @@ msgstr "%d Min"
 #, c-format
 msgid "%d s"
 msgstr "%d S"
+
+#~ msgid "USE RETROARCH RGUI MENU"
+#~ msgstr "BENUTZE DAS RETROARCH RGUI MENÜ"
 
 #~ msgid "RESET GAMELIST CUSTOMISATIONS"
 #~ msgstr "SPIELELISTEN-ANPASSUNGEN ZURÜCKSETZEN"

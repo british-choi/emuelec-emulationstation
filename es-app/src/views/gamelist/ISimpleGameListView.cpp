@@ -123,6 +123,10 @@ void ISimpleGameListView::toggleFavoritesFilter()
 		return;
 
 	auto system = cursor->getSystem();
+
+	if (system->isGroupChildSystem())
+		system = system->getParentGroupSystem();
+
 	auto index = system->getIndex(true);
 	if (index == nullptr)
 		return;
