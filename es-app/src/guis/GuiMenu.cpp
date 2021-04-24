@@ -645,7 +645,6 @@ void GuiMenu::openScraperSettings()
 		// Image source : <image> tag
 		std::string imageSourceName = Settings::getInstance()->getString("ScrapperImageSrc");
 		auto imageSource = std::make_shared< OptionListComponent<std::string> >(mWindow, _("IMAGE SOURCE"), false);
-		//imageSource->add(_("NONE"), "", imageSourceName.empty());
 		imageSource->add(_("SCREENSHOT"), "ss", imageSourceName == "ss");
 		imageSource->add(_("TITLE SCREENSHOT"), "sstitle", imageSourceName == "sstitle");
 		imageSource->add(_("MIX V1"), "mixrbv1", imageSourceName == "mixrbv1");
@@ -653,6 +652,7 @@ void GuiMenu::openScraperSettings()
 		imageSource->add(_("BOX 2D"), "box-2D", imageSourceName == "box-2D");
 		imageSource->add(_("BOX 3D"), "box-3D", imageSourceName == "box-3D");
 		imageSource->add(_("FAN ART"), "fanart", imageSourceName == "fanart");
+		imageSource->add(_("NONE"), "", imageSourceName.empty());
 
 		if (!imageSource->hasSelection())
 			imageSource->selectFirstItem();
@@ -1040,6 +1040,13 @@ void GuiMenu::openSystemInformations_batocera()
 		color);
 	informationsGui->addWithLabel(_("SYSTEM DISK USAGE"), systemspace);
 #endif
+
+	auto glvendor = std::make_shared<TextComponent>(window, Renderer::GLVendor(), font, color);
+	informationsGui->addWithLabel(_("GL VENDOR"), glvendor);
+	auto glrenderer = std::make_shared<TextComponent>(window, Renderer::GLRenderer(), font, color);
+	informationsGui->addWithLabel(_("GL RENDERER"), glrenderer);
+	auto glversion = std::make_shared<TextComponent>(window, Renderer::GLVersion(), font, color);
+	informationsGui->addWithLabel(_("GL VERSION"), glversion);
 
 	// various informations
 	std::vector<std::string> infos = ApiSystem::getInstance()->getSystemInformations();

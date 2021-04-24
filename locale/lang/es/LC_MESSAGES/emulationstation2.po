@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-15 16:27+0200\n"
+"POT-Creation-Date: 2021-04-23 07:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pajarorrojo\n"
 "Language-Team: \n"
@@ -173,10 +173,10 @@ msgid "enter hidden"
 msgstr "marcar como oculto"
 
 msgid "Kidgame"
-msgstr "Juego infantil"
+msgstr "Para niños"
 
 msgid "enter kidgame"
-msgstr "marcar como juego infantil"
+msgstr "marcar como juego para niños"
 
 msgid "Play count"
 msgstr "Nº de veces jugado"
@@ -245,7 +245,7 @@ msgid "never played"
 msgstr "nunca jugado"
 
 msgid "retroachievements"
-msgstr "retrologros"
+msgstr "retroachievements (logros)"
 
 msgid "arcade"
 msgstr "arcade"
@@ -404,13 +404,13 @@ msgid "SORT SYSTEMS"
 msgstr "ORDENAR SISTEMAS"
 
 msgid "START ON SYSTEM"
-msgstr "INICIAR BATOCERA DIRECTAMENTE EN UN SISTEMA"
+msgstr "INICIAR BATOCERA DIRECTAMENTE EN"
 
 msgid "NONE"
 msgstr "NINGUNO"
 
 msgid "RESTORE LAST SELECTED"
-msgstr "RESTAURAR ÚLTIMOS SELECCIONADOS"
+msgstr "DONDE LO DEJASTE"
 
 msgid "START ON GAMELIST"
 msgstr "INICIAR EN LA LISTA DE JUEGOS"
@@ -425,7 +425,7 @@ msgid "SHOW GAMES OF HIDDEN SYSTEMS IN COLLECTIONS"
 msgstr "MOSTRAR JUEGOS OCULTOS EN COLECCIONES"
 
 msgid "UPDATE GAMES LISTS"
-msgstr "ACTUALIZAR LAS LISTAS DE JUEGOS"
+msgstr "ACTUALIZAR LISTAS DE JUEGOS"
 
 msgid "Loading..."
 msgstr "Cargando..."
@@ -603,16 +603,16 @@ msgid "CONTROLLERS LINKS HAVE BEEN DELETED."
 msgstr "LOS MANDOS HAN SIDO DESVINCULADOS."
 
 msgid "FILE BROWSER"
-msgstr ""
+msgstr "EXAMINAR"
 
 msgid "RESET"
 msgstr "RESTABLECER"
 
 msgid "PARENT FOLDER"
-msgstr ""
+msgstr "CARPETA PRINCIPAL"
 
 msgid "SCREENSHOTS FOLDER"
-msgstr ""
+msgstr "CARPETA DE CAPTURAS DE PANTALLA"
 
 msgid "SELECT"
 msgstr "SELECCIONAR"
@@ -880,6 +880,9 @@ msgstr "JUEGO"
 msgid "SAVE SNAPSHOTS"
 msgstr "PARTIDAS GUARDADAS"
 
+msgid "OPEN"
+msgstr "ABRIR"
+
 msgid "START NETPLAY HOST"
 msgstr "INICIAR EN NETPLAY COMO SERVIDOR"
 
@@ -904,6 +907,19 @@ msgstr "CONTRASEÑA PARA ESPECTADORES"
 msgid "FIND SIMILAR GAMES..."
 msgstr "BUSCAR JUEGOS SIMILARES..."
 
+msgid "DELETE ITEM"
+msgstr "BORRAR ELEMENTO"
+
+msgid "DELETE GAME"
+msgstr "BORRAR JUEGO"
+
+msgid ""
+"THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
+"ARE YOU SURE?"
+msgstr ""
+"ESTO ELIMINARÁ EL ARCHIVO(S) DEL JUEGO ACTUAL!\n"
+"¿ESTÁS SEGURO?"
+
 msgid "COLLECTIONS"
 msgstr "COLECCIONES"
 
@@ -917,6 +933,9 @@ msgstr "AÑADIR A %s"
 
 msgid "FAVORITES"
 msgstr "FAVORITOS"
+
+msgid "ADD TO CUSTOM COLLECTION..."
+msgstr "AÑADIR A COLECCIÓN PERSONALIZADA"
 
 msgid "SCRAPE"
 msgstr "SCRAPEAR"
@@ -1038,7 +1057,7 @@ msgid "Architecture"
 msgstr "Arquitectura"
 
 msgid "Disk format"
-msgstr ""
+msgstr "Sistema de archivos"
 
 msgid "Temperature"
 msgstr "Temperatura"
@@ -1317,7 +1336,7 @@ msgid "COMPLETE QUIT MENU"
 msgstr "SALIR AL MENÚ"
 
 msgid "RETROARCH MENU DRIVER"
-msgstr ""
+msgstr "TIPO DE INTERFAZ DE RETROARCH"
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -1329,7 +1348,7 @@ msgid "SWITCH A/B BUTTONS IN EMULATIONSTATION"
 msgstr "INVERTIR LOS BOTONES A/B EN EMULATIONSTATION"
 
 msgid "CONTROL EMULATIONSTATION ONLY WITH FIRST JOYSTICK"
-msgstr ""
+msgstr "CONTROLAR SISTEMA SOLO CON EL MANDO PRINCIPAL"
 
 msgid "SHOW NETWORK INDICATOR"
 msgstr "MOSTRAR INDICADOR DE RED"
@@ -1897,16 +1916,12 @@ msgid "EDIT METADATA"
 msgstr "EDITAR LOS METADATOS"
 
 msgid ""
-"THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
-"ARE YOU SURE?"
-msgstr ""
-"ESTO ELIMINARÁ EL ARCHIVO(S) DEL JUEGO ACTUAL!\n"
-"¿ESTÁS SEGURO?"
-
-msgid ""
-"SOME FILES YOU LINKED ARE LOCATED OUSIDE THE GAMELIST PATH.\n"
+"SOME FILES YOU LINKED ARE LOCATED OUTSIDE THE GAMELIST PATH.\n"
 "DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
 msgstr ""
+"ALGUNOS ARCHIVOS QUE HA VINCULADO SE ENCUENTRAN FUERA DE LA RUTA DE ACCESO "
+"DE LA LISTA DE JUEGOS.\n"
+"¿DESEAS USAR UNA COPIA DE ESTOS ARCHIVOS RELATIVOS A LA LISTA DE JUEGOS?"
 
 msgid "NO DEVICE FOUND"
 msgstr "NINGÚN DISPOSITIVO CONECTADO"
@@ -2006,13 +2021,19 @@ msgid "Kiosk"
 msgstr "Exposición"
 
 msgid "Kid"
-msgstr "Niño"
+msgstr "Para niños"
 
 msgid "Released"
 msgstr "Lanzamiento"
 
 msgid "Times played"
 msgstr "Veces jugado"
+
+#, c-format
+msgid "This folder contains %i game, including :%s"
+msgid_plural "This folder contains %i games, including :%s"
+msgstr[0] "Esta carpeta contiene %i juego, incluyendo :%s"
+msgstr[1] "Esta carpeta contiene %i juegos, incluyendo :%s"
 
 msgid "No Entries Found"
 msgstr "No se han encontrado entradas"
@@ -2389,6 +2410,9 @@ msgstr "%d m"
 #, c-format
 msgid "%d s"
 msgstr "%d s"
+
+#~ msgid "ADD TO CUSTOM COLLECTION"
+#~ msgstr "AÑADIR A COLECCIÓN PERSONALIZADA"
 
 #~ msgid "USE RETROARCH RGUI MENU"
 #~ msgstr "USAR INTERFAZ DE RETROARCH"
