@@ -1425,7 +1425,8 @@ std::vector<PacmanPackage> ApiSystem::getBatoceraStorePackages()
 				package.repository = node.text().get();
 			if (tag == "url")
 				package.url = node.text().get();			
-
+			if (tag == "arch")
+				package.arch = node.text().get();
 			if (tag == "download_size")
 				package.download_size = node.text().as_llong();
 			if (tag == "installed_size")
@@ -1441,17 +1442,18 @@ std::vector<PacmanPackage> ApiSystem::getBatoceraStorePackages()
 
 std::pair<std::string, int> ApiSystem::installBatoceraStorePackage(std::string name, const std::function<void(const std::string)>& func)
 {
-	return executeScript("batocera-store install " + name, func);
+	return executeScript("batocera-store install \"" + name + "\"", func);
 }
 
 std::pair<std::string, int> ApiSystem::uninstallBatoceraStorePackage(std::string name, const std::function<void(const std::string)>& func)
 {
-	return executeScript("batocera-store remove " + name, func);
+	return executeScript("batocera-store remove \"" + name + "\"", func);
 }
 
 void ApiSystem::refreshBatoceraStorePackageList()
 {
 	executeScript("batocera-store refresh");
+	executeScript("batocera-store clean-all");
 }
 
 void ApiSystem::updateBatoceraStorePackageList()
@@ -1603,4 +1605,22 @@ std::vector<PadInfo> ApiSystem::getPadsInfo()
 	}
 
 	return ret;
+}
+
+std::string ApiSystem::getRunningArchitecture()
+{
+	auto res = executeEnumerationScript("uname -m");
+	if (res.size() > 0)
+		return res[0];
+
+	return "";
+}
+
+std::string ApiSystem::getHostsName()
+{
+	auto hostName = SystemConf::getInstance()->get("system.hostname");
+	if (!hostName.empty())
+		return hostName;
+
+	return "127.0.0.1";
 }

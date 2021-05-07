@@ -236,7 +236,19 @@ void SystemView::ensureLogo(IList<SystemViewData, SystemData*>::Entry& entry)
 	Vector2f denormalized = mCarousel.logoSize * entry.data.logo->getOrigin();
 	entry.data.logo->setPosition(denormalized.x(), denormalized.y(), 0.0);
 
-	if (entry.data.logo->selectStoryboard("deactivate") && !entry.data.logo->selectStoryboard())
+	mCarousel.anyLogoHasScaleStoryboard = 
+		entry.data.logo->storyBoardExists("deactivate", "scale") || 
+		entry.data.logo->storyBoardExists("activate", "scale") ||
+		entry.data.logo->storyBoardExists("scroll", "scale") ||
+		entry.data.logo->storyBoardExists("", "scale");
+
+	mCarousel.anyLogoHasOpacityStoryboard =
+		entry.data.logo->storyBoardExists("deactivate", "opacity") ||
+		entry.data.logo->storyBoardExists("activate", "opacity") ||
+		entry.data.logo->storyBoardExists("scroll", "opacity") ||
+		entry.data.logo->storyBoardExists("", "opacity");
+
+	if (!entry.data.logo->selectStoryboard("deactivate") && !entry.data.logo->selectStoryboard())
 		entry.data.logo->deselectStoryboard();
 }
 
@@ -249,6 +261,8 @@ void SystemView::populate()
 	for(auto it = SystemData::sSystemVector.cbegin(); it != SystemData::sSystemVector.cend(); it++)
 	{
 		const std::shared_ptr<ThemeData>& theme = (*it)->getTheme();
+		if (theme == nullptr)
+			continue;
 
 		if(mViewNeedsReload)
 			getViewElements(theme);
@@ -842,18 +856,24 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 	int oldCursor = mLastCursor;
 	mLastCursor = mCursor;
 
-	// TODO
+	bool oldCursorHasStoryboard = false;
+
 	if (oldCursor >= 0 && oldCursor < mEntries.size())
 	{
 		auto logo = mEntries.at(oldCursor).data.logo;				
 		if (logo)
 		{
 			if (logo->selectStoryboard("deactivate"))
+			{
 				logo->startStoryboard();
-			else if (!logo->selectStoryboard())
+				oldCursorHasStoryboard = true;
+			}
+			else
 				logo->deselectStoryboard();
 		}
 	}
+
+	bool cursorHasStoryboard = false;
 
 	if (mCursor >= 0 && mCursor < mEntries.size())
 	{
@@ -861,10 +881,23 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 		if (logo)
 		{
 			if (logo->selectStoryboard("activate"))
+			{
 				logo->startStoryboard();
-			else if (!logo->selectStoryboard())
+				cursorHasStoryboard = true;
+			}
+			else
 				logo->deselectStoryboard();
 		}
+	}
+
+	for (int i = 0 ; i < mEntries.size() ; i++)
+	{
+		if ((cursorHasStoryboard && i == mCursor) || (oldCursorHasStoryboard && i == oldCursor))
+			continue;
+
+		auto logo = mEntries.at(i).data.logo;
+		if (logo && logo->selectStoryboard("scroll"))
+			logo->startStoryboard();		
 	}
 
 	Animation* anim;
@@ -1189,11 +1222,11 @@ void SystemView::renderCarousel(const Transform4x4f& trans)
 			comp->setRotationOrigin(mCarousel.logoRotationOrigin);
 		}
 		
-		if (!comp->hasStoryBoard())
-		{
-			comp->setScale(scale);
+		if (!mCarousel.anyLogoHasOpacityStoryboard)
 			comp->setOpacity((unsigned char)opacity);
-		}
+
+		if (!mCarousel.anyLogoHasScaleStoryboard)
+			comp->setScale(scale);
 		
 		comp->render(logoTrans);
 	};
@@ -1559,6 +1592,8 @@ void  SystemView::getDefaultElements(void)
 	mCarousel.defaultTransition = "";
 	mCarousel.transitionSpeed = 500;
 	mCarousel.minLogoOpacity = 0.5f;
+	mCarousel.anyLogoHasOpacityStoryboard = false;
+	mCarousel.anyLogoHasScaleStoryboard = false;
 
 	// System Info Bar
 	mSystemInfo.setSize(mSize.x(), mSystemInfo.getFont()->getLetterHeight()*2.2f);
@@ -1656,16 +1691,36 @@ void SystemView::onShow()
 {
 	GuiComponent::onShow();		
 
+	bool cursorStoryboardSet = false;
+
 	if (mCursor >= 0 && mCursor < mEntries.size())
 	{
 		auto logo = mEntries.at(mCursor).data.logo;
 		if (logo)
 		{
 			if (logo->selectStoryboard("activate"))
+			{
 				logo->startStoryboard();
-			else if (!logo->selectStoryboard())
+				cursorStoryboardSet = true;
+			}
+			else if (logo->selectStoryboard())
+			{
+				logo->startStoryboard();
+				cursorStoryboardSet = true;
+			}
+			else 
 				logo->deselectStoryboard();
 		}
+	}
+
+	for (int i = 0 ; i < mEntries.size() ; i++)
+	{
+		if (cursorStoryboardSet && mCursor == i)
+			continue;
+
+		auto logo = mEntries.at(i).data.logo;
+		if (logo && (logo->selectStoryboard("scroll") || logo->selectStoryboard()))
+			logo->startStoryboard();
 	}
 
 	activateExtras(mCursor);

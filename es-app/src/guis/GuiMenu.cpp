@@ -1137,10 +1137,18 @@ void GuiMenu::openDeveloperSettings()
 	s->addGroup(_("LOGGING"));
 #else
 	s->addGroup(_("TOOLS"));
+	
+	auto hostName = Utils::String::toLower(ApiSystem::getInstance()->getHostsName());
+
+	auto webAccess = std::make_shared<SwitchComponent>(mWindow);
+	webAccess->setState(Settings::getInstance()->getBool("PublicWebAccess"));
+	s->addWithDescription(_("ENABLE PUBLIC WEB ACCESS"), _("Allow public web access API using ") + " http://" + hostName + ":1234", webAccess);
+	s->addSaveFunc([webAccess, window]
+	{ 
+		if (Settings::getInstance()->setBool("PublicWebAccess", webAccess->getState()))
+			window->displayNotificationMessage(_U("\uF011  ") + _("A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"));
+	});
 #endif
-
-
-
 	// log level
 	auto logLevel = std::make_shared< OptionListComponent<std::string> >(mWindow, _("LOG LEVEL"), false);
 	std::vector<std::string> modes;
@@ -1288,6 +1296,12 @@ void GuiMenu::openDeveloperSettings()
 	
 	s->addGroup(_("DATA MANAGEMENT"));
 
+	// ExcludeMultiDiskContent
+	auto excludeMultiDiskContent = std::make_shared<SwitchComponent>(mWindow);
+	excludeMultiDiskContent->setState(Settings::getInstance()->getBool("RemoveMultiDiskContent"));
+	s->addWithLabel(_("IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"), excludeMultiDiskContent);
+	s->addSaveFunc([excludeMultiDiskContent] { Settings::getInstance()->setBool("RemoveMultiDiskContent", excludeMultiDiskContent->getState()); });
+
 	// enable filters (ForceDisableFilters)
 	auto enable_filter = std::make_shared<SwitchComponent>(mWindow);
 	enable_filter->setState(!Settings::getInstance()->getBool("ForceDisableFilters"));
@@ -1309,12 +1323,11 @@ void GuiMenu::openDeveloperSettings()
 	s->addWithLabel(_("PARSE GAMESLISTS ONLY"), parse_gamelists);
 	s->addSaveFunc([parse_gamelists] { Settings::getInstance()->setBool("ParseGamelistOnly", parse_gamelists->getState()); });
 
-
+	// Local Art
 	auto local_art = std::make_shared<SwitchComponent>(mWindow);
 	local_art->setState(Settings::getInstance()->getBool("LocalArt"));
 	s->addWithLabel(_("SEARCH FOR LOCAL ART"), local_art);
 	s->addSaveFunc([local_art] { Settings::getInstance()->setBool("LocalArt", local_art->getState()); });
-
 
 	s->addGroup(_("UI"));
 
@@ -1391,7 +1404,7 @@ void GuiMenu::openDeveloperSettings()
 
 	auto firstJoystickOnly = std::make_shared<SwitchComponent>(mWindow);
 	firstJoystickOnly->setState(Settings::getInstance()->getBool("FirstJoystickOnly"));
-	s->addWithLabel(_("CONTROL EMULATIONSTATION ONLY WITH FIRST JOYSTICK"), invertJoy);
+	s->addWithLabel(_("CONTROL EMULATIONSTATION ONLY WITH FIRST JOYSTICK"), firstJoystickOnly);
 	s->addSaveFunc([this, firstJoystickOnly] { Settings::getInstance()->setBool("FirstJoystickOnly", firstJoystickOnly->getState()); });
 
 #if defined(WIN32)
@@ -1495,11 +1508,17 @@ void GuiMenu::openUpdatesSettings()
 	auto updatesTypeList = std::make_shared<OptionListComponent<std::string> >(mWindow, _("UPDATE TYPE"), false);
 	
 	std::string updatesType = SystemConf::getInstance()->get("updates.type");
+
+#if WIN32
+	if (updatesType == "unstable")
+		updatesTypeList->add("unstable", "unstable", updatesType == "unstable");
+	else 
+#endif
 	if (updatesType.empty() || updatesType != "beta")
 		updatesType = "stable";
 	
 	updatesTypeList->add("stable", "stable", updatesType == "stable");
-	updatesTypeList->add("beta", "beta", updatesType != "stable");
+	updatesTypeList->add("beta", "beta", updatesType == "beta");
 	
 	updateGui->addWithLabel(_("UPDATE TYPE"), updatesTypeList);
 	updatesTypeList->setSelectedChangedCallback([](std::string name)
@@ -1604,6 +1623,7 @@ void GuiMenu::openSystemSettings_batocera()
 	language_choice->add("正體中文", 	     "zh_TW", language == "zh_TW");
 	s->addWithLabel(_("LANGUAGE"), language_choice);
 
+#if !defined(_ENABLEEMUELEC)
 	// Timezone
 #if !defined(WIN32) || defined(_DEBUG)
 	auto availableTimezones = ApiSystem::getInstance()->getTimezones();
@@ -1625,6 +1645,7 @@ void GuiMenu::openSystemSettings_batocera()
 				ApiSystem::getInstance()->setTimezone(tzChoices->getSelected());
 				});
 	}
+#endif
 #endif
 	// Clock time format (14:42 or 2:42 pm)
 	auto tmFormat = std::make_shared<SwitchComponent>(mWindow);
@@ -2739,20 +2760,18 @@ void GuiMenu::openControllersSettings_batocera(int autoSel)
 	clearLoadedInput();
 
 	std::vector<std::shared_ptr<OptionListComponent<StrInputConfig *>>> options;
-	char strbuf[256];
+	//char strbuf[256];
 
 	auto configList = InputManager::getInstance()->getInputConfigs();
 
 	for (int player = 0; player < MAX_PLAYERS; player++) 
 	{
-		std::stringstream sstm;
-		sstm << "INPUT P" << player + 1;
-		std::string confName = sstm.str() + "NAME";
-		std::string confGuid = sstm.str() + "GUID";
-		snprintf(strbuf, 256, _("INPUT P%i").c_str(), player + 1);
+		std::string label = Utils::String::format(_("INPUT P%i").c_str(), player + 1);
+		std::string confName = Utils::String::format("INPUT P%iNAME", player + 1);
+		std::string confGuid = Utils::String::format("INPUT P%iGUID", player + 1);
 
 		LOG(LogInfo) << player + 1 << " " << confName << " " << confGuid;
-		auto inputOptionList = std::make_shared<OptionListComponent<StrInputConfig *> >(mWindow, strbuf, false);
+		auto inputOptionList = std::make_shared<OptionListComponent<StrInputConfig *> >(mWindow, label, false);
 		inputOptionList->add(_("default"), nullptr, false);
 		options.push_back(inputOptionList);
 
@@ -2802,7 +2821,7 @@ void GuiMenu::openControllersSettings_batocera(int autoSel)
 			inputOptionList->selectFirstItem();
 
 		// Populate controllers list
-		s->addWithLabel(strbuf, inputOptionList);
+		s->addWithLabel(label, inputOptionList);
 	}
 
 	s->addSaveFunc([this, options, window] 
@@ -4725,9 +4744,9 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 	if (fileData == nullptr && ApiSystem::getInstance()->isScriptingSupported(ApiSystem::ScriptId::EVMAPY) && systemData->isCurrentFeatureSupported(EmulatorFeatures::Features::padTokeyboard))
 	{
 		if (systemData->hasKeyboardMapping())
-			systemConfiguration->addEntry(_("EDIT PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData); });
+			systemConfiguration->addEntry(_("EDIT PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData, true); });
 		else
-			systemConfiguration->addEntry(_("CREATE PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData); });
+			systemConfiguration->addEntry(_("CREATE PAD TO KEYBOARD CONFIGURATION"), true, [mWindow, systemData] { editKeyboardMappings(mWindow, systemData, true); });
 	}
 
 	mWindow->pushGui(systemConfiguration);
@@ -5084,7 +5103,7 @@ void GuiMenu::loadSubsetSettings(const std::string themeName)
 		LOG(LogError) << "Unable to open " << fileName;
 }
 
-void GuiMenu::editKeyboardMappings(Window *window, IKeyboardMapContainer* mapping)
+void GuiMenu::editKeyboardMappings(Window *window, IKeyboardMapContainer* mapping, bool editable)
 {
-	window->pushGui(new GuiKeyMappingEditor(window, mapping));
+	window->pushGui(new GuiKeyMappingEditor(window, mapping, editable));
 }

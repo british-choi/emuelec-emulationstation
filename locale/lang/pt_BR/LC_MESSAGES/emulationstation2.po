@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 07:28+0200\n"
+"POT-Creation-Date: 2021-05-04 17:19-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -81,6 +81,12 @@ msgstr "Manual"
 
 msgid "enter path to manual"
 msgstr "insira o caminho para o manual"
+
+msgid "Magazine"
+msgstr "Revista"
+
+msgid "enter path to magazine"
+msgstr "insira o caminho para a revista"
 
 msgid "Map"
 msgstr "Mapa"
@@ -515,6 +521,9 @@ msgstr "automático"
 msgid "VIEW CUSTOMISATION"
 msgstr "VER PERSONALIZAÇÃO"
 
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr "VISUALIZAR INFORMAÇÕES DO CONTROLE E TECLADO"
+
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr "OPÇÕES AVANÇADAS DO SISTEMA"
 
@@ -862,6 +871,9 @@ msgstr "MÍDIAS DE JOGOS"
 msgid "VIEW GAME MANUAL"
 msgstr "VER MANUAL DO JOGO"
 
+msgid "VIEW GAME MAGAZINE"
+msgstr "VER REVISTA DE JOGOS"
+
 msgid "VIEW GAME MAP"
 msgstr "VER MAPA DO JOGO"
 
@@ -881,7 +893,7 @@ msgid "SAVE SNAPSHOTS"
 msgstr "SALVAR PARTIDAS"
 
 msgid "OPEN"
-msgstr ""
+msgstr "ABRIR"
 
 msgid "START NETPLAY HOST"
 msgstr "INICIAR NETPLAY COMO SERVIDOR"
@@ -954,9 +966,6 @@ msgstr "EDITAR PASTA DE METADADOS"
 
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "EDITAR AS INFORMAÇÕES DO JOGO"
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr "VISUALIZAR INFORMAÇÕES DO CONTROLE E TECLADO"
 
 msgid "THEMES DOWNLOADER"
 msgstr "GERENCIADOR DE TEMAS"
@@ -1034,7 +1043,7 @@ msgid "NO GAMES FIT THAT CRITERIA."
 msgstr "NENHUM JOGO SE AJUSTA AO CRITÉRIO"
 
 msgid "THE BEZEL PROJECT"
-msgstr "PROJETO MOLDURA"
+msgstr "PROJETO BEZEL"
 
 msgid "SELECT BEZELS TO INSTALL / REMOVE"
 msgstr "SELECIONAR MOLDURAS PARA INSTALAR / REMOVER"
@@ -1237,6 +1246,15 @@ msgstr "USO DO DISCO DO USUÁRIO"
 msgid "SYSTEM DISK USAGE"
 msgstr "USO DO DISCO DO SISTEMA"
 
+msgid "GL VENDOR"
+msgstr "FABRICANTE DA PLACA DE VÍDEO"
+
+msgid "GL RENDERER"
+msgstr "RENDERIZADOR DA PLACA DE VÍDEO"
+
+msgid "GL VERSION"
+msgstr "VERSÃO DA PLACA DE VÍDEO"
+
 msgid "DEVELOPER"
 msgstr "DESENVOLVEDOR"
 
@@ -1260,6 +1278,15 @@ msgstr "USAR OMX PLAYER (HW ACELERADO)"
 
 msgid "TOOLS"
 msgstr "FERRAMENTAS"
+
+msgid "ENABLE PUBLIC WEB ACCESS"
+msgstr "ATIVAR ACESSO PÚBLICO À WEB"
+
+msgid "Allow public web access API using "
+msgstr "Permitir acesso público à web usando API"
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
+msgstr "É NECESSÁRIO REINICIAR O SISTEMA PARA APLICAR A CONFIGURAÇÃO"
 
 msgid "LOG LEVEL"
 msgstr "NÍVEL DE LOG"
@@ -1305,6 +1332,9 @@ msgstr "PROCURAR TODOS OS JOGOS COM NETPLAY/CONQUISTAS"
 
 msgid "DATA MANAGEMENT"
 msgstr "GERENCIAMENTO DE DADOS"
+
+msgid "IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"
+msgstr "IGNORE O CONTEÚDO DE MÚLTIPLOS DISCOS (CUE/GDI/CCD/M3U)"
 
 msgid "ENABLE FILTERS"
 msgstr "ATIVAR FILTROS"
@@ -1448,9 +1478,6 @@ msgstr "BRILHO"
 
 msgid "VIDEO OUTPUT"
 msgstr "SAÍDA DE VÍDEO"
-
-msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
-msgstr "É NECESSÁRIO REINICIAR O SISTEMA PARA APLICAR A CONFIGURAÇÃO"
 
 msgid "AUDIO OUTPUT"
 msgstr "SAÍDA DE ÁUDIO"
@@ -1919,6 +1946,8 @@ msgid ""
 "SOME FILES YOU LINKED ARE LOCATED OUTSIDE THE GAMELIST PATH.\n"
 "DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
 msgstr ""
+"ALGUNS ARQUIVOS ASSOCIADOS ESTÃO LOCALIZADOS FORA DO CAMINHO DO JOGO.\n"
+"DESEJA USAR UMA CÓPIA DESTES ARQUIVOS RELACIONADOS AO JOGO ?"
 
 msgid "NO DEVICE FOUND"
 msgstr "NENHUM DISPOSITIVO ENCONTRADO"

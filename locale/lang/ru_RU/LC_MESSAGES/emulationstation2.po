@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: batocera-emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 07:28+0200\n"
+"POT-Creation-Date: 2021-05-04 13:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ckau\n"
 "Language-Team: Russian <https://4pda.ru/forum/index.php?showtopic=802556>\n"
@@ -81,6 +81,12 @@ msgstr "Руководство"
 
 msgid "enter path to manual"
 msgstr "введите путь к руководству"
+
+msgid "Magazine"
+msgstr ""
+
+msgid "enter path to magazine"
+msgstr ""
 
 msgid "Map"
 msgstr "Карта"
@@ -516,6 +522,9 @@ msgstr "автоматически"
 msgid "VIEW CUSTOMISATION"
 msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ"
 
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr "ПОСМОТРЕТЬ ДАННЫЕ PADTOKEY"
+
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ"
 
@@ -863,6 +872,9 @@ msgstr "МЕДИА ИГРЫ"
 msgid "VIEW GAME MANUAL"
 msgstr "ПОСМОТРЕТЬ РУКОВОДСТВО"
 
+msgid "VIEW GAME MAGAZINE"
+msgstr ""
+
 msgid "VIEW GAME MAP"
 msgstr "ПОСМОТРЕТЬ КАРТУ"
 
@@ -955,9 +967,6 @@ msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ ПАПКИ"
 
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ"
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr "ПОСМОТРЕТЬ ДАННЫЕ PADTOKEY"
 
 msgid "THEMES DOWNLOADER"
 msgstr "ЗАГРУЗКА ТЕМ"
@@ -1237,6 +1246,15 @@ msgstr "ЗАНЯТО НА ДИСКЕ ПОЛЬЗОВАТЕЛЯ"
 msgid "SYSTEM DISK USAGE"
 msgstr "ЗАНЯТО НА СИСТЕМНОМ ДИСКЕ"
 
+msgid "GL VENDOR"
+msgstr ""
+
+msgid "GL RENDERER"
+msgstr ""
+
+msgid "GL VERSION"
+msgstr ""
+
 msgid "DEVELOPER"
 msgstr "РАЗРАБОТЧИК"
 
@@ -1260,6 +1278,15 @@ msgstr "ИСПОЛЬЗОВАТЬ OMX ПЛЕЕР (HW ACCELERATED)"
 
 msgid "TOOLS"
 msgstr "ИНСТРУМЕНТЫ"
+
+msgid "ENABLE PUBLIC WEB ACCESS"
+msgstr ""
+
+msgid "Allow public web access API using "
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
+msgstr "ДЛЯ ПРИМЕНЕНИЯ НАСТРОЕК ТРЕБУЕТСЯ ПЕРЕЗАГРУЗИТЬ СИСТЕМУ"
 
 msgid "LOG LEVEL"
 msgstr "УРОВЕНЬ ЖУРНАЛА"
@@ -1305,6 +1332,9 @@ msgstr "НАЙТИ ВСЕ ИГРЫ С NETPLAY/ДОСТИЖЕНИЯМИ"
 
 msgid "DATA MANAGEMENT"
 msgstr "УПРАВЛЕНИЕ ДАННЫМИ"
+
+msgid "IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"
+msgstr ""
 
 msgid "ENABLE FILTERS"
 msgstr "ВКЛЮЧИТЬ ФИЛЬТРЫ"
@@ -1447,9 +1477,6 @@ msgstr "ЯРКОСТЬ"
 
 msgid "VIDEO OUTPUT"
 msgstr "ВИДЕО ВЫХОД"
-
-msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
-msgstr "ДЛЯ ПРИМЕНЕНИЯ НАСТРОЕК ТРЕБУЕТСЯ ПЕРЕЗАГРУЗИТЬ СИСТЕМУ"
 
 msgid "AUDIO OUTPUT"
 msgstr "АУДИО ВЫХОД"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 07:28+0200\n"
+"POT-Creation-Date: 2021-05-04 13:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -81,6 +81,12 @@ msgstr "Manual"
 
 msgid "enter path to manual"
 msgstr "insira o caminho para o manual"
+
+msgid "Magazine"
+msgstr "Revista"
+
+msgid "enter path to magazine"
+msgstr "insira o caminho para a revista"
 
 msgid "Map"
 msgstr "Mapa"
@@ -515,6 +521,9 @@ msgstr "automático"
 msgid "VIEW CUSTOMISATION"
 msgstr "VER PERSONALIZAÇÕES"
 
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr "VISUALIZAR INFORMAÇÕES DO RATO E TECLADO"
+
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr "OPÇÕES AVANÇADAS DO SISTEMA"
 
@@ -862,6 +871,9 @@ msgstr "MÍDIAS DE JOGOS"
 msgid "VIEW GAME MANUAL"
 msgstr "VISUALIZAR MANUAL DO JOGO"
 
+msgid "VIEW GAME MAGAZINE"
+msgstr "VER REVISTA DE JOGOS"
+
 msgid "VIEW GAME MAP"
 msgstr "VISUALIZAR MAPA DO JOGO"
 
@@ -954,9 +966,6 @@ msgstr "EDITAR PASTA METADATA"
 
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "EDITAR AS INFORMAÇÕES DO JOGO"
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr "VISUALIZAR INFORMAÇÕES DO RATO E TECLADO"
 
 msgid "THEMES DOWNLOADER"
 msgstr "TRANSFERÊNCIA DE TEMAS"
@@ -1236,6 +1245,15 @@ msgstr "DISCO DO UTILIZADOR"
 msgid "SYSTEM DISK USAGE"
 msgstr "DISCO DO SISTEMA"
 
+msgid "GL VENDOR"
+msgstr "FABRICANTE DA GPU"
+
+msgid "GL RENDERER"
+msgstr "RENDERIZADOR DA GPU"
+
+msgid "GL VERSION"
+msgstr "VERSÃO DA GPU"
+
 msgid "DEVELOPER"
 msgstr "DESENVOLVEDOR"
 
@@ -1259,6 +1277,15 @@ msgstr "USAR REPRODUTOR OMX (ACELERADO POR HARDWARE)"
 
 msgid "TOOLS"
 msgstr "FERRAMENTAS"
+
+msgid "ENABLE PUBLIC WEB ACCESS"
+msgstr "ATIVAR O ACESSO PÚBLICO À WEB"
+
+msgid "Allow public web access API using "
+msgstr "Permitir o acesso publico à web usando API "
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
+msgstr "É NECESSÁRIO REINICIAR O SISTEMA PARA APLICAR A CONFIGURAÇÃO"
 
 msgid "LOG LEVEL"
 msgstr "NÍVEL DO LOG"
@@ -1304,6 +1331,9 @@ msgstr "ENCONTRAR TODOS OS JOGOS COM NETPLAY/CONQUISTAS"
 
 msgid "DATA MANAGEMENT"
 msgstr "GESTÃO DE DADOS"
+
+msgid "IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"
+msgstr "IGNORE O CONTEÚDO DE MÚLTIPLOS DISCOS (CUE/GDI/CCD/M3U)"
 
 msgid "ENABLE FILTERS"
 msgstr "ATIVAR FILTROS"
@@ -1445,9 +1475,6 @@ msgstr "BRILHO"
 
 msgid "VIDEO OUTPUT"
 msgstr "SAÍDA DE VÍDEO"
-
-msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
-msgstr "É NECESSÁRIO REINICIAR O SISTEMA PARA APLICAR A CONFIGURAÇÃO"
 
 msgid "AUDIO OUTPUT"
 msgstr "SAÍDA DE ÁUDIO"

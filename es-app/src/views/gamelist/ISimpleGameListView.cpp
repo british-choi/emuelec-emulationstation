@@ -51,6 +51,8 @@ ISimpleGameListView::ISimpleGameListView(Window* window, FolderData* root, bool 
 	addChild(&mHeaderText);
 	addChild(&mBackground);
 	addChild(&mFolderPath);
+
+	mSaveStatesEnabled = (mRoot && mRoot->getSystem() && mRoot->getSystem()->isCurrentFeatureSupported(EmulatorFeatures::autosave));
 }
 
 ISimpleGameListView::~ISimpleGameListView()
@@ -168,21 +170,30 @@ void ISimpleGameListView::update(const int deltaTime)
 	GuiComponent::update(deltaTime);
 
 	if (mOKButton.isLongPressed(deltaTime))
-		showSelectedGameOptions();
-
-	if (mSelectButton.isLongPressed(deltaTime))
-		toggleFavoritesFilter();
-
-	if (mYButton.isLongPressed(deltaTime))
-		showQuickSearch();
-
-	if (mXButton.isLongPressed(deltaTime) && !UIModeController::getInstance()->isUIModeKid())
 	{
-		if (mRoot->getSystem()->isGameSystem() || mRoot->getSystem()->isGroupSystem())
-			CollectionSystemManager::get()->toggleGameInCollection(getCursor(), "Favorites");
+		showSelectedGameOptions();
+		return;
 	}
 
+	if (mSelectButton.isLongPressed(deltaTime))
+	{
+		toggleFavoritesFilter();
+		return;
+	}
 
+	if (mYButton.isLongPressed(deltaTime))
+	{
+		moveToRandomGame();
+		return;
+	}
+	
+	if (mXButton.isLongPressed(deltaTime))
+	{
+		if (UIModeController::getInstance()->isUIModeKid() && mSaveStatesEnabled)
+			showSelectedGameSaveSnapshots();
+		else if (!UIModeController::getInstance()->isUIModeKid() && (mRoot->getSystem()->isGameSystem() || mRoot->getSystem()->isGroupSystem()))
+			CollectionSystemManager::get()->toggleGameInCollection(getCursor(), "Favorites");
+	}
 }
 
 bool ISimpleGameListView::input(InputConfig* config, Input input)
@@ -195,13 +206,17 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 
 	if (mYButton.isShortPressed(config, input))
 	{
-		moveToRandomGame();
+		showQuickSearch();
 		return true;
 	}
 
 	if (mXButton.isShortPressed(config, input))
 	{
-		showSelectedGameOptions();
+		//if (UIModeController::getInstance()->isUIModeKid())
+			showSelectedGameSaveSnapshots();
+		//else if (mRoot->getSystem()->isGameSystem() || mRoot->getSystem()->isGroupSystem())
+		//	CollectionSystemManager::get()->toggleGameInCollection(getCursor(), "Favorites");
+
 		return true;
 	}	
 
@@ -224,23 +239,7 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 
 	if (config->isMappedTo("l3", input))
 	{
-		FileData* cursor = getCursor();
-		if (cursor->getType() == GAME)
-		{				
-			if (SaveStateRepository::isEnabled(cursor))
-			{
-				mWindow->pushGui(new GuiSaveState(mWindow, cursor, [this, cursor](SaveState state)
-				{
-					Sound::getFromTheme(getTheme(), getName(), "launch")->play();
-
-					LaunchGameOptions options;
-					options.saveStateInfo = state;
-					ViewController::get()->launch(cursor, options);
-				}
-				));
-			}
-		}
-
+		showSelectedGameSaveSnapshots();
 		return true;
 	}
 		
@@ -289,8 +288,9 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 		{
 			onFocusLost();
 			ViewController::get()->goToNextGameList();
-			return true;
 		}
+
+		return true;
 	}
 	else if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike(getQuickSystemSelectLeftButton(), input)) || config->isMappedLike("l2", input))
 	{
@@ -298,9 +298,10 @@ bool ISimpleGameListView::input(InputConfig* config, Input input)
 		{
 			onFocusLost();
 			ViewController::get()->goToPrevGameList();
-			return true;
 		}
-	}		
+
+		return true;
+	}
 
 	return IGameListView::input(config, input);
 }
@@ -313,6 +314,31 @@ void ISimpleGameListView::showSelectedGameOptions()
 
 	Sound::getFromTheme(mTheme, getName(), "menuOpen")->play();
 	mWindow->pushGui(new GuiGameOptions(mWindow, cursor));
+}
+
+void ISimpleGameListView::showSelectedGameSaveSnapshots()
+{
+	if (!mSaveStatesEnabled)
+		return;
+
+	FileData* cursor = getCursor();
+	if (cursor == nullptr || cursor->getType() != GAME)
+		return;
+
+	if (SaveStateRepository::isEnabled(cursor))
+	{
+		Sound::getFromTheme(mTheme, getName(), "menuOpen")->play();
+
+		mWindow->pushGui(new GuiSaveState(mWindow, cursor, [this, cursor](SaveState state)
+		{
+			Sound::getFromTheme(getTheme(), getName(), "launch")->play();
+
+			LaunchGameOptions options;
+			options.saveStateInfo = state;
+			ViewController::get()->launch(cursor, options);
+		}
+		));
+	}
 }
 
 void ISimpleGameListView::launchSelectedGame()
@@ -479,4 +505,37 @@ void ISimpleGameListView::closePopupContext()
 
 	if (exitPopup != nullptr)
 		exitPopup();
+}
+
+std::vector<HelpPrompt> ISimpleGameListView::getHelpPrompts()
+{
+	std::vector<HelpPrompt> prompts;
+
+	if (Renderer::getScreenProportion() > 1.4)
+	{
+		if (mPopupSelfReference == nullptr && Settings::getInstance()->getBool("QuickSystemSelect") && getQuickSystemSelectLeftButton() == "left")
+			prompts.push_back(HelpPrompt("left/right", _("SYSTEM"))); // batocera
+
+		prompts.push_back(HelpPrompt("up/down", _("CHOOSE"))); // batocera
+	}
+
+	prompts.push_back(HelpPrompt(BUTTON_BACK, _("BACK")));
+	prompts.push_back(HelpPrompt(BUTTON_OK, _("LAUNCH") + std::string(" / ") + _("GAME OPTIONS")));
+
+	if (!UIModeController::getInstance()->isUIModeKid())
+		prompts.push_back(HelpPrompt("select", _("OPTIONS"))); // batocera
+	
+	if (mSaveStatesEnabled)
+	{
+		if (UIModeController::getInstance()->isUIModeKid())
+			prompts.push_back(HelpPrompt("x", _("SAVE SNAPSHOTS")));
+		else
+			prompts.push_back(HelpPrompt("x", _("SAVE SNAPSHOTS") + std::string(" / ") + _("FAVORITE")));
+	}
+	else if (!UIModeController::getInstance()->isUIModeKid())
+		prompts.push_back(HelpPrompt("x", _("FAVORITE")));
+
+	prompts.push_back(HelpPrompt("y", _("SEARCH") + std::string(" / ") + _("RANDOM")));
+
+	return prompts;
 }

@@ -700,11 +700,13 @@ void DetailedContainer::updateControls(FileData* file, bool isClearing, int move
 				mFlag->setImage(":/folder.svg");
 		}
 
+		bool hasManualOrMagazine = Utils::FileSystem::exists(file->getMetadata(MetaDataId::Manual)) || Utils::FileSystem::exists(file->getMetadata(MetaDataId::Magazine));
+
 		if (mManual != nullptr)
-			mManual->setVisible(Utils::FileSystem::exists(file->getMetadata(MetaDataId::Manual)));
+			mManual->setVisible(hasManualOrMagazine);
 
 		if (mNoManual != nullptr)
-			mNoManual->setVisible(!Utils::FileSystem::exists(file->getMetadata(MetaDataId::Manual)));
+			mNoManual->setVisible(!hasManualOrMagazine);
 
 		if (mMap != nullptr)
 			mMap->setVisible(Utils::FileSystem::exists(file->getMetadata(MetaDataId::Map)));
@@ -1110,7 +1112,7 @@ Vector3f DetailedContainerHost::getLaunchTarget()
 
 void DetailedContainerHost::updateControls(FileData* file, bool isClearing, int moveBy)
 {
-	//if (!mContainer->anyComponentHasStoryBoard() || file == nullptr || isClearing || moveBy == 0)
+	if (!mContainer->anyComponentHasStoryBoard() || file == nullptr || isClearing || moveBy == 0)
 	{
 		mContainer->updateControls(file, isClearing, moveBy);
 		return;

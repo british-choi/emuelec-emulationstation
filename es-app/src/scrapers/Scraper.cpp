@@ -14,6 +14,9 @@
 #include <thread>
 #include <SDL_timer.h>
 
+#define OVERQUOTA_RETRY_DELAY 15000
+#define OVERQUOTA_RETRY_COUNT 5
+
 std::vector<std::pair<std::string, Scraper*>> Scraper::scrapers
 {
 #ifdef SCREENSCRAPER_DEV_LOGIN
@@ -138,7 +141,7 @@ void ScraperHttpRequest::update()
 	if (mOverQuotaPendingTime > 0)
 	{
 		int lastTime = SDL_GetTicks();
-		if (lastTime - mOverQuotaPendingTime > 5000)
+		if (lastTime - mOverQuotaPendingTime > OVERQUOTA_RETRY_DELAY)
 		{
 			mOverQuotaPendingTime = 0;
 
@@ -168,7 +171,7 @@ void ScraperHttpRequest::update()
 	if (status == HttpReq::REQ_429_TOOMANYREQUESTS)
 	{
 		mRetryCount++;
-		if (mRetryCount > 4)
+		if (mRetryCount >= OVERQUOTA_RETRY_COUNT)
 		{
 			setStatus(ASYNC_DONE); // Ignore error
 			return;
@@ -226,8 +229,6 @@ MDResolveHandle::MDResolveHandle(const ScraperSearchResult& result, const Scrape
 		std::string suffix = "image";
 		switch (url.first)
 		{
-		case MetaDataId::Thumbnail: suffix = "thumb"; break;
-		case MetaDataId::Marquee: suffix = "marquee"; break;
 		case MetaDataId::Video: suffix = "video";  resize = false; break;
 		case MetaDataId::FanArt: suffix = "fanart"; resize = false; break;
 		case MetaDataId::BoxBack: suffix = "boxback"; resize = false; break;
@@ -235,6 +236,7 @@ MDResolveHandle::MDResolveHandle(const ScraperSearchResult& result, const Scrape
 		case MetaDataId::Wheel: suffix = "wheel"; resize = false; break;		
 		case MetaDataId::TitleShot: suffix = "titleshot"; break;
 		case MetaDataId::Manual: suffix = "manual"; resize = false;  break;
+		case MetaDataId::Magazine: suffix = "magazine"; resize = false;  break;
 		case MetaDataId::Map: suffix = "map"; resize = false; break;
 		case MetaDataId::Cartridge: suffix = "cartridge"; break;
 		}
@@ -243,7 +245,7 @@ MDResolveHandle::MDResolveHandle(const ScraperSearchResult& result, const Scrape
 		if (ext.empty())
 			ext = Utils::FileSystem::getExtension(url.second.url);
 
-		std::string resourcePath = getSaveAsPath(search, suffix, ext);
+		std::string resourcePath = Scraper::getSaveAsPath(search.game, url.first, ext);
 
 		if (!search.overWriteMedias && Utils::FileSystem::exists(resourcePath))
 		{
@@ -337,6 +339,7 @@ std::unique_ptr<ImageDownloadHandle> MDResolveHandle::downloadImageAsync(const s
 ImageDownloadHandle::ImageDownloadHandle(const std::string& url, const std::string& path, int maxWidth, int maxHeight) : 
 	mSavePath(path), mMaxWidth(maxWidth), mMaxHeight(maxHeight)
 {
+	mRetryCount = 0;
 	mOverQuotaPendingTime = 0;
 
 	if (url.find("screenscraper") != std::string::npos && (path.find(".jpg") != std::string::npos || path.find(".png") != std::string::npos) && url.find("media=map") == std::string::npos)
@@ -372,7 +375,7 @@ void ImageDownloadHandle::update()
 	if (mOverQuotaPendingTime > 0)
 	{
 		int lastTime = SDL_GetTicks();
-		if (lastTime - mOverQuotaPendingTime > 5000)
+		if (lastTime - mOverQuotaPendingTime > OVERQUOTA_RETRY_DELAY)
 		{
 			mOverQuotaPendingTime = 0;
 
@@ -394,7 +397,7 @@ void ImageDownloadHandle::update()
 	if (status == HttpReq::REQ_429_TOOMANYREQUESTS)
 	{
 		mRetryCount++;
-		if (mRetryCount > 4)
+		if (mRetryCount >= OVERQUOTA_RETRY_COUNT)
 		{
 			setStatus(ASYNC_DONE); // Ignore error
 			return;
@@ -543,27 +546,36 @@ bool resizeImage(const std::string& path, int maxWidth, int maxHeight)
 	return saved;
 }
 
-std::string getSaveAsPath(const ScraperSearchParams& params, const std::string& suffix, const std::string& extension)
+std::string Scraper::getSaveAsPath(FileData* game, const MetaDataId metadataId, const std::string& extension)
 {
-	const std::string subdirectory = params.system->getName();
-	const std::string name = Utils::FileSystem::getStem(params.game->getPath()) + "-" + suffix;
+	std::string suffix = "image";
+	std::string folder = "images";
 
-	std::string subFolder = "images";
-	if (suffix == "video")
-		subFolder = "videos";
-	else if (suffix == "manual")
-		subFolder = "manuals";
+	switch (metadataId)
+	{
+	case MetaDataId::Thumbnail: suffix = "thumb"; break;
+	case MetaDataId::Marquee: suffix = "marquee"; break;
+	case MetaDataId::Video: suffix = "video"; folder = "videos"; break;
+	case MetaDataId::FanArt: suffix = "fanart"; break;
+	case MetaDataId::BoxBack: suffix = "boxback"; break;
+	case MetaDataId::BoxArt: suffix = "box"; break;
+	case MetaDataId::Wheel: suffix = "wheel"; break;
+	case MetaDataId::TitleShot: suffix = "titleshot"; break;
+	case MetaDataId::Manual: suffix = "manual"; folder = "manuals";  break;
+	case MetaDataId::Magazine: suffix = "magazine"; folder = "magazines"; break;
+	case MetaDataId::Map: suffix = "map"; break;
+	case MetaDataId::Cartridge: suffix = "cartridge"; break;
+	}
 
-	std::string path = params.system->getRootFolder()->getPath() + "/" + subFolder + "/"; // batocera
+	auto system = game->getSourceFileData()->getSystem();
+
+	const std::string subdirectory = system->getName();
+	const std::string name = Utils::FileSystem::getStem(game->getPath()) + "-" + suffix;
+
+	std::string path = system->getRootFolder()->getPath() + "/" + folder + "/";
 
 	if(!Utils::FileSystem::exists(path))
 		Utils::FileSystem::createDirectory(path);
-
-	// batocera
-	//path += subdirectory + "/";
-	//
-	//if(!Utils::FileSystem::exists(path))
-	//	Utils::FileSystem::createDirectory(path);
 
 	path += name + extension;
 	return path;

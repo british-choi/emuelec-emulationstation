@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 07:28+0200\n"
+"POT-Creation-Date: 2021-05-04 13:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -81,6 +81,12 @@ msgstr "使用手冊"
 
 msgid "enter path to manual"
 msgstr "輸入使用手冊路徑"
+
+msgid "Magazine"
+msgstr ""
+
+msgid "enter path to magazine"
+msgstr ""
 
 msgid "Map"
 msgstr "地圖"
@@ -514,6 +520,9 @@ msgstr "自動"
 msgid "VIEW CUSTOMISATION"
 msgstr "查看定義"
 
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr ""
+
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr "系統設定"
 
@@ -861,6 +870,9 @@ msgstr "遊戲資料庫"
 msgid "VIEW GAME MANUAL"
 msgstr "觀看遊戲使用手冊"
 
+msgid "VIEW GAME MAGAZINE"
+msgstr ""
+
 msgid "VIEW GAME MAP"
 msgstr "觀看遊戲圖片"
 
@@ -953,9 +965,6 @@ msgstr "編輯文件夾資料"
 
 msgid "EDIT THIS GAME'S METADATA"
 msgstr "編輯此遊戲的簡介資料"
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr ""
 
 msgid "THEMES DOWNLOADER"
 msgstr "佈景主題下載器"
@@ -1234,6 +1243,15 @@ msgstr "使用者硬碟"
 msgid "SYSTEM DISK USAGE"
 msgstr "系統硬碟"
 
+msgid "GL VENDOR"
+msgstr ""
+
+msgid "GL RENDERER"
+msgstr ""
+
+msgid "GL VERSION"
+msgstr ""
+
 msgid "DEVELOPER"
 msgstr "開發者選項"
 
@@ -1257,6 +1275,15 @@ msgstr ""
 
 msgid "TOOLS"
 msgstr "工具"
+
+msgid "ENABLE PUBLIC WEB ACCESS"
+msgstr ""
+
+msgid "Allow public web access API using "
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
+msgstr "需要從重啟動才可以保存新的設定"
 
 msgid "LOG LEVEL"
 msgstr "日誌等級"
@@ -1301,6 +1328,9 @@ msgid "FIND ALL GAMES WITH NETPLAY/ACHIEVEMENTS"
 msgstr ""
 
 msgid "DATA MANAGEMENT"
+msgstr ""
+
+msgid "IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"
 msgstr ""
 
 msgid "ENABLE FILTERS"
@@ -1443,9 +1473,6 @@ msgstr "亮度"
 
 msgid "VIDEO OUTPUT"
 msgstr "影像輸出"
-
-msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
-msgstr "需要從重啟動才可以保存新的設定"
 
 msgid "AUDIO OUTPUT"
 msgstr "聲音輸出"

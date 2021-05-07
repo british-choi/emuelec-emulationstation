@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 07:28+0200\n"
+"POT-Creation-Date: 2021-05-04 13:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,12 @@ msgid "Manual"
 msgstr ""
 
 msgid "enter path to manual"
+msgstr ""
+
+msgid "Magazine"
+msgstr ""
+
+msgid "enter path to magazine"
 msgstr ""
 
 msgid "Map"
@@ -520,6 +526,9 @@ msgstr ""
 msgid "VIEW CUSTOMISATION"
 msgstr ""
 
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr ""
+
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr ""
 
@@ -867,6 +876,9 @@ msgstr ""
 msgid "VIEW GAME MANUAL"
 msgstr ""
 
+msgid "VIEW GAME MAGAZINE"
+msgstr ""
+
 msgid "VIEW GAME MAP"
 msgstr ""
 
@@ -956,9 +968,6 @@ msgid "EDIT FOLDER METADATA"
 msgstr ""
 
 msgid "EDIT THIS GAME'S METADATA"
-msgstr ""
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
 msgstr ""
 
 msgid "THEMES DOWNLOADER"
@@ -1236,6 +1245,15 @@ msgstr ""
 msgid "SYSTEM DISK USAGE"
 msgstr ""
 
+msgid "GL VENDOR"
+msgstr ""
+
+msgid "GL RENDERER"
+msgstr ""
+
+msgid "GL VERSION"
+msgstr ""
+
 msgid "DEVELOPER"
 msgstr ""
 
@@ -1258,6 +1276,15 @@ msgid "USE OMX PLAYER (HW ACCELERATED)"
 msgstr ""
 
 msgid "TOOLS"
+msgstr ""
+
+msgid "ENABLE PUBLIC WEB ACCESS"
+msgstr ""
+
+msgid "Allow public web access API using "
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
 msgstr ""
 
 msgid "LOG LEVEL"
@@ -1303,6 +1330,9 @@ msgid "FIND ALL GAMES WITH NETPLAY/ACHIEVEMENTS"
 msgstr ""
 
 msgid "DATA MANAGEMENT"
+msgstr ""
+
+msgid "IGNORE MULTIFILE DISK CONTENT (CUE/GDI/CCD/M3U)"
 msgstr ""
 
 msgid "ENABLE FILTERS"
@@ -1441,9 +1471,6 @@ msgid "BRIGHTNESS"
 msgstr ""
 
 msgid "VIDEO OUTPUT"
-msgstr ""
-
-msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
 msgstr ""
 
 msgid "AUDIO OUTPUT"
