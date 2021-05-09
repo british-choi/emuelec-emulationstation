@@ -131,7 +131,7 @@ bool Window::init(bool initRenderer, bool initInputManager)
 		mClock = std::make_shared<TextComponent>(this);
 		mClock->setFont(Font::get(FONT_SIZE_SMALL));
 		mClock->setHorizontalAlignment(ALIGN_RIGHT);
-		mClock->setVerticalAlignment(ALIGN_TOP);
+		mClock->setVerticalAlignment(ALIGN_CENTER);
 		mClock->setPosition(Renderer::getScreenWidth()*0.89, Renderer::getScreenHeight()*0.9965 - Font::get(FONT_SIZE_SMALL)->getHeight());
 		mClock->setSize(Renderer::getScreenWidth()*0.10, 0);
 		mClock->setColor(0x777777FF);
@@ -920,7 +920,7 @@ void Window::onThemeChanged(const std::shared_ptr<ThemeData>& theme)
 		mClock->setFont(Font::get(FONT_SIZE_SMALL));
 		mClock->setColor(0x777777FF);		
 		mClock->setHorizontalAlignment(ALIGN_RIGHT);
-		mClock->setVerticalAlignment(ALIGN_TOP);
+		mClock->setVerticalAlignment(ALIGN_CENTER);
 		
 		// if clock element does not exist in screen view -> <view name="screen"><text name="clock"> 
 		// skin it from system.helpsystem -> <view name="system"><helpsystem name="help"> )
