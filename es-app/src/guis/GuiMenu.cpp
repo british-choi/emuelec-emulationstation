@@ -1568,7 +1568,6 @@ void GuiMenu::openSystemSettings_batocera()
 	// System informations
 	s->addEntry(_("INFORMATION"), true, [this] { openSystemInformations_batocera(); });
 
-#if 0	// Remove EmuELEC Timezone
 	auto emuelec_timezones = std::make_shared<OptionListComponent<std::string> >(mWindow, _("TIMEZONE"), false);
 	std::string currentTimezone = SystemConf::getInstance()->get("system.timezone");
 	if (currentTimezone.empty())
@@ -1585,7 +1584,6 @@ void GuiMenu::openSystemSettings_batocera()
 		}
 		SystemConf::getInstance()->set("system.timezone", emuelec_timezones->getSelected());
 	});
-#endif
 
 	// language choice
 	auto language_choice = std::make_shared<OptionListComponent<std::string> >(window, _("LANGUAGE"), false);
