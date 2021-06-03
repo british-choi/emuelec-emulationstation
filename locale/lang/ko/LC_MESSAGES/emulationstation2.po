@@ -2074,7 +2074,7 @@ msgstr "플레이 횟수"
 #, c-format
 msgid "This folder contains %i game, including :%s"
 msgid_plural "This folder contains %i games, including :%s"
-msgstr[0] ""
+msgstr[0] "이 폴더에는 다음을 포함한 %i 게임이 포함되어 있습니다 :%s"
 
 msgid "No Entries Found"
 msgstr "항목을 찾지 못했습니다"
