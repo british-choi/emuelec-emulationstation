@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emulationstation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-05 21:02+0200\n"
+"POT-Creation-Date: 2021-06-07 13:22+0200\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1133,17 +1133,17 @@ msgstr "평면빛"
 msgid "RGA SCALING"
 msgstr "RGA 스캘링"
 
-msgid "GL VENDOR"
-msgstr "GL 벤더"
+msgid "VENDOR"
+msgstr "벤더"
 
-msgid "GL RENDERER"
-msgstr "GL 렌더러"
+msgid "RENDERER"
+msgstr "렌더러"
 
-msgid "GL VERSION"
-msgstr "GL 버전"
+msgid "VERSION"
+msgstr "버전"
 
-msgid "GLSL VERSION"
-msgstr "GLSL 버전"
+msgid "SHADERS"
+msgstr "쉐이더"
 
 msgid "MAIN MENU"
 msgstr "메인 메뉴"
@@ -1271,14 +1271,17 @@ msgstr "UI 모드를 잠금해제 하기 위한 코드를 입력하세요"
 msgid "INFORMATION"
 msgstr "정보"
 
-msgid "VERSION"
-msgstr "버전"
-
 msgid "USER DISK USAGE"
 msgstr "사용자 디스크 사용량"
 
 msgid "SYSTEM DISK USAGE"
 msgstr "시스템 디스크 사용량"
+
+msgid "SYSTEM"
+msgstr "시스템"
+
+msgid "VIDEO DRIVER"
+msgstr "비디오 드라이버"
 
 msgid "DEVELOPER"
 msgstr "개발자"
@@ -1457,9 +1460,6 @@ msgstr "업데이트 시작"
 
 msgid "UPDATE IS ALREADY RUNNING"
 msgstr "업데이트가 이미 실행 중입니다"
-
-msgid "SYSTEM"
-msgstr "시스템"
 
 msgid "LANGUAGE"
 msgstr "언어"
