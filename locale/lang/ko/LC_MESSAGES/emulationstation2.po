@@ -280,7 +280,7 @@ msgstr "'%s'를 '%s'에 추가함"
 
 #, c-format
 msgid "Removed '%s' from '%s'"
-msgstr "''%s'를 %s'에서 삭제함"
+msgstr "'%s'를 '%s'에서 삭제함"
 
 msgid "This collection is empty."
 msgstr "이 컬렉션은 비어 있습니다."
